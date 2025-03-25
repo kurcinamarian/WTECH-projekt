@@ -13,6 +13,12 @@
         .top-container {
             background-color: #F3F3F3;
         }
+        .bottom-bar {
+            background-color: #F3F3F3;
+        }
+        .bottom-bar .nav-link {
+            color: black;
+        }
     </style>
 
 
@@ -47,10 +53,19 @@
 </nav>
 
 
-</ul>
 
 
 
 
+
+
+
+<div class="bottom-bar text-light py-4">
+    <div class="container d-flex justify-content-center">
+        <a href="#" class="nav-link mx-3">About Us</a>
+        <a href="#" class="nav-link mx-3">Contact</a>
+        <a href="#" class="nav-link mx-3">Privacy Policy</a>
+    </div>
+</div>
 </body>
 </html>
