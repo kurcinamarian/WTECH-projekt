@@ -6,6 +6,7 @@
     <title>Product Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <style>
         .navbar {
@@ -54,14 +55,35 @@
         <div>
             <a class="text-dark text-decoration-none" href="#">Register</a>
             <span class="mx-2 text-dark">|</span>
-            <a class="text-dark text-decoration-none" href="#">Login</a>
+            <div class="dropdown d-inline">
+                <a class="text-dark text-decoration-none dropdown-toggle" role="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Login
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="loginDropdown" style="min-width: 250px;">
+                    <li>
+                        <div class="mb-2">
+                            <label for="loginName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="loginName" placeholder="Enter your name">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="mb-2">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password">
+                        </div>
+                    </li>
+                    <li>
+                        <button class="btn btn-secondary w-100">Confirm</button>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
 
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-        <a class="navbar-brand" href="#"><span style="font-size: 2rem;">&#9917;</span> </a>
+        <a href="#" class="me-3 text-dark placeholder-box"> <i class="bi bi-vinyl-fill fs-2"></i></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#NavbarMenu" aria-controls="NavbarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

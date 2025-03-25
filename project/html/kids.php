@@ -6,6 +6,7 @@
     <title>Kids Section</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         .navbar {
             background-color: #D9D9D9;
@@ -25,7 +26,6 @@
 </head>
 <body>
 
-<!-- top bar -->
 <div class="container-fluid top-container py-2">
     <div class="container d-flex justify-content-between align-items-center">
         <a class="text-dark text-decoration-none fw-bold" href="#">FTW</a>
@@ -33,7 +33,6 @@
             <a class="text-dark text-decoration-none" href="#">Register</a>
             <span class="mx-2 text-dark">|</span>
 
-            <!-- Dropdown pre Login -->
             <div class="dropdown d-inline">
                 <a class="text-dark text-decoration-none dropdown-toggle" role="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     Login
@@ -52,7 +51,7 @@
                         </div>
                     </li>
                     <li>
-                        <button class="btn btn-primary w-100">Confirm</button>
+                        <button class="btn btn-secondary w-100">Confirm</button>
                     </li>
                 </ul>
             </div>
@@ -64,7 +63,7 @@
 
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-        <a class="navbar-brand" href="#"><span style="font-size: 2rem;">&#9917;</span> </a>
+        <a href="#" class="me-3 text-dark placeholder-box"> <i class="bi bi-vinyl-fill fs-2"></i></a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item"><a class="nav-link ms-4" href="#" style="font-size: 1.5rem; font-weight: bold;">MEN</a></li>
@@ -77,11 +76,6 @@
         </div>
     </div>
 </nav>
-
-
-
-
-<!-- products-->
 
 <div class="container">
     <div class="row">
