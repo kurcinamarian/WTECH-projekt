@@ -22,9 +22,11 @@
     </style>
 
 
-
 </head>
 <body>
+
+<!-- top bar-->
+
 
 <div class="container-fluid top-container py-2">
     <div class="container d-flex justify-content-between align-items-center">
@@ -53,25 +55,94 @@
 </nav>
 
 
+<!-- products-->
 
-<div class="col-md-4 col-lg-3 mb-4">
-    <div class="card text-center">
-        <img src="pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
-        <div class="card-body">
-            <h5 class="card-title">Názov produktu</h5>
-            <p class="card-text text-muted">Cena produktu</p>
-            <button class="btn btn-primary">Pridať do košíka</button>
-            <button class="btn btn-outline-secondary">
-                <i class="fas fa-heart"></i> <!-- Bootstrap ikona srdiečka -->
-            </button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-lg-4 mb-4">
+            <div class="card text-center">
+                <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
+                <div class="card-body">
+                    <h5 class="card-title">Product name</h5>
+                    <p class="card-text text-muted">Product Price</p>
+                    <button class="btn btn-primary">Add to cart</button>
+                    <button class="btn btn-outline-secondary">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 mb-4">
+            <div class="card text-center">
+                <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
+                <div class="card-body">
+                    <h5 class="card-title">Product name</h5>
+                    <p class="card-text text-muted">Product Price</p>
+                    <button class="btn btn-primary">Add to cart</button>
+                    <button class="btn btn-outline-secondary">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 mb-4">
+            <div class="card text-center">
+                <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
+                <div class="card-body">
+                    <h5 class="card-title">Product name</h5>
+                    <p class="card-text text-muted">Product Price</p>
+                    <button class="btn btn-primary">Add to cart</button>
+                    <button class="btn btn-outline-secondary">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 mb-4">
+            <div class="card text-center">
+                <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
+                <div class="card-body">
+                    <h5 class="card-title">Product name</h5>
+                    <p class="card-text text-muted">Product Price</p>
+                    <button class="btn btn-primary">Add to cart</button>
+                    <button class="btn btn-outline-secondary">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 mb-4">
+            <div class="card text-center">
+                <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
+                <div class="card-body">
+                    <h5 class="card-title">Product name</h5>
+                    <p class="card-text text-muted">Product Price</p>
+                    <button class="btn btn-primary">Add to cart</button>
+                    <button class="btn btn-outline-secondary">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 mb-4">
+            <div class="card text-center">
+                <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
+                <div class="card-body">
+                    <h5 class="card-title">Product name</h5>
+                    <p class="card-text text-muted">Product Price</p>
+                    <button class="btn btn-primary">Add to cart</button>
+                    <button class="btn btn-outline-secondary">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 
 
-
-
+<!-- bottom-bar-->
 <div class="bottom-bar text-light py-4">
     <div class="container d-flex justify-content-center">
         <a href="#" class="nav-link mx-3">About Us</a>
