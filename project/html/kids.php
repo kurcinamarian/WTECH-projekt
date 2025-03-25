@@ -25,19 +25,43 @@
 </head>
 <body>
 
-<!-- top bar-->
-
-
+<!-- top bar -->
 <div class="container-fluid top-container py-2">
     <div class="container d-flex justify-content-between align-items-center">
         <a class="text-dark text-decoration-none fw-bold" href="#">FTW</a>
         <div>
             <a class="text-dark text-decoration-none" href="#">Register</a>
             <span class="mx-2 text-dark">|</span>
-            <a class="text-dark text-decoration-none" href="#">Login</a>
+
+            <!-- Dropdown pre Login -->
+            <div class="dropdown d-inline">
+                <a class="text-dark text-decoration-none dropdown-toggle" role="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Login
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="loginDropdown" style="min-width: 250px;">
+                    <li>
+                        <div class="mb-2">
+                            <label for="loginName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="loginName" placeholder="Enter your name">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="mb-2">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password">
+                        </div>
+                    </li>
+                    <li>
+                        <button class="btn btn-primary w-100">Confirm</button>
+                    </li>
+                </ul>
+            </div>
+
         </div>
     </div>
 </div>
+
+
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="#"><span style="font-size: 2rem;">&#9917;</span> </a>
@@ -55,11 +79,13 @@
 </nav>
 
 
+
+
 <!-- products-->
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4 col-lg-4 mb-4">
+        <div class="col-sm-12 col-md-4 lg-3">
             <div class="card text-center">
                 <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
                 <div class="card-body">
@@ -72,7 +98,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-lg-4 mb-4">
+        <div class="col-sm-12 col-md-4 lg-3">
             <div class="card text-center">
                 <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
                 <div class="card-body">
@@ -85,7 +111,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-lg-4 mb-4">
+        <div class="col-sm-12 col-md-4 lg-3">
             <div class="card text-center">
                 <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
                 <div class="card-body">
@@ -98,7 +124,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-lg-4 mb-4">
+        <div class="col-sm-12 col-md-4 lg-3">
             <div class="card text-center">
                 <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
                 <div class="card-body">
@@ -111,7 +137,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-lg-4 mb-4">
+        <div class="col-sm-12 col-md-4 lg-3">
             <div class="card text-center">
                 <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
                 <div class="card-body">
@@ -124,7 +150,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-lg-4 mb-4">
+        <div class="col-sm-12 col-md-4 lg-3">
             <div class="card text-center">
                 <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
                 <div class="card-body">
@@ -150,5 +176,8 @@
         <a href="#" class="nav-link mx-3">Privacy Policy</a>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
