@@ -34,6 +34,17 @@
             flex: 1;
             min-width: 100px;
         }
+        .icon {
+            font-size: 20px;
+        }
+
+
+        .search-icon-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
     </style>
 
 
@@ -77,22 +88,30 @@
 
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-        <a href="#" class="me-3 text-dark placeholder-box"> <i class="bi bi-vinyl-fill fs-2"></i></a>
+        <a href="#" class="me-3 text-dark placeholder-box col-2"> <i class="bi bi-vinyl-fill fs-2"></i></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#NavbarMenu" aria-controls="NavbarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="NavbarMenu">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item"><a class="nav-link ms-4" href="#"
-                                        style="font-size: 1.5rem; font-weight: bold;">MEN</a></li>
-                <li class="nav-item"><a class="nav-link ms-4" href="#" style="font-size: 1.5rem; font-weight: bold;">WOMEN</a>
-                </li>
-                <li class="nav-item"><a class="nav-link ms-4" href="#" style="font-size: 1.5rem; font-weight: bold;">KIDS</a>
-                </li>
+            <ul class="navbar-nav mx-auto justify-content-center"> <!-- Center the menu items -->
+                <li class="nav-item"><a class="nav-link ms-4" href="#" style="font-size: 1.5rem; font-weight: bold;">MEN</a></li>
+                <li class="nav-item"><a class="nav-link ms-4" href="#" style="font-size: 1.5rem; font-weight: bold;">WOMEN</a></li>
+                <li class="nav-item"><a class="nav-link ms-4" href="#" style="font-size: 1.5rem; font-weight: bold;">KIDS</a></li>
             </ul>
-            <a href="#" class="me-3 text-dark placeholder-box"><i class="fas fa-magnifying-glass"></i></a>
-            <a href="#" class="me-3 text-dark placeholder-box"><i class="fas fa-heart"></i></a>
-            <a href="#" class="me-3 text-dark placeholder-box"><i class="fas fa-shopping-cart"></i></a>
+            <div class="d-flex align-items-center">
+                <form class="d-flex align-items-center" role="search">
+                    <div class="input-group col-6" style="position: relative;">
+                        <input class="form-control rounded-pill" type="search" placeholder="Search" aria-label="Search"
+                               style="border-radius: 30px; height: 30px; font-size: 14px; padding-right: 35px;">
+                        <button class="btn btn-outline-secondary rounded-pill position-absolute end-0 me-1 search-icon-btn d-flex align-items-center justify-content-center" type="submit"
+                                style="border-radius: 30px; height: 30px; background: transparent; border: none;">
+                            <i class="fas fa-magnifying-glass icon"></i>
+                        </button>
+                    </div>
+                </form>
+                <a href="#" class="ms-3 text-dark placeholder-box"><i class="fas fa-heart icon"></i></a>
+                <a href="#" class="ms-3 text-dark placeholder-box"><i class="fas fa-shopping-cart icon"></i></a>
+            </div>
         </div>
     </div>
 </nav>
