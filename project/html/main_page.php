@@ -235,12 +235,124 @@
         </div>
 </div>
 
-<div class="bottom-bar text-light py-4">
-    <div class="container d-flex justify-content-center">
-        <a href="#" class="nav-link mx-3">About Us</a>
-        <a href="#" class="nav-link mx-3">Contact</a>
-        <a href="#" class="nav-link mx-3">Privacy Policy</a>
+    <div class="bottom-bar text-light py-3 w-100 d-flex justify-content-between align-items-center">
+        <a class="nav-link mx-3 mb-0" style="color: grey; font-size: 0.75rem;">©2025</a>
+        <div class="container d-flex justify-content-center">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1" style="background: none; color: black; border: none;">
+                About Us
+            </button>
+            <div class="modal modal-lg fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5 " id="staticBackdropLabel" style="color: black;">About Us</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" style="background: none; color: black; border: none;">
+                Contact
+            </button>
+            <div class="modal modal-lg fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop2Label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5 " id="staticBackdrop2Label" style="color: black;">Contact</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" style="background: none; color: black; border: none;">
+                Privacy Policy
+            </button>
+            <div class="modal modal-lg fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop3Label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div style="color: black">
+                                <h1>Privacy Policy</h1>
+
+                                <p>Last updated: March 26, 2025</p>
+
+                                <p>Your privacy is important to us. This privacy policy document outlines the types of personal information that is received and collected by [Your Company Name] and how it is used.</p>
+
+                                <h2>1. Information We Collect</h2>
+                                <p>We collect various types of information in order to provide and improve our service to you. The types of information we may collect include:</p>
+                                <ul>
+                                    <li><strong>Personal Information:</strong> Name, email address, phone number, and other personal details that you provide when you register or contact us.</li>
+                                    <li><strong>Usage Data:</strong> Information on how you use our website, such as your IP address, browser type, and usage patterns.</li>
+                                    <li><strong>Cookies:</strong> We use cookies to enhance user experience, analyze traffic, and for marketing purposes.</li>
+                                </ul>
+
+                                <h2>2. How We Use Your Information</h2>
+                                <p>We use the information we collect for the following purposes:</p>
+                                <ul>
+                                    <li>To provide, operate, and maintain our services</li>
+                                    <li>To improve, personalize, and expand our services</li>
+                                    <li>To communicate with you, including customer support and sending updates</li>
+                                    <li>To monitor usage and prevent fraud</li>
+                                </ul>
+
+                                <h2>3. How We Share Your Information</h2>
+                                <p>We may share your information in the following ways:</p>
+                                <ul>
+                                    <li><strong>With Service Providers:</strong> We may share your data with third-party vendors to perform functions related to our service (e.g., payment processing, customer support).</li>
+                                    <li><strong>In Legal Matters:</strong> If required by law, we may share your information with authorities in response to legal processes, such as a subpoena or court order.</li>
+                                </ul>
+
+                                <h2>4. Data Security</h2>
+                                <p>We take the security of your personal information seriously. We implement appropriate security measures to protect your data from unauthorized access, alteration, or destruction.</p>
+
+                                <h2>5. Your Rights</h2>
+                                <p>You have the right to:</p>
+                                <ul>
+                                    <li>Access your personal data and request a copy</li>
+                                    <li>Request corrections to any inaccurate or incomplete information</li>
+                                    <li>Request deletion of your personal data (subject to certain legal exceptions)</li>
+                                    <li>Opt-out of marketing communications</li>
+                                </ul>
+
+                                <h2>6. Third-Party Links</h2>
+                                <p>Our website may contain links to third-party websites. We are not responsible for the content or privacy practices of these external sites. Please review their privacy policies before providing any personal information.</p>
+
+                                <h2>7. Changes to This Privacy Policy</h2>
+                                <p>We may update this privacy policy from time to time. Any changes will be posted on this page with an updated "Last updated" date. We encourage you to review this policy periodically for any updates.</p>
+
+                                <h2>8. Contact Us</h2>
+                                <p>If you have any questions about this privacy policy or your personal information, please contact us at:</p>
+                                <p><strong>Fair To Wear</strong><br>
+                                    Email: questions@ftw.com<br>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+
+
 </body>
 </html>
