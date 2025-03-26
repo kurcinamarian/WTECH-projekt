@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Page</title>
+    <title>Fair to wear</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -32,12 +32,10 @@
         }
 
         .rectangle-square {
-            background-color: #ccc;
             padding: 100% 0 0;
         }
 
         .rectangle {
-            background-color: #ccc;
             padding: 47% 0 0;
         }
 
@@ -98,12 +96,13 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="NavbarMenu">
-            <ul class="navbar-nav mx-auto justify-content-center"> <!-- Center the menu items -->
-                <li class="nav-item"><a class="nav-link ms-4" href="#"
+            <ul class="navbar-nav mx-auto justify-content-center">
+                <li class="nav-item"><a class="nav-link m-2" href="#"
                                         style="font-size: 1.5rem; font-weight: bold;">MEN</a></li>
-                <li class="nav-item"><a class="nav-link ms-4" href="#" style="font-size: 1.5rem; font-weight: bold;">WOMEN</a>
+                <li class="nav-item"><a class="nav-link m-2" href="#" style="font-size: 1.5rem; font-weight: bold;">WOMEN</a>
                 </li>
-                <li class="nav-item"><a class="nav-link ms-4" href="#" style="font-size: 1.5rem; font-weight: bold;">KIDS</a>
+                <li class="nav-item"><a class="nav-link m-2" href="#"
+                                        style="font-size: 1.5rem; font-weight: bold;">KIDS</a>
                 </li>
             </ul>
             <div class="d-flex align-items-center">
@@ -125,35 +124,40 @@
     </div>
 </nav>
 <!-- title photo -->
-<div class="container-fluid bg-white">
-    <div class="row">
-        <div class="rectangle ">
-            <img src=# alt="Title_photo" class="img-fluid">
-        </div>
-    </div>
+<div class="container-fluid bg-white p-0 mb-5">
+    <img src="../pictures/MP-I1.jpg" alt="Title_photo" class="img-fluid">
 </div>
 <!-- categories photos -->
 <div class="container-fluid bg-white justify-content-between">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-4">
-                <div class="rectangle-wrapper ">
-                    <div class="rectangle-square bg-light">
-                        <img src=# alt="MEN" class="img-fluid">
+                <div class="rectangle-wrapper">
+                    <div class="rectangle-square bg-light position-relative">
+                        <img src="../pictures/MP-I2.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="MEN">
+                        <div class="position-absolute top-0 end-0 m-4 p-1 bg-light border rounded-5">
+                            <span class="fs-4 text-dark ms-2 me-2">MEN</span>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div class="rectangle-wrapper ">
-                    <div class="rectangle-square bg-light">
-                        <img src=# alt="WOMEN" class="img-fluid">
+                <div class="rectangle-wrapper">
+                    <div class="rectangle-square bg-light position-relative">
+                        <img src="../pictures/MP-I3.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="WOMEN">
+                        <div class="position-absolute top-0 end-0 m-4 p-1 bg-light border rounded-5">
+                            <span class="fs-4 text-dark ms-2 me-2">WOMEN</span>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div class="rectangle-wrapper ">
-                    <div class="rectangle-square bg-light">
-                        <img src=# alt="KIDS" class="img-fluid">
+                <div class="rectangle-wrapper">
+                    <div class="rectangle-square bg-light position-relative">
+                        <img src="../pictures/MP-I4.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="KIDS">
+                        <div class="position-absolute top-0 end-0 m-4 p-1 bg-light border rounded-5">
+                            <span class="fs-4 text-dark ms-2 me-2">KIDS</span>
+                        </div>
                     </div>
                 </div>
             </div>
