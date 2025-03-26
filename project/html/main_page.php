@@ -104,24 +104,24 @@
 </nav>
 
 <div class="container-fluid bg-white">
-    <div class="row"><div class="rectangle bg-purple"></div></div>
+    <div class="row"><div class="rectangle "></div></div>
 </div>
 
 <div class="container-fluid bg-white justify-content-between">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-4">
-                <div class="rectangle-wrapper bg-purple">
+                <div class="rectangle-wrapper ">
                     <div class="rectangle-square bg-light"></div>
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div class="rectangle-wrapper bg-purple">
+                <div class="rectangle-wrapper ">
                     <div class="rectangle-square bg-light"></div>
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div class="rectangle-wrapper bg-purple">
+                <div class="rectangle-wrapper ">
                     <div class="rectangle-square bg-light"></div>
                 </div>
             </div>
@@ -133,27 +133,28 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper bg-purple">
+                <div class="rectangle-wrapper">
                     <div class="rectangle-square bg-light"></div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper bg-purple">
+                <div class="rectangle-wrapper">
                     <div class="rectangle-square bg-light"></div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper bg-purple">
+                <div class="rectangle-wrapper">
                     <div class="rectangle-square bg-light"></div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper bg-purple">
+                <div class="rectangle-wrapper">
                     <div class="rectangle-square bg-light"></div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 <div class="container-fluid bg-white justify-content-between">
     <div class="container">
@@ -179,22 +180,22 @@
 
         <div class="row">
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper bg-purple">
+                <div class="rectangle-wrapper ">
                     <div class="rectangle-square bg-light"></div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper bg-purple">
+                <div class="rectangle-wrapper ">
                     <div class="rectangle-square bg-light"></div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper bg-purple">
+                <div class="rectangle-wrapper ">
                     <div class="rectangle-square bg-light"></div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper bg-purple">
+                <div class="rectangle-wrapper ">
                     <div class="rectangle-square bg-light"></div>
                 </div>
             </div>
@@ -211,22 +212,22 @@
 
             <div class="row">
                 <div class="col-sm-6 col-lg-3">
-                    <div class="rectangle-wrapper bg-purple">
+                    <div class="rectangle-wrapper ">
                         <div class="rectangle-square bg-light"></div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-3">
-                    <div class="rectangle-wrapper bg-purple">
+                    <div class="rectangle-wrapper ">
                         <div class="rectangle-square bg-light"></div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-3">
-                    <div class="rectangle-wrapper bg-purple">
+                    <div class="rectangle-wrapper ">
                         <div class="rectangle-square bg-light"></div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-3">
-                    <div class="rectangle-wrapper bg-purple">
+                    <div class="rectangle-wrapper ">
                         <div class="rectangle-square bg-light"></div>
                     </div>
                 </div>

@@ -20,6 +20,20 @@
         .bottom-bar .nav-link {
             color: black;
         }
+
+        .row > *{
+            margin-bottom: 2%;
+        }
+
+        .rectangle-square {
+            background-color: #ccc;
+            padding: 100% 0 0;
+        }
+
+        .rectangle-wrapper{
+            flex: 1;
+            min-width: 100px;
+        }
     </style>
 
 
@@ -28,7 +42,7 @@
 
 <div class="container-fluid top-container py-2">
     <div class="container d-flex justify-content-between align-items-center">
-        <a class="text-dark text-decoration-none fw-bold" href="#">FTW</a>
+        <a class="text-dark text-decoration-none " href="#">FTW</a>
         <div>
             <a class="text-dark text-decoration-none" href="#">Register</a>
             <span class="mx-2 text-dark">|</span>
@@ -64,11 +78,17 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a href="#" class="me-3 text-dark placeholder-box"> <i class="bi bi-vinyl-fill fs-2"></i></a>
-        <div class="collapse navbar-collapse">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#NavbarMenu" aria-controls="NavbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="NavbarMenu">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item"><a class="nav-link ms-4" href="#" style="font-size: 1.5rem; font-weight: bold;">MEN</a></li>
-                <li class="nav-item"><a class="nav-link ms-4" href="#" style="font-size: 1.5rem; font-weight: bold;">WOMEN</a></li>
-                <li class="nav-item"><a class="nav-link ms-4" href="#" style="font-size: 1.5rem; font-weight: bold;">KIDS</a></li>
+                <li class="nav-item"><a class="nav-link ms-4" href="#"
+                                        style="font-size: 1.5rem; font-weight: bold;">MEN</a></li>
+                <li class="nav-item"><a class="nav-link ms-4" href="#" style="font-size: 1.5rem; font-weight: bold;">WOMEN</a>
+                </li>
+                <li class="nav-item"><a class="nav-link ms-4" href="#" style="font-size: 1.5rem; font-weight: bold;">KIDS</a>
+                </li>
             </ul>
             <a href="#" class="me-3 text-dark placeholder-box"><i class="fas fa-magnifying-glass"></i></a>
             <a href="#" class="me-3 text-dark placeholder-box"><i class="fas fa-heart"></i></a>
@@ -77,83 +97,187 @@
     </div>
 </nav>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-4 lg-3">
-            <div class="card text-center">
-                <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
-                <div class="card-body">
-                    <h5 class="card-title">Product name</h5>
-                    <p class="card-text text-muted">Product Price</p>
-                    <button class="btn btn-primary">Add to cart</button>
-                    <button class="btn btn-outline-secondary">
-                        <i class="fas fa-heart"></i>
-                    </button>
+<div class="container-fluid bg-white justify-content-between">
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="rectangle-wrapper">
+                    <div class="rectangle-square bg-light position-relative">
+                        <img src="../pictures/shoes.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Sample Image">
+                        <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                            <i class="fa-regular fa-heart text-danger fs-3"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <span class="product-name fs-4">Nike Shoes</span><br>
+                    <span class="product-category text-muted fs-6">Sportswear</span><br>
+                    <span class="product-price fs-4">$99.99</span>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-4 lg-3">
-            <div class="card text-center">
-                <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
-                <div class="card-body">
-                    <h5 class="card-title">Product name</h5>
-                    <p class="card-text text-muted">Product Price</p>
-                    <button class="btn btn-primary">Add to cart</button>
-                    <button class="btn btn-outline-secondary">
-                        <i class="fas fa-heart"></i>
-                    </button>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="rectangle-wrapper">
+                    <div class="rectangle-square bg-light position-relative">
+                        <img src="../pictures/shoes.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Sample Image">
+                        <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                            <i class="fa-regular fa-heart text-danger fs-3"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <span class="product-name fs-4">Nike Shoes</span><br>
+                    <span class="product-category text-muted fs-6">Sportswear</span><br>
+                    <span class="product-price fs-4">$99.99</span>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-4 lg-3">
-            <div class="card text-center">
-                <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
-                <div class="card-body">
-                    <h5 class="card-title">Product name</h5>
-                    <p class="card-text text-muted">Product Price</p>
-                    <button class="btn btn-primary">Add to cart</button>
-                    <button class="btn btn-outline-secondary">
-                        <i class="fas fa-heart"></i>
-                    </button>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="rectangle-wrapper">
+                    <div class="rectangle-square bg-light position-relative">
+                        <img src="../pictures/shoes.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Sample Image">
+                        <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                            <i class="fa-regular fa-heart text-danger fs-3"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <span class="product-name fs-4">Nike Shoes</span><br>
+                    <span class="product-category text-muted fs-6">Sportswear</span><br>
+                    <span class="product-price fs-4">$99.99</span>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-4 lg-3">
-            <div class="card text-center">
-                <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
-                <div class="card-body">
-                    <h5 class="card-title">Product name</h5>
-                    <p class="card-text text-muted">Product Price</p>
-                    <button class="btn btn-primary">Add to cart</button>
-                    <button class="btn btn-outline-secondary">
-                        <i class="fas fa-heart"></i>
-                    </button>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="rectangle-wrapper">
+                    <div class="rectangle-square bg-light position-relative">
+                        <img src="../pictures/shoes.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Sample Image">
+                        <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                            <i class="fa-regular fa-heart text-danger fs-3"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <span class="product-name fs-4">Nike Shoes</span><br>
+                    <span class="product-category text-muted fs-6">Sportswear</span><br>
+                    <span class="product-price fs-4">$99.99</span>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-4 lg-3">
-            <div class="card text-center">
-                <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
-                <div class="card-body">
-                    <h5 class="card-title">Product name</h5>
-                    <p class="card-text text-muted">Product Price</p>
-                    <button class="btn btn-primary">Add to cart</button>
-                    <button class="btn btn-outline-secondary">
-                        <i class="fas fa-heart"></i>
-                    </button>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="rectangle-wrapper">
+                    <div class="rectangle-square bg-light position-relative">
+                        <img src="../pictures/shoes.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Sample Image">
+                        <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                            <i class="fa-regular fa-heart text-danger fs-3"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <span class="product-name fs-4">Nike Shoes</span><br>
+                    <span class="product-category text-muted fs-6">Sportswear</span><br>
+                    <span class="product-price fs-4">$99.99</span>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-4 lg-3">
-            <div class="card text-center">
-                <img src="../pictures/shoes.jpg" class="card-img-top" alt="Obrázok produktu">
-                <div class="card-body">
-                    <h5 class="card-title">Product name</h5>
-                    <p class="card-text text-muted">Product Price</p>
-                    <button class="btn btn-primary">Add to cart</button>
-                    <button class="btn btn-outline-secondary">
-                        <i class="fas fa-heart"></i>
-                    </button>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="rectangle-wrapper">
+                    <div class="rectangle-square bg-light position-relative">
+                        <img src="../pictures/shoes.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Sample Image">
+                        <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                            <i class="fa-regular fa-heart text-danger fs-3"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <span class="product-name fs-4">Nike Shoes</span><br>
+                    <span class="product-category text-muted fs-6">Sportswear</span><br>
+                    <span class="product-price fs-4">$99.99</span>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="rectangle-wrapper">
+                    <div class="rectangle-square bg-light position-relative">
+                        <img src="../pictures/shoes.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Sample Image">
+                        <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                            <i class="fa-regular fa-heart text-danger fs-3"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <span class="product-name fs-4">Nike Shoes</span><br>
+                    <span class="product-category text-muted fs-6">Sportswear</span><br>
+                    <span class="product-price fs-4">$99.99</span>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="rectangle-wrapper">
+                    <div class="rectangle-square bg-light position-relative">
+                        <img src="../pictures/shoes.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Sample Image">
+                        <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                            <i class="fa-regular fa-heart text-danger fs-3"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <span class="product-name fs-4">Nike Shoes</span><br>
+                    <span class="product-category text-muted fs-6">Sportswear</span><br>
+                    <span class="product-price fs-4">$99.99</span>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="rectangle-wrapper">
+                    <div class="rectangle-square bg-light position-relative">
+                        <img src="../pictures/shoes.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Sample Image">
+                        <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                            <i class="fa-regular fa-heart text-danger fs-3"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <span class="product-name fs-4">Nike Shoes</span><br>
+                    <span class="product-category text-muted fs-6">Sportswear</span><br>
+                    <span class="product-price fs-4">$99.99</span>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="rectangle-wrapper">
+                    <div class="rectangle-square bg-light position-relative">
+                        <img src="../pictures/shoes.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Sample Image">
+                        <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                            <i class="fa-regular fa-heart text-danger fs-3"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <span class="product-name fs-4">Nike Shoes</span><br>
+                    <span class="product-category text-muted fs-6">Sportswear</span><br>
+                    <span class="product-price fs-4">$99.99</span>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="rectangle-wrapper">
+                    <div class="rectangle-square bg-light position-relative">
+                        <img src="../pictures/shoes.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Sample Image">
+                        <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                            <i class="fa-regular fa-heart text-danger fs-3"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <span class="product-name fs-4">Nike Shoes</span><br>
+                    <span class="product-category text-muted fs-6">Sportswear</span><br>
+                    <span class="product-price fs-4">$99.99</span>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="rectangle-wrapper">
+                    <div class="rectangle-square bg-light position-relative">
+                        <img src="../pictures/shoes.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Sample Image">
+                        <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                            <i class="fa-regular fa-heart text-danger fs-3"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <span class="product-name fs-4">Nike Shoes</span><br>
+                    <span class="product-category text-muted fs-6">Sportswear</span><br>
+                    <span class="product-price fs-4">$99.99</span>
                 </div>
             </div>
         </div>
@@ -162,7 +286,6 @@
 
 
 
-<!-- bottom-bar-->
 <div class="bottom-bar text-light py-4">
     <div class="container d-flex justify-content-center">
         <a href="#" class="nav-link mx-3">About Us</a>
