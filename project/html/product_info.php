@@ -260,6 +260,7 @@
         </div>
     </div>
 </div>
+
 <!-- Bottom bar -->
 <div class="container-fluid bg-light">
     <div class="container py-3 d-flex justify-content-between align-items-center">
