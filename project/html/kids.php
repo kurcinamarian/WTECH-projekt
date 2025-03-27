@@ -134,13 +134,24 @@
     <div class="container mt-4">
         <div class="row">
             <!-- Filter Panel (3 columns) -->
-            <div class="col-md-3">
-                <div class="p-3 border-end">
-                    <h5>Filters</h5>
+            <!-- Button to Open Offcanvas Filter Panel -->
+            <button class="btn btn-secondary mb-4" style="width: 150px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#filterPanel" aria-controls="filterPanel">
+                Open Filters
+            </button>
+
+
+
+            <!-- Offcanvas Filter Panel -->
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="filterPanel" aria-labelledby="filterPanelLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="filterPanelLabel">Filters</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
 
                     <!-- Clothing Type -->
                     <div class="mb-3">
-                        <label class="form-label">Clothing Type</label><br>
+                        <label class="form-label">Clothing Type</label>
                         <select class="form-select">
                             <option>T-Shirts</option>
                             <option>Shoes</option>
@@ -164,7 +175,7 @@
 
                     <!-- Style -->
                     <div class="mb-3">
-                        <label class="form-label">Style</label><br>
+                        <label class="form-label">Style</label>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="casual">
                             <label class="form-check-label" for="casual">Casual</label>
@@ -181,7 +192,7 @@
 
                     <!-- Color -->
                     <div class="mb-3">
-                        <label class="form-label">Color</label><br>
+                        <label class="form-label">Color</label>
                         <select class="form-select">
                             <option>Red</option>
                             <option>Blue</option>
@@ -193,7 +204,7 @@
 
                     <!-- Fabric Type -->
                     <div class="mb-3">
-                        <label class="form-label">Fabric Type</label><br>
+                        <label class="form-label">Fabric Type</label>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="cotton">
                             <label class="form-check-label" for="cotton">Cotton</label>
@@ -207,11 +218,12 @@
                             <label class="form-check-label" for="polyester">Polyester</label>
                         </div>
                     </div>
+
                 </div>
             </div>
 
             <!-- Product Grid (9 columns) -->
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <div class="rectangle-wrapper">
@@ -333,6 +345,8 @@
     </div>
 </div>
 
+<!-- Bootstrap JS (Required for Offcanvas to Work) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
