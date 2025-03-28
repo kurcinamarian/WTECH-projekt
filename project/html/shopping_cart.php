@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Shopping Cart</title>
     <!-- Bootstrap CSS -->
     <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
@@ -123,100 +123,137 @@
     </div>
 </nav>
 
-<!-- Shopping Cart -->
-<div class="container my-5">
-    <div class="row">
-        <!-- Left Column: Cart Items -->
-        <div class="col-md-8">
 
-            <!-- Item 1 -->
-            <div class="row align-items-center mb-4">
-                <!-- Image -->
-                <div class="col-3">
-                    <img src="../pictures/P-I1.jpg" alt="Item 1" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
-                </div>
-                <div class="col-4">
-                    <h6 class="mb-1">Long cross-over trench coat <small>(Women's Coat)</small></h6>
-                    <p class="mb-0">M</p>
-                </div>
-                <div class="col-2 text-end">
-                    <strong>99.99 €</strong>
-                </div>
-                <div class="col-2 text-center">
-                    <div class="input-group input-group-sm">
-                        <button class="btn btn-outline-secondary" type="button">-</button>
-                        <input type="text" class="form-control text-center" value="1" style="max-width: 40px;">
-                        <button class="btn btn-outline-secondary" type="button">+</button>
+<div class="container mt-5 mb-5">
+    <!-- Navbar with Tabs -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="cart-tab" data-bs-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="true">Shopping Cart</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="shipping-tab" data-bs-toggle="tab" href="#shipping" role="tab" aria-controls="shipping" aria-selected="false">Shipping Information</a>
+        </li>
+    </ul>
+</div>
+
+<div class="tab-content" id="myTabContent">
+    <!-- Shopping Cart Page -->
+    <div class="tab-pane fade show active" id="cart" role="tabpanel" aria-labelledby="cart-tab">
+        <div class="container my-5">
+            <div class="row">
+                <!-- Left Column: Cart Items -->
+                <div class="col-md-8">
+                    <div class="row align-items-center mb-4">
+                        <div class="col-3">
+                            <img src="../pictures/P-I1.jpg" alt="Item 1" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
+                        </div>
+                        <div class="col-4">
+                            <h6 class="mb-1">Long cross-over trench coat <small>(Women's Coat)</small></h6>
+                            <p class="mb-0">M</p>
+                        </div>
+                        <div class="col-2 text-end">
+                            <strong>99.99 €</strong>
+                        </div>
+                        <div class="col-2 text-center">
+                            <div class="input-group input-group-sm">
+                                <button class="btn btn-outline-secondary" type="button">-</button>
+                                <input type="text" class="form-control text-center" value="1" style="max-width: 40px;">
+                                <button class="btn btn-outline-secondary" type="button">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center mb-4">
+                        <div class="col-3">
+                            <img src="../pictures/S-I2.jpg" alt="Item 2" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
+                        </div>
+                        <div class="col-4">
+                            <h6 class="mb-1">Artisan Patchwork Cap <small>(Men's Hat)</small></h6>
+                            <p class="mb-0">one-size</p>
+                        </div>
+                        <div class="col-2 text-end">
+                            <strong>15.99 €</strong>
+                        </div>
+                        <div class="col-2 text-center">
+                            <div class="input-group input-group-sm">
+                                <button class="btn btn-outline-secondary" type="button">-</button>
+                                <input type="text" class="form-control text-center" value="1" style="max-width: 40px;">
+                                <button class="btn btn-outline-secondary" type="button">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center mb-4">
+                        <div class="col-3">
+                            <img src="../pictures/pexels-urfriendlyphotog-277861001.jpg" alt="Item 3" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
+                        </div>
+                        <div class="col-4">
+                            <h6 class="mb-1">Hamilton denim jacket <small>(Women's Jacket)</small></h6>
+                            <p class="mb-0">S</p>
+                        </div>
+                        <div class="col-2 text-end">
+                            <strong>45.99 €</strong>
+                        </div>
+                        <div class="col-2 text-center">
+                            <div class="input-group input-group-sm">
+                                <button class="btn btn-outline-secondary" type="button">-</button>
+                                <input type="text" class="form-control text-center" value="1" style="max-width: 40px;">
+                                <button class="btn btn-outline-secondary" type="button">+</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Item 2 -->
-            <div class="row align-items-center mb-4">
-                <div class="col-3">
-                    <img src="../pictures/S-I2.jpg" alt="Item 2" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
-                </div>
-                <div class="col-4">
-                    <h6 class="mb-1">Artisan Patchwork Cap <small>(Men's Hat)</small></h6>
-                    <p class="mb-0">one-size</p>
-                </div>
-                <div class="col-2 text-end">
-                    <strong>15.99 €</strong>
-                </div>
-                <div class="col-2 text-center">
-                    <div class="input-group input-group-sm">
-                        <button class="btn btn-outline-secondary" type="button">-</button>
-                        <input type="text" class="form-control text-center" value="1" style="max-width: 40px;">
-                        <button class="btn btn-outline-secondary" type="button">+</button>
+                <!-- Right Column: Summary -->
+                <div class="col-md-4">
+                    <div class="border p-3">
+                        <h5 class="mb-4">Summary</h5>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal</span>
+                            <span>161.97 €</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Estimated Delivery</span>
+                            <span>3.29 €</span>
+                        </div>
+                        <hr/>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Total</span>
+                            <strong>165.26 €</strong>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Item 3 -->
-            <div class="row align-items-center mb-4">
-                <div class="col-3">
-                    <img src="../pictures/pexels-urfriendlyphotog-277861001.jpg" alt="Item 3" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
-                </div>
-                <div class="col-4">
-                    <h6 class="mb-1">Hamilton denim jacket <small>(Women's Jacket)</small></h6>
-                    <p class="mb-0">S</p>
-                </div>
-                <div class="col-2 text-end">
-                    <strong>45.99 €</strong>
-                </div>
-                <div class="col-2 text-center">
-                    <div class="input-group input-group-sm">
-                        <button class="btn btn-outline-secondary" type="button">-</button>
-                        <input type="text" class="form-control text-center" value="1" style="max-width: 40px;">
-                        <button class="btn btn-outline-secondary" type="button">+</button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Right Column: Summary -->
-        <div class="col-md-4">
-            <div class="border p-3">
-                <h5 class="mb-4">Summary</h5>
-                <div class="d-flex justify-content-between mb-2">
-                    <span>Subtotal</span>
-                    <span>161.97 €</span>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <span>Estimated Delivery</span>
-                    <span>3.29 €</span>
-                </div>
-                <hr />
-                <div class="d-flex justify-content-between mb-3">
-                    <span>Total</span>
-                    <strong>165.26 €</strong>
-                </div>
-                <button class="btn btn-secondary w-100">Checkout</button>
             </div>
         </div>
     </div>
+
+    <!-- Shipping Information Page -->
+    <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
+        <div class="container my-5">
+            <h3>Shipping Information</h3>
+            <form>
+                <div class="form-group">
+                    <label for="address">Shipping Address</label>
+                    <input type="text" class="form-control" id="address" placeholder="Enter your shipping address">
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" id="city" placeholder="Enter your city">
+                </div>
+                <div class="form-group">
+                    <label for="zipcode">Zip Code</label>
+                    <input type="text" class="form-control" id="zipcode" placeholder="Enter zip code">
+                </div>
+            </form>
+            <div class="d-flex mt-4">
+                <a class="btn btn-secondary me-3" data-bs-toggle="tab" href="#payment" role="tab" aria-controls="payment">Pay by Card</a>
+                <a class="btn btn-secondary ms-3" data-bs-toggle="tab" href="#payment" role="tab" aria-controls="payment">Pay When Delivered</a>
+            </div>
+        </div>
+    </div>
+
 </div>
+
 
 
 <!-- Suggested -->
@@ -231,7 +268,8 @@
             <div class="col-sm-6 col-lg-3">
                 <div class="rectangle-wrapper ">
                     <div class="rectangle-square bg-light position-relative">
-                        <img src="../pictures/S-I1.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
+                        <img src="../pictures/S-I1.jpg"
+                             class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
                     </div>
                 </div>
                 <div class="mt-2">
@@ -243,7 +281,8 @@
             <div class="col-sm-6 col-lg-3">
                 <div class="rectangle-wrapper ">
                     <div class="rectangle-square bg-light position-relative">
-                        <img src="../pictures/S-I2.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
+                        <img src="../pictures/S-I2.jpg"
+                             class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
                     </div>
                 </div>
                 <div class="mt-2">
@@ -255,7 +294,8 @@
             <div class="col-sm-6 col-lg-3">
                 <div class="rectangle-wrapper ">
                     <div class="rectangle-square bg-light position-relative">
-                        <img src="../pictures/S-I3.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
+                        <img src="../pictures/S-I3.jpg"
+                             class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
                     </div>
                 </div>
                 <div class="mt-2">
@@ -267,7 +307,8 @@
             <div class="col-sm-6 col-lg-3">
                 <div class="rectangle-wrapper ">
                     <div class="rectangle-square bg-light position-relative">
-                        <img src="../pictures/S-I4.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
+                        <img src="../pictures/S-I4.jpg"
+                             class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
                     </div>
                 </div>
                 <div class="mt-2">
@@ -279,6 +320,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Bottom bar -->
 <div class="container-fluid bg-light">
@@ -574,7 +616,10 @@
     </div>
 </div>
 
-<!-- Bootstrap JS (optional if you need interactive components) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

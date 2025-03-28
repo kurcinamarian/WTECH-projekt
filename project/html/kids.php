@@ -48,6 +48,32 @@
             align-items: center;
             justify-content: center;
         }
+        .range_container {
+            max-width: 400px;
+            margin: auto;
+        }
+        .sliders_control {
+            position: relative;
+            width: 100%;
+        }
+        input[type="range"] {
+            position: absolute;
+            width: 100%;
+            pointer-events: none;
+            background: transparent;
+            appearance: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            pointer-events: auto;
+            position: relative;
+            z-index: 3;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: black;
+            border-radius: 50%;
+            cursor: pointer;
+        }
 
     </style>
 
@@ -135,10 +161,10 @@
         <div class="row">
             <!-- Filter Panel (3 columns) -->
             <!-- Button to Open Offcanvas Filter Panel -->
-            <button class="btn btn-secondary mb-4" style="width: 150px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#filterPanel" aria-controls="filterPanel">
+            <button class="btn btn-secondary mb-4" style="width: 150px;" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#filterPanel" aria-controls="filterPanel">
                 Open Filters
             </button>
-
 
 
             <!-- Offcanvas Filter Panel -->
@@ -150,26 +176,52 @@
                 <div class="offcanvas-body">
 
                     <!-- Clothing Type -->
-                    <div class="mb-3">
-                        <label class="form-label">Clothing Type</label>
-                        <select class="form-select">
-                            <option>T-Shirts</option>
-                            <option>Shoes</option>
-                            <option>Coats</option>
-                            <option>Trousers</option>
-                        </select>
+                    <div class="container">
+                        <!-- Main Category -->
+                        <div class="mb-3">
+                            <label class="form-label">Select Category</label>
+                            <select class="form-select">
+                                <optgroup label="Category 1">
+                                    <option value="1">1</option>
+                                    <option value="1.1">1.1</option>
+                                    <option value="1.2">1.2</option>
+                                    <option value="1.3">1.3</option>
+                                    <option value="1.4">1.4</option>
+                                    <option value="1.5">1.5</option>
+                                </optgroup>
+                                <optgroup label="Category 2">
+                                    <option value="2">2</option>
+                                    <option value="2.1">2.1</option>
+                                    <option value="2.2">2.2</option>
+                                    <option value="2.3">2.3</option>
+                                </optgroup>
+                                <optgroup label="Category 3">
+                                    <option value="3">3</option>
+                                    <option value="3.1">3.1</option>
+                                    <option value="3.2">3.2</option>
+                                    <option value="3.3">3.3</option>
+                                </optgroup>
+                            </select>
+                        </div>
                     </div>
 
-                    <!-- Price Range with Two Handles -->
-                    <div class="mb-3">
-                        <label class="form-label">Price Range</label>
-                        <div class="d-flex align-items-center">
-                            <input type="range" class="form-range" min="0" max="500" step="10" id="priceMin">
-                            <input type="range" class="form-range ms-2" min="0" max="500" step="10" id="priceMax">
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <span id="minPriceLabel">$0</span>
-                            <span id="maxPriceLabel">$500</span>
+                    <div class="container">
+                        <div class="range_container">
+                            <div class="sliders_control mb-4">
+                                <input id="fromSlider" type="range" value="10" min="0" max="100" class="form-range">
+                                <input id="toSlider" type="range" value="40" min="0" max="100" class="form-range">
+                            </div>
+
+                            <div class="row g-2 mt-3">
+                                <div class="col-6">
+                                    <label for="fromInput" class="form-label mt-3">Min</label>
+                                    <input type="number" id="fromInput" value="10" min="0" max="100" class="form-control">
+                                </div>
+                                <div class="col-6">
+                                    <label for="toInput" class="form-label mt-3">Max</label>
+                                    <input type="number" id="toInput" value="40" min="0" max="100" class="form-control">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -334,6 +386,7 @@
         </div>
     </div>
 
+
 </div>
 
 
@@ -347,7 +400,5 @@
 
 <!-- Bootstrap JS (Required for Offcanvas to Work) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>
