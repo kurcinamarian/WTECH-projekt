@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fair to wear</title>
+    <link rel="icon" type="image/png" href="../pictures/album.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -50,14 +51,13 @@
 
     </style>
 </head>
-
 <body>
 <!-- top navbar -->
 <div class="container-fluid top-container py-2">
     <div class="container d-flex justify-content-between align-items-center">
-        <a class="text-dark text-decoration-none fw-bold" href="#">FTW</a>
+        <a class="text-dark text-decoration-none fw-bold" href="../html/main_page.html">FTW</a>
         <div>
-            <a class="text-dark text-decoration-none" href="#">Register</a>
+            <a class="text-dark text-decoration-none" href="../html/register.html">Register</a>
             <span class="mx-2 text-dark">|</span>
             <div class="dropdown d-inline">
                 <a class="text-dark text-decoration-none dropdown-toggle" role="button" id="loginDropdown"
@@ -90,18 +90,20 @@
 <!-- bottom navbar -->
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-        <a href="#" class="me-3 text-dark placeholder-box col-2"> <i class="bi bi-vinyl-fill fs-2"></i></a>
+        <a href="../html/main_page.html" class="me-3 text-dark placeholder-box col-2"> <i
+                class="bi bi-vinyl-fill fs-2"></i></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#NavbarMenu"
                 aria-controls="NavbarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="NavbarMenu">
             <ul class="navbar-nav mx-auto justify-content-center">
-                <li class="nav-item"><a class="nav-link m-2" href="#"
+                <li class="nav-item"><a class="nav-link m-2" href="../html/men.html"
                                         style="font-size: 1.5rem; font-weight: bold;">MEN</a></li>
-                <li class="nav-item"><a class="nav-link m-2" href="#" style="font-size: 1.5rem; font-weight: bold;">WOMEN</a>
+                <li class="nav-item"><a class="nav-link m-2" href="../html/women.html"
+                                        style="font-size: 1.5rem; font-weight: bold;">WOMEN</a>
                 </li>
-                <li class="nav-item"><a class="nav-link m-2" href="#"
+                <li class="nav-item"><a class="nav-link m-2" href="../html/kids.html"
                                         style="font-size: 1.5rem; font-weight: bold;">KIDS</a>
                 </li>
             </ul>
@@ -117,8 +119,10 @@
                         </button>
                     </div>
                 </form>
-                <a href="#" class="ms-3 text-dark placeholder-box"><i class="fas fa-heart icon"></i></a>
-                <a href="#" class="ms-3 text-dark placeholder-box"><i class="fas fa-shopping-cart icon"></i></a>
+                <a href="../html/liked.html" class="ms-3 text-dark placeholder-box"><i
+                        class="fas fa-heart icon"></i></a>
+                <a href="../html/shopping_cart.html" class="ms-3 text-dark placeholder-box"><i
+                        class="fas fa-shopping-cart icon"></i></a>
             </div>
         </div>
     </div>
@@ -132,34 +136,43 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-4">
-                <div class="rectangle-wrapper">
-                    <div class="rectangle-square bg-light position-relative">
-                        <img src="../pictures/MP-I2.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="MEN">
-                        <div class="position-absolute top-0 end-0 m-4 p-1 bg-light border rounded-5">
-                            <span class="fs-4 text-dark ms-2 me-2">MEN</span>
+                <a href="../html/men.html" class="text-decoration-none">
+                    <div class="rectangle-wrapper">
+                        <div class="rectangle-square bg-light position-relative">
+                            <img src="../pictures/MP-I2.jpg"
+                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="MEN">
+                            <div class="position-absolute top-0 end-0 m-4 p-1 bg-light border rounded-5">
+                                <span class="fs-4 text-dark ms-2 me-2">MEN</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div class="rectangle-wrapper">
-                    <div class="rectangle-square bg-light position-relative">
-                        <img src="../pictures/MP-I3.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="WOMEN">
-                        <div class="position-absolute top-0 end-0 m-4 p-1 bg-light border rounded-5">
-                            <span class="fs-4 text-dark ms-2 me-2">WOMEN</span>
+                <a href="../html/women.html" class="text-decoration-none">
+                    <div class="rectangle-wrapper">
+                        <div class="rectangle-square bg-light position-relative">
+                            <img href="../html/women.html" src="../pictures/MP-I3.jpg"
+                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="WOMEN">
+                            <div class="position-absolute top-0 end-0 m-4 p-1 bg-light border rounded-5">
+                                <span class="fs-4 text-dark ms-2 me-2">WOMEN</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div class="rectangle-wrapper">
-                    <div class="rectangle-square bg-light position-relative">
-                        <img src="../pictures/MP-I4.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="KIDS">
-                        <div class="position-absolute top-0 end-0 m-4 p-1 bg-light border rounded-5">
-                            <span class="fs-4 text-dark ms-2 me-2">KIDS</span>
+                <a href="../html/kids.html" class="text-decoration-none">
+                    <div class="rectangle-wrapper">
+                        <div class="rectangle-square bg-light position-relative">
+                            <img src="../pictures/MP-I4.jpg"
+                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="KIDS">
+                            <div class="position-absolute top-0 end-0 m-4 p-1 bg-light border rounded-5">
+                                <span class="fs-4 text-dark ms-2 me-2">KIDS</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
@@ -169,32 +182,40 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper">
-                    <div class="rectangle-square bg-light">
-                        <img src=# alt="Featured" class="img-fluid">
+                <a href="../html/product_info.html" class="text-decoration-none">
+                    <div class="rectangle-wrapper">
+                        <div class="rectangle-square bg-light">
+                            <img src=# alt="Featured" class="img-fluid">
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper">
-                    <div class="rectangle-square bg-light">
-                        <img src=# alt="Featured" class="img-fluid">
+                <a href="../html/product_info.html" class="text-decoration-none">
+                    <div class="rectangle-wrapper">
+                        <div class="rectangle-square bg-light">
+                            <img src=# alt="Featured" class="img-fluid">
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper">
-                    <div class="rectangle-square bg-light">
-                        <img src=# alt="Featured" class="img-fluid">
+                <a href="../html/product_info.html" class="text-decoration-none">
+                    <div class="rectangle-wrapper">
+                        <div class="rectangle-square bg-light">
+                            <img src=# alt="Featured" class="img-fluid">
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper">
-                    <div class="rectangle-square bg-light">
-                        <img src=# alt="Featured" class="img-fluid">
+                <a href="../html/product_info.html" class="text-decoration-none">
+                    <div class="rectangle-wrapper">
+                        <div class="rectangle-square bg-light">
+                            <img src=# alt="Featured" class="img-fluid">
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
@@ -204,23 +225,29 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-12">
-                <div class="rectangle-square bg-light">
-                    <img src=# alt="Featured" class="img-fluid">
-                </div>
+                <a href="../html/product_info.html" class="text-decoration-none">
+                    <div class="rectangle-square bg-light">
+                        <img src=# alt="Featured" class="img-fluid">
+                    </div>
+                </a>
             </div>
             <div class="col-md-6 col-sm-12">
                 <div class="row">
                     <div class="col-12">
-                        <div class="rectangle bg-light">
-                            <img src=# alt="Featured" class="img-fluid">
-                        </div>
+                        <a href="../html/product_info.html" class="text-decoration-none">
+                            <div class="rectangle bg-light">
+                                <img src=# alt="Featured" class="img-fluid">
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="rectangle bg-light">
-                            <img src=# alt="Featured" class="img-fluid">
-                        </div>
+                        <a href="../html/product_info.html" class="text-decoration-none">
+                            <div class="rectangle bg-light">
+                                <img src=# alt="Featured" class="img-fluid">
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -238,32 +265,40 @@
 
         <div class="row">
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper ">
-                    <div class="rectangle-square bg-light">
-                        <img src=# alt="NEW" class="img-fluid">
+                <a href="../html/product_info.html" class="text-decoration-none">
+                    <div class="rectangle-wrapper ">
+                        <div class="rectangle-square bg-light">
+                            <img src=# alt="NEW" class="img-fluid">
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper ">
-                    <div class="rectangle-square bg-light">
-                        <img src=# alt="NEW" class="img-fluid">
+                <a href="../html/product_info.html" class="text-decoration-none">
+                    <div class="rectangle-wrapper">
+                        <div class="rectangle-square bg-light">
+                            <img src=# alt="NEW" class="img-fluid">
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper ">
-                    <div class="rectangle-square bg-light">
-                        <img src=# alt="NEW" class="img-fluid">
+                <a href="../html/product_info.html" class="text-decoration-none">
+                    <div class="rectangle-wrapper">
+                        <div class="rectangle-square bg-light">
+                            <img src=# alt="NEW" class="img-fluid">
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper ">
-                    <div class="rectangle-square bg-light">
-                        <img src=# alt="NEW" class="img-fluid">
+                <a href="../html/product_info.html" class="text-decoration-none">
+                    <div class="rectangle-wrapper ">
+                        <div class="rectangle-square bg-light">
+                            <img src=# alt="NEW" class="img-fluid">
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
@@ -278,31 +313,63 @@
         </div>
         <div class="row">
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper ">
-                    <div class="rectangle-square bg-light">
-                        <img src=# alt="Suggested" class="img-fluid">
+                <a href="../html/product_info.html" class="text-decoration-none">
+                    <div class="rectangle-wrapper ">
+                        <div class="rectangle-square bg-light position-relative">
+                            <img src="../pictures/S-I1.jpg"
+                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
+                        </div>
                     </div>
+                </a>
+                <div class="mt-2">
+                    <span class="product-name fs-4">Urban Ease Sweatshirt</span><br>
+                    <span class="product-category text-muted fs-6">(Women's T-shirt)</span><br>
+                    <span class="product-price fs-4">19.99 €</span>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper ">
-                    <div class="rectangle-square bg-light">
-                        <img src=# alt="Suggested" class="img-fluid">
+                <a href="../html/product_info.html" class="text-decoration-none">
+                    <div class="rectangle-wrapper ">
+                        <div class="rectangle-square bg-light position-relative">
+                            <img src="../pictures/S-I2.jpg"
+                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
+                        </div>
                     </div>
+                </a>
+                <div class="mt-2">
+                    <span class="product-name fs-4">Artisan Patchwork Cap</span><br>
+                    <span class="product-category text-muted fs-6">(Men's Hat)</span><br>
+                    <span class="product-price fs-4">15.99 €</span>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper ">
-                    <div class="rectangle-square bg-light">
-                        <img src=# alt="Suggested" class="img-fluid">
+                <a href="../html/product_info.html" class="text-decoration-none">
+                    <div class="rectangle-wrapper ">
+                        <div class="rectangle-square bg-light position-relative">
+                            <img src="../pictures/S-I3.jpg"
+                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
+                        </div>
                     </div>
+                </a>
+                <div class="mt-2">
+                    <span class="product-name fs-4">Flowing Linen Shirt</span><br>
+                    <span class="product-category text-muted fs-6">(Women's Tops)</span><br>
+                    <span class="product-price fs-4">23.99 €</span>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <div class="rectangle-wrapper ">
-                    <div class="rectangle-square bg-light">
-                        <img src=# alt="Suggested" class="img-fluid">
+                <a href="../html/product_info.html" class="text-decoration-none">
+                    <div class="rectangle-wrapper ">
+                        <div class="rectangle-square bg-light position-relative">
+                            <img src="../pictures/S-I4.jpg"
+                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
+                        </div>
                     </div>
+                </a>
+                <div class="mt-2">
+                    <span class="product-name fs-4">Arctic Denim Puffer</span><br>
+                    <span class="product-category text-muted fs-6">(Women's Outerwear)</span><br>
+                    <span class="product-price fs-4">49.99 €</span>
                 </div>
             </div>
         </div>
@@ -421,7 +488,7 @@
 
                             <h2>Contact Us</h2>
                             <p>For any questions regarding returns, please contact our support team at <a
-                                        href="mailto:help@ftw.com">help@ftw.com</a>.</p>
+                                    href="mailto:help@ftw.com">help@ftw.com</a>.</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

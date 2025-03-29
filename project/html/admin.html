@@ -63,29 +63,55 @@
 <!-- top navbar -->
 <div class="container-fluid top-container py-2">
     <div class="container d-flex justify-content-between align-items-center">
-        <a class="text-dark text-decoration-none fw-bold" href="#">FTW</a>
-        <div class="ms-auto">
-            <a class="text-dark text-decoration-none" href="#">Martin Lupták</a>
+        <a class="text-dark text-decoration-none fw-bold" href="../html/main_page.html">FTW</a>
+        <div>
+            <a class="text-dark text-decoration-none" href="../html/register.html">Register</a>
             <span class="mx-2 text-dark">|</span>
-            <a class="text-dark text-decoration-none" href="#">Log out</a>
+            <div class="dropdown d-inline">
+                <a class="text-dark text-decoration-none dropdown-toggle" role="button" id="loginDropdown"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    Login
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="loginDropdown"
+                    style="min-width: 250px;">
+                    <li>
+                        <div class="mb-2">
+                            <label for="loginName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="loginName" placeholder="Enter your name">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="mb-2">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword"
+                                   placeholder="Enter your password">
+                        </div>
+                    </li>
+                    <li>
+                        <button class="btn btn-secondary w-100">Confirm</button>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
 <!-- bottom navbar -->
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-        <a href="#" class="me-3 text-dark placeholder-box col-2"> <i class="bi bi-vinyl-fill fs-2"></i></a>
+        <a href="../html/main_page.html" class="me-3 text-dark placeholder-box col-2"> <i
+                class="bi bi-vinyl-fill fs-2"></i></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#NavbarMenu"
                 aria-controls="NavbarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="NavbarMenu">
             <ul class="navbar-nav mx-auto justify-content-center">
-                <li class="nav-item"><a class="nav-link m-2" href="#"
+                <li class="nav-item"><a class="nav-link m-2" href="../html/men.html"
                                         style="font-size: 1.5rem; font-weight: bold;">MEN</a></li>
-                <li class="nav-item"><a class="nav-link m-2" href="#" style="font-size: 1.5rem; font-weight: bold;">WOMEN</a>
+                <li class="nav-item"><a class="nav-link m-2" href="../html/women.html"
+                                        style="font-size: 1.5rem; font-weight: bold;">WOMEN</a>
                 </li>
-                <li class="nav-item"><a class="nav-link m-2" href="#"
+                <li class="nav-item"><a class="nav-link m-2" href="../html/kids.html"
                                         style="font-size: 1.5rem; font-weight: bold;">KIDS</a>
                 </li>
             </ul>
@@ -101,8 +127,10 @@
                         </button>
                     </div>
                 </form>
-                <a href="#" class="ms-3 text-dark placeholder-box"><i class="fas fa-heart icon"></i></a>
-                <a href="#" class="ms-3 text-dark placeholder-box"><i class="fas fa-shopping-cart icon"></i></a>
+                <a href="../html/liked.html" class="ms-3 text-dark placeholder-box"><i
+                        class="fas fa-heart icon"></i></a>
+                <a href="../html/shopping_cart.html" class="ms-3 text-dark placeholder-box"><i
+                        class="fas fa-shopping-cart icon"></i></a>
             </div>
         </div>
     </div>
@@ -306,7 +334,7 @@
                         </li>
                         <li class="list-group-item d-flex justify-content-between">
                             <div>
-                                <strong></strong> 
+                                <strong></strong>
                             </div>
                             <button class="btn btn-danger btn-sm" title="Delete Category">
                                 <i class="bi bi-trash"></i>
