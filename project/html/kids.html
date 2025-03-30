@@ -20,14 +20,6 @@
             background-color: #F3F3F3;
         }
 
-        .bottom-bar {
-            background-color: #F3F3F3;
-        }
-
-        .bottom-bar .nav-link {
-            color: black;
-        }
-
         .row > * {
             margin-bottom: 2%;
         }
@@ -45,7 +37,6 @@
         .icon {
             font-size: 20px;
         }
-
 
         .search-icon-btn {
             display: flex;
@@ -172,13 +163,10 @@
     <div class="container">
         <div class="row">
             <div class="d-flex justify-content-between mb-4">
-                <!-- open filters button -->
                 <button class="btn btn-secondary" style="width: 150px;" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#filterPanel" aria-controls="filterPanel">
                     Open Filters
                 </button>
-
-            <!-- offcanvas filter panel -->
             <div class="offcanvas offcanvas-start" tabindex="-1" id="filterPanel" aria-labelledby="filterPanelLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="filterPanelLabel">Filters</h5>
@@ -187,7 +175,6 @@
                 <div class="offcanvas-body">
 
                     <div class="container">
-                        <!-- main filter -->
                         <div class="mb-3">
                             <label class="form-label">Select Category</label>
                             <select class="form-select">
@@ -218,6 +205,7 @@
 
                     <div class="container">
                         <div class="range_container">
+                            <!-- #https://medium.com/@predragdavidovic10/native-dual-range-slider-html-css-javascript-91e778134816 -->
                             <div class="sliders_control mb-4">
                                 <input id="fromSlider" type="range" value="10" min="0" max="100" class="form-range">
                                 <input id="toSlider" type="range" value="40" min="0" max="100" class="form-range">

@@ -20,13 +20,6 @@
             background-color: #F3F3F3;
         }
 
-        .bottom-bar {
-            background-color: #F3F3F3;
-        }
-
-        .bottom-bar .nav-link {
-            color: black;
-        }
 
         .row > * {
             margin-bottom: 2%;
@@ -172,13 +165,10 @@
     <div class="container">
         <div class="row">
             <div class="d-flex justify-content-between mb-4">
-                <!-- open filters button -->
                 <button class="btn btn-secondary" style="width: 150px;" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#filterPanel" aria-controls="filterPanel">
                     Open Filters
                 </button>
-
-                <!-- offcanvas filter panel -->
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="filterPanel" aria-labelledby="filterPanelLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="filterPanelLabel">Filters</h5>
@@ -187,7 +177,6 @@
                     <div class="offcanvas-body">
 
                         <div class="container">
-                            <!-- main filter -->
                             <div class="mb-3">
                                 <label class="form-label">Select Category</label>
                                 <select class="form-select">

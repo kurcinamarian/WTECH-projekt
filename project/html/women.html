@@ -20,14 +20,6 @@
             background-color: #F3F3F3;
         }
 
-        .bottom-bar {
-            background-color: #F3F3F3;
-        }
-
-        .bottom-bar .nav-link {
-            color: black;
-        }
-
         .row > * {
             margin-bottom: 2%;
         }
@@ -52,14 +44,17 @@
             align-items: center;
             justify-content: center;
         }
+
         .range_container {
             max-width: 400px;
             margin: auto;
         }
+
         .sliders_control {
             position: relative;
             width: 100%;
         }
+
         input[type="range"] {
             position: absolute;
             width: 100%;
@@ -67,6 +62,7 @@
             background: transparent;
             appearance: none;
         }
+
         input[type="range"]::-webkit-slider-thumb {
             pointer-events: auto;
             position: relative;
@@ -172,14 +168,12 @@
     <div class="container">
         <div class="row">
             <div class="d-flex justify-content-between mb-4">
-                <!-- open filters button -->
                 <button class="btn btn-secondary" style="width: 150px;" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#filterPanel" aria-controls="filterPanel">
                     Open Filters
                 </button>
-
-                <!-- offcanvas filter panel -->
-                <div class="offcanvas offcanvas-start" tabindex="-1" id="filterPanel" aria-labelledby="filterPanelLabel">
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="filterPanel"
+                     aria-labelledby="filterPanelLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="filterPanelLabel">Filters</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -187,7 +181,6 @@
                     <div class="offcanvas-body">
 
                         <div class="container">
-                            <!-- main filter -->
                             <div class="mb-3">
                                 <label class="form-label">Select Category</label>
                                 <select class="form-select">
@@ -226,11 +219,13 @@
                                 <div class="row g-2 mt-3">
                                     <div class="col-6">
                                         <label for="fromInput" class="form-label mt-3">Min</label>
-                                        <input type="number" id="fromInput" value="10" min="0" max="100" class="form-control">
+                                        <input type="number" id="fromInput" value="10" min="0" max="100"
+                                               class="form-control">
                                     </div>
                                     <div class="col-6">
                                         <label for="toInput" class="form-label mt-3">Max</label>
-                                        <input type="number" id="toInput" value="40" min="0" max="100" class="form-control">
+                                        <input type="number" id="toInput" value="40" min="0" max="100"
+                                               class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -283,7 +278,8 @@
                     </div>
                 </div>
                 <div class="dropdown">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="orderByDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="orderByDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                         Order By
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="orderByDropdown">
@@ -443,18 +439,34 @@
                         <div class="modal-body">
                             <h1>About Us</h1>
                             <p>
-                                Welcome to <strong>FTW (Fair to Wear)</strong>, where fashion meets responsibility. We believe that what you wear should not only reflect your personal style but also your values. Our mission is to offer clothing that not only looks great but is made with respect for people and the planet.
+                                Welcome to <strong>FTW (Fair to Wear)</strong>, where fashion meets responsibility. We
+                                believe that what you wear should not only reflect your personal style but also your
+                                values. Our mission is to offer clothing that not only looks great but is made with
+                                respect for people and the planet.
                             </p>
                             <p>
-                                At FTW, we carefully select each garment with the environment in mind. Our clothing is made from sustainable, eco-friendly materials, such as organic cotton, recycled fabrics, and low-impact dyes. We work closely with manufacturers who share our commitment to ethical labor practices, ensuring that every piece of clothing is made with care and fairness at every stage of production.
+                                At FTW, we carefully select each garment with the environment in mind. Our clothing is
+                                made from sustainable, eco-friendly materials, such as organic cotton, recycled fabrics,
+                                and low-impact dyes. We work closely with manufacturers who share our commitment to
+                                ethical labor practices, ensuring that every piece of clothing is made with care and
+                                fairness at every stage of production.
                             </p>
-                            We understand that fashion is about more than just trends—it’s about lasting style. That’s why our collections are designed with versatility, durability, and timelessness in mind. Whether you're dressing for a casual day out or a special occasion, FTW’s pieces are crafted to fit seamlessly into your wardrobe, helping you look and feel your best, day after day.
+                            We understand that fashion is about more than just trends—it’s about lasting style. That’s
+                            why our collections are designed with versatility, durability, and timelessness in mind.
+                            Whether you're dressing for a casual day out or a special occasion, FTW’s pieces are crafted
+                            to fit seamlessly into your wardrobe, helping you look and feel your best, day after day.
                             </p>
                             <p>
-                                As a company, we believe in transparency and integrity. We are committed to keeping our customers informed about the journey behind each product, from the materials we use to the people who create them. Our goal is to empower you to make informed choices about your wardrobe, so you can feel proud of every purchase you make.
+                                As a company, we believe in transparency and integrity. We are committed to keeping our
+                                customers informed about the journey behind each product, from the materials we use to
+                                the people who create them. Our goal is to empower you to make informed choices about
+                                your wardrobe, so you can feel proud of every purchase you make.
                             </p>
                             <p>
-                                Join us in shaping a more sustainable future for fashion. At FTW, we’re not just about looking good—we’re about feeling good too. Thank you for choosing us and supporting a brand that values fairness, quality, and the planet. Together, we can make fashion better for everyone.
+                                Join us in shaping a more sustainable future for fashion. At FTW, we’re not just about
+                                looking good—we’re about feeling good too. Thank you for choosing us and supporting a
+                                brand that values fairness, quality, and the planet. Together, we can make fashion
+                                better for everyone.
                             </p>
                         </div>
 
