@@ -3,8 +3,8 @@
   <component name="PHPUnit">
     <option name="directories">
       <list>
-        <option value="$PROJECT_DIR$/my_lara/tests/Unit" />
-        <option value="$PROJECT_DIR$/my_lara/tests/Feature" />
+        <option value="$PROJECT_DIR$/shop/tests/Unit" />
+        <option value="$PROJECT_DIR$/shop/tests/Feature" />
       </list>
     </option>
   </component>
