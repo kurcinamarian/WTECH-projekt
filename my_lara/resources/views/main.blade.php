@@ -56,25 +56,31 @@
                    data-bs-toggle="dropdown" aria-expanded="false">
                     Login
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="loginDropdown"
+
+                    <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="loginDropdown"
                     style="min-width: 250px;">
-                    <li>
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+
+                            <li>
                         <div class="mb-2">
                             <label for="loginName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="loginName" placeholder="Enter your name">
+                            <input type="text" class="form-control" id="loginName" name="email" placeholder="Enter your name">
                         </div>
                     </li>
                     <li>
                         <div class="mb-2">
                             <label for="loginPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="loginPassword"
+                            <input type="password" class="form-control" id="loginPassword" name="password"
                                    placeholder="Enter your password">
                         </div>
                     </li>
                     <li>
                         <button class="btn btn-secondary w-100">Confirm</button>
                     </li>
+                        </form>
                 </ul>
+
             </div>
         </div>
     </div>
