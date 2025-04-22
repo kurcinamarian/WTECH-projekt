@@ -83,7 +83,7 @@
 <!-- bottom navbar -->
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-        <a href="{{ url('main_page') }}" class="me-3 text-dark placeholder-box col-2">
+        <a href="{{ url('/') }}" class="me-3 text-dark placeholder-box col-2">
             <i class="bi bi-vinyl-fill fs-2"></i>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#NavbarMenu"
