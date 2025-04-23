@@ -283,10 +283,10 @@
                         Order By
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="orderByDropdown">
-                        <li><a class="dropdown-item" href="#">Price - Low to High</a></li>
-                        <li><a class="dropdown-item" href="#">Price - High to Low</a></li>
-                        <li><a class="dropdown-item" href="#">Most Popular</a></li>
-                        <li><a class="dropdown-item" href="#">Newest</a></li>
+                        <li><a class="dropdown-item" href="{{ route('kids', ['sort' => 'price_asc']) }}">Price - Low to High</a></li>
+                        <li><a class="dropdown-item" href="{{ route('kids', ['sort' => 'price_desc']) }}">Price - High to Low</a></li>
+                        <li><a class="dropdown-item" href="{{ route('kids', ['sort' => 'popular']) }}">Most Popular</a></li>
+                        <li><a class="dropdown-item" href="{{ route('kids', ['sort' => 'newest']) }}">Newest</a></li>
                     </ul>
                 </div>
             </div>
@@ -294,125 +294,43 @@
             <!-- product grid -->
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="rectangle-wrapper">
-                            <a href="{{ url('product_info') }}" class="text-decoration-none">
-                                <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/S-I1.jpg') }}"
-                                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-                                         alt="Sample Image">
-                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
-                                        <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                    </button>
-                                </div>
-                            </a>
+                    @foreach ($items as $item)
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="rectangle-wrapper">
+                                <a href="{{ url('product_info') }}" class="text-decoration-none">
+                                    <div class="rectangle-square bg-light position-relative">
+                                        <img src="{{ asset('pictures/default.jpg') }}"
+                                             class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
+                                             alt="Sample Image">
+                                        <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                                            <i class="fa-regular fa-heart text-danger fs-3"></i>
+                                        </button>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="mt-2">
+                                <span class="product-name fs-4">{{ $item->item_name }}</span><br>
+                                <span class="product-category text-muted fs-6">({{ $item->main_category }})</span><br>
+                                <span class="product-price fs-4">{{ number_format($item->price, 2) }} €</span>
+                            </div>
                         </div>
-
-                        <div class="mt-2">
-                            <span class="product-name fs-4">Urban Ease Sweatshirt</span><br>
-                            <span class="product-category text-muted fs-6">(Women's T-shirt)</span><br>
-                            <span class="product-price fs-4">19.99 €</span>
-                        </div>
+                    @endforeach
+                </div>
+                <!-- pagination info and links -->
+                <div class="d-flex flex-column align-items-center mt-4">
+                    <!-- info o počte -->
+                    <div class="mb-2 text-muted">
+                        Zobrazené {{ $items->firstItem() }} – {{ $items->lastItem() }} z {{ $items->total() }} produktov
                     </div>
 
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="rectangle-wrapper">
-                            <a href="{{ url('product_info') }}" class="text-decoration-none">
-                                <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/S-I2.jpg') }}"
-                                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-                                         alt="Sample Image">
-                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
-                                        <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                    </button>
-                                </div>
+                    <!-- číselné stránkovanie bez šípok -->
+                    <div class="pagination">
+                        @for ($i = 1; $i <= $items->lastPage(); $i++)
+                            <a href="{{ $items->url($i) }}"
+                               class="btn btn-sm mx-1 {{ $items->currentPage() == $i ? 'btn-dark text-white' : 'btn-outline-secondary' }}">
+                                {{ $i }}
                             </a>
-                        </div>
-                        <div class="mt-2">
-                            <span class="product-name fs-4">Artisan Patchwork Cap</span><br>
-                            <span class="product-category text-muted fs-6">(Men's Hat)</span><br>
-                            <span class="product-price fs-4">15.99 €</span>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="rectangle-wrapper">
-                            <a href="{{ url('product_info') }}" class="text-decoration-none">
-                                <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/S-I3.jpg') }}"
-                                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-                                         alt="Sample Image">
-                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
-                                        <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="mt-2">
-                            <span class="product-name fs-4">Flowing Linen Shirt</span><br>
-                            <span class="product-category text-muted fs-6">Sportswear</span><br>
-                            <span class="product-price fs-4">23.99 €</span>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="rectangle-wrapper">
-                            <a href="{{ url('product_info') }}" class="text-decoration-none">
-                                <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/S-I4.jpg') }}"
-                                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-                                         alt="Sample Image">
-                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
-                                        <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="mt-2">
-                            <span class="product-name fs-4">Arctic Denim Puffer</span><br>
-                            <span class="product-category text-muted fs-6">(Women's Outerwear)</span><br>
-                            <span class="product-price fs-4">49.99 €</span>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="rectangle-wrapper">
-                            <a href="{{ url('product_info') }}" class="text-decoration-none">
-                                <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/P-I6.jpg') }}"
-                                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-                                         alt="Sample Image">
-                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
-                                        <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="mt-2">
-                            <span class="product-name fs-4">Summertime high heels</span><br>
-                            <span class="product-category text-muted fs-6">(Women's High heels)</span><br>
-                            <span class="product-price fs-4">29.99 €</span>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="rectangle-wrapper">
-                            <a href="{{ url('product_info') }}" class="text-decoration-none">
-                                <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/P-I1.jpg') }}"
-                                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-                                         alt="Sample Image">
-                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
-                                        <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="mt-2">
-                            <span class="product-name fs-4">Long cross-over trench coat</span><br>
-                            <span class="product-category text-muted fs-6">(Women's Coat)</span><br>
-                            <span class="product-price fs-4">$99.99</span>
-                        </div>
+                        @endfor
                     </div>
                 </div>
             </div>
