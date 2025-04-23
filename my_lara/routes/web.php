@@ -52,6 +52,19 @@ Route::get('/main', function () {
     return view('main'); // Or replace with your actual controller/view
 });
 
+use App\Http\Controllers\UserController;
+
+// Only accessible to authenticated users
+Route::middleware('auth')->group(function () {
+    Route::post('/account/update-info', [UserController::class, 'updateaccount'])->name('profile.updateaccount');
+    Route::post('/account/update-settings', [UserController::class, 'update'])->name('profile.updatesettings');
+});
+
 use App\Http\Controllers\ItemController;
 
 Route::get('/kids', [ItemController::class, 'kids'])->name('kids');
+
+use App\Http\Controllers\OrderController;
+
+
+Route::get('/account', [OrderController::class, 'showOrders'])->name('account');

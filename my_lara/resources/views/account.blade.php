@@ -116,214 +116,169 @@
 <!-- Tabs -->
 <div class="tab-content mb-3" id="myTabContent">
     <!-- Account Page -->
+    @php
+        $user = auth()->user();
+        $addressParts = explode(';', $user->address ?? ';;;;');
+    @endphp
+
     <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
         <div class="container mt-5">
             <div class="card p-4">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="d-flex flex-column flex-md-row align-items-center mb-4 g-3">
-                            <img src="{{ asset('pictures/P-I1.jpg') }}" class="rounded-circle me-md-3 mb-3 mb-md-0"
-                                 style="width: 120px; height: 120px; object-fit: cover;"
-                                 alt="Profile Picture">
-                            <div class="text-center text-md-start w-100">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" id="name" class="form-control mb-2" value="Ľudovít Štúr">
+                <form method="POST" action="{{ route('profile.updateaccount') }}" enctype="multipart/form-data">
+                    @csrf
 
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" id="email" class="form-control" value="ludovit.stur@gmail.com">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 mb-4">
+                            <div class="d-flex flex-column flex-md-row align-items-center g-3">
+                                <img id="profilePic"
+                                     src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/icons/person-circle.svg"
+                                     class="rounded-circle me-md-3 mb-3 mb-md-0"
+                                     style="width: 120px; height: 120px; object-fit: cover;"
+                                     alt="Profile Picture">
+                                <div class="text-center text-md-start w-100">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" id="name" name="name" class="form-control mb-2" value="{{ $user->firstname }} {{ $user->lastname }}">
+
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" id="email" name="email" class="form-control" value="{{ $user->email }}">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <form>
+
                     <div class="row">
                         <div class="mb-3 col-sm-12 col-md-6">
                             <label class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" value="+421 954 123 729">
+                            <input type="tel" class="form-control" name="telephone" value="{{ $user->telephone_number }}">
                         </div>
                         <div class="mb-3 col-sm-12 col-md-6">
                             <label class="form-label">Date of Birth</label>
-                            <input type="date" class="form-control" value="1815-10-28">
+                            <input type="date" class="form-control" name="dob" value="{{ $user->date_of_birth }}">
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="mb-3 col-sm-12 col-md-6">
                             <label class="form-label">Street</label>
-                            <input type="text" class="form-control" value="Spišská">
+                            <input type="text" name="street" class="form-control" value="{{ $addressParts[0] ?? '' }}">
                         </div>
                         <div class="mb-3 col-sm-12 col-md-6">
-                            <label class="form-label">House number</label>
-                            <input type="text" class="form-control" value="123">
+                            <label class="form-label">House Number</label>
+                            <input type="text" name="house_number" class="form-control" value="{{ $addressParts[1] ?? '' }}">
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-sm-12 col-md-6 mb-3">
                             <label class="form-label">City</label>
-                            <input type="text" class="form-control" value="Uhrovec">
+                            <input type="text" name="city" class="form-control" value="{{ $addressParts[2] ?? '' }}">
                         </div>
                         <div class="col-sm-12 col-md-6 mb-3">
                             <label class="form-label">ZIP Code</label>
-                            <input type="text" class="form-control" value="956 41">
+                            <input type="text" name="zip" class="form-control" value="{{ $addressParts[3] ?? '' }}">
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-sm-12 col-md-6 mb-3">
                             <label class="form-label">Country</label>
-                            <input type="text" class="form-control" value="Slovakia">
+                            <input type="text" name="country" class="form-control" value="{{ $addressParts[4] ?? '' }}">
                         </div>
                     </div>
+
                     <button type="submit" class="btn btn-secondary">Save</button>
                 </form>
             </div>
         </div>
     </div>
+
     <!-- Orders Page -->
     <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
         <div class="container mt-5">
-            <div class="card mb-4">
-                <div class="card-header bg-secondary text-white">
-                    <h5 class="mb-0">Order ID: #123456</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row align-items-center mb-4 text-center text-md-start">
-                        <div class="col-12 col-md-2 mb-2 mb-md-0">
-                            <img src="{{ asset('pictures/P-I1.jpg') }}" alt="Item 1" class="img-fluid rounded"
-                                 style="max-width: 100%; height: auto; object-fit: cover;">
+            @if ($groupedOrders->isEmpty())
+                <p>No orders found.</p>
+            @else
+                @foreach ($groupedOrders as $orderId => $orders)
+                    <div class="card mb-4">
+                        <div class="card-header bg-secondary text-white">
+                            <h5 class="mb-0">Order ID: #{{ $orderId }}</h5>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <h6 class="mb-1">Long cross-over trench coat <small>(Women's Coat)</small></h6>
-                            <p class="mb-0">Size: M</p>
-                        </div>
-                        <div class="col-12 col-md-2 text-end mt-2 mt-md-0">
-                            <strong>99.99 €</strong>
-                        </div>
-                        <div class="col-12 col-md-2 text-center mt-2 mt-md-0">
-                            <p class="mb-0">Qty: 1</p>
-                        </div>
-                    </div>
+                        <div class="card-body">
+                            @php $totalPrice = 0; @endphp
+                            @foreach ($orders as $order)
+                                @php $totalPrice += $order->item->price * $order->quantity; @endphp
+                                <div class="row align-items-center mb-4">
 
-                    <div class="row align-items-center mb-4 text-center text-md-start">
-                        <div class="col-12 col-md-2 mb-2 mb-md-0">
-                            <img src="{{ asset('pictures/S-I2.jpg') }}" alt="Item 2" class="img-fluid rounded"
-                                 style="max-width: 100%; height: auto; object-fit: cover;">
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <h6 class="mb-1">Artisan Patchwork Cap <small>(Men's Hat)</small></h6>
-                            <p class="mb-0">Size: One-size</p>
-                        </div>
-                        <div class="col-12 col-md-2 text-end mt-2 mt-md-0">
-                            <strong>15.99 €</strong>
-                        </div>
-                        <div class="col-12 col-md-2 text-center mt-2 mt-md-0">
-                            <p class="mb-0">Qty: 1</p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col text-end">
-                            <h5 class="text-secondary">Total: 115.98 €</h5>
+                                    <div class="col-12 col-md-4">
+                                        <h6>{{ $order->item->item_name }}</h6>
+                                        <p>Size: {{ $order->size }}</p>
+                                    </div>
+                                    <div class="col-12 col-md-2 text-end">
+                                        <strong>{{ $order->item->price }} €</strong>
+                                    </div>
+                                    <div class="col-12 col-md-2 text-center">
+                                        <p>Qty: {{ $order->quantity }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                            <div class="row">
+                                <div class="col text-end">
+                                    <h5 class="text-secondary">Total Price: €{{ number_format($totalPrice, 2) }}</h5>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="card mb-4">
-                <div class="card-header bg-secondary text-white">
-                    <h5 class="mb-0">Order ID: #789012</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row align-items-center mb-4 text-center text-md-start">
-                        <div class="col-12 col-md-2 mb-2 mb-md-0">
-                            <img src="{{ asset('pictures/pexels-urfriendlyphotog-277861001.jpg') }}" alt="Item 3"
-                                 class="img-fluid rounded" style="max-width: 100%; height: auto; object-fit: cover;">
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <h6 class="mb-1">Hamilton Denim Jacket <small>(Women's Jacket)</small></h6>
-                            <p class="mb-0">Size: S</p>
-                        </div>
-                        <div class="col-12 col-md-2 text-end mt-2 mt-md-0">
-                            <strong>45.99 €</strong>
-                        </div>
-                        <div class="col-12 col-md-2 text-center mt-2 mt-md-0">
-                            <p class="mb-0">Qty: 1</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col text-end">
-                            <h5 class="text-secondary">Total: 45.99 €</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                @endforeach
+            @endif
         </div>
+
     </div>
     <!-- Settings Page -->
     <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
         <div class="container mt-5">
             <h2 class="mb-4">Account Settings</h2>
-            <div class="card mb-4">
-                <div class="card-header bg-secondary text-white">
-                    <h5 class="mb-0">Email Notifications</h5>
+            <form method="POST" action="{{ route('profile.updatesettings') }}" enctype="multipart/form-data">
+                @csrf
+
+                <!-- Email Notifications -->
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="emailNotifications" name="email_notifications" {{ ($user->user_settings & 1) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="emailNotifications">Enable Email Notifications</label>
                 </div>
-                <div class="card-body">
-                    <div class="form-check mb-3">
-                        <input type="checkbox" class="form-check-input" id="emailNotifications" checked>
-                        <label class="form-check-label" for="emailNotifications">Enable Email Notifications</label>
-                    </div>
-                    <div class="form-check mb-3">
-                        <input type="checkbox" class="form-check-input" id="newOffers" checked>
-                        <label class="form-check-label" for="newOffers">Receive Emails for New Offers</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="newsletters">
-                        <label class="form-check-label" for="newsletters">Subscribe to Newsletters</label>
-                    </div>
+
+                <!-- New Offers -->
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="newOffers" name="new_offers" {{ ($user->user_settings & 2) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="newOffers">Receive Emails for New Offers</label>
                 </div>
-            </div>
-            <div class="card mb-4">
-                <div class="card-header bg-secondary text-white">
-                    <h5 class="mb-0">Privacy Settings</h5>
+
+                <!-- Newsletters -->
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="newsletters" name="newsletters" {{ ($user->user_settings & 4) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="newsletters">Subscribe to Newsletters</label>
                 </div>
-                <div class="card-body">
-                    <div class="form-check mb-3">
-                        <input type="checkbox" class="form-check-input" id="showProfilePublic" checked>
-                        <label class="form-check-label" for="showProfilePublic">Show Profile Publicly</label>
-                    </div>
-                    <div class="form-check mb-3">
-                        <input type="checkbox" class="form-check-input" id="trackLocation">
-                        <label class="form-check-label" for="trackLocation">Enable Location Tracking</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="thirdPartyDataSharing">
-                        <label class="form-check-label" for="thirdPartyDataSharing">Share Data with Third-Party Services</label>
-                    </div>
+
+                <!-- Show Profile Public -->
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="showProfilePublic" name="show_profile_public" {{ ($user->user_settings & 8) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="showProfilePublic">Show Profile Publicly</label>
                 </div>
-            </div>
-            <div class="card mb-4">
-                <div class="card-header bg-secondary text-white">
-                    <h5 class="mb-0">Account Deletion</h5>
+
+                <!-- Enable Location Tracking -->
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="trackLocation" name="track_location" {{ ($user->user_settings & 16) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="trackLocation">Enable Location Tracking</label>
                 </div>
-                <div class="card-body">
-                    <p class="text">Warning: Deleting your account is permanent and cannot be undone. All your data will be lost.</p>
-                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Account</button>
+
+                <!-- Share Data with Third-Party Services -->
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="thirdPartyDataSharing" name="third_party_data_sharing" {{ ($user->user_settings & 32) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="thirdPartyDataSharing">Share Data with Third-Party Services</label>
                 </div>
-            </div>
-            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="deleteModalLabel">Confirm Account Deletion</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Are you sure you want to delete your account? This action cannot be undone.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-danger">Delete Account</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+                <button type="submit" class="btn btn-secondary">Save Changes</button>
+            </form>
+
         </div>
     </div>
 </div>
@@ -647,7 +602,6 @@
         <span style="color: grey; font-size: 0.75rem;">FTW</span>
     </div>
 </div>
-
 
 </body>
 </html>

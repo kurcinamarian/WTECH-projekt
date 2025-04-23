@@ -91,9 +91,12 @@
         @endguest
         @auth
             <div>
-                <span class="text-dark">{{ Auth::user()->firstname }}</span>
+                <a href="{{ route('account') }}" class="text-dark text-decoration-none">
+                    {{ Auth::user()->firstname }}
+                </a>
                 <span class="mx-2 text-dark">|</span>
-                <a class="text-dark text-decoration-none" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <a class="text-dark text-decoration-none" href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Logout
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

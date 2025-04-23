@@ -57,6 +57,6 @@ class RegisterController extends Controller
     // Optional: If you want to show your custom form
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        return view('register');
     }
 }

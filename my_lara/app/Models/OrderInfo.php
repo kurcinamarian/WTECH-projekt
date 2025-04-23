@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderInfo extends Model
 {
-    protected $table = 'Order_info';
+    protected $table = 'order_info';
 
     protected $primaryKey = 'order_id';
 

@@ -15,7 +15,7 @@ class User extends Model implements Authenticatable
     protected $primaryKey = 'user_id';
 
     protected $fillable = [
-        'user_id','firstname', 'lastname', 'email', 'telephone_number',
+        'firstname', 'lastname', 'email', 'telephone_number',
         'password', 'birth_date', 'address', 'user_settings',
         'profile_image'
     ];
