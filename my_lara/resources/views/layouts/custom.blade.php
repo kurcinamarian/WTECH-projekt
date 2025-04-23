@@ -109,7 +109,6 @@
 <body>
 
 <div class="container">
-    <h2>Register</h2>
     @yield('content')
 
     <div class="error">

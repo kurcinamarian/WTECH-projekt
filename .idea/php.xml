@@ -239,6 +239,7 @@
       <path value="$PROJECT_DIR$/shop/vendor/phar-io/version" />
       <path value="$PROJECT_DIR$/shop/vendor/theseer/tokenizer" />
       <path value="$PROJECT_DIR$/shop/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/my_lara/vendor/laravel/ui" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2">
