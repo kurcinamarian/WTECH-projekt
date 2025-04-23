@@ -12,9 +12,10 @@ class Item extends Model
 
     protected $fillable = [
         'item_name', 'price', 'description', 'parameters',
-        'category_id', 'style_fabric', 'colour',
+        'category_id', 'main_category', 'style_fabric', 'colour',
         'times_bought', 'release_date'
     ];
+
 
     public function category()
     {

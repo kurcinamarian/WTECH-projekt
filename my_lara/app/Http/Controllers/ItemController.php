@@ -1,6 +1,5 @@
 <?php
 
-// app/Http/Controllers/ItemController.php
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -10,9 +9,36 @@ class ItemController extends Controller
 {
     public function kids(Request $request)
     {
-        $sort = $request->query('sort');
+        $categoryId = $request->input('category_id');
+        $priceMin = $request->input('price_min');
+        $priceMax = $request->input('price_max');
+        $styleFabricFlags = $request->input('style_fabric_flags', []);
+        $colour = $request->input('colour');
+        $sort = $request->input('sort');
 
-        $query = Item::where('main_category', 'Kids');
+        $query = Item::query()->where('main_category', 'like', '%KIDS%');
+
+
+        if (!empty($categoryId)) {
+            $query->where('category_id', $categoryId);
+        }
+
+        if (!empty($priceMin)) {
+            $query->where('price', '>=', $priceMin);
+        }
+
+        if (!empty($priceMax)) {
+            $query->where('price', '<=', $priceMax);
+        }
+
+        if (!empty($colour)) {
+            $query->where('colour', $colour);
+        }
+
+        if (!empty($styleFabricFlags)) {
+            $sum = array_sum($styleFabricFlags);
+            $query->whereRaw('style_fabric & ? = ?', [$sum, $sum]);
+        }
 
         switch ($sort) {
             case 'price_asc':
@@ -28,12 +54,15 @@ class ItemController extends Controller
                 $query->orderBy('release_date', 'desc');
                 break;
             default:
-                $query->orderBy('release_date', 'desc'); // default sort
+                $query->orderBy('item_id', 'desc');
+                break;
+
         }
 
-        // Stránkovanie – 9 produktov na stránku
-        $items = $query->paginate(9)->appends(['sort' => $sort]);
+        $items = $query->paginate(9)->appends($request->all());
 
-        return view('kids', compact('items', 'sort'));
+
+        return view('kids', compact('items'));
     }
+
 }

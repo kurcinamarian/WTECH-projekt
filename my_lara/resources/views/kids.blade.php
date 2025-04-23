@@ -165,131 +165,146 @@
     <div class="container">
         <div class="row">
             <div class="col-12 mt-4">
-                <h1 class="text-start">Men</h1>
+                <h1 class="text-start">Kids</h1>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row">
-            <div class="d-flex justify-content-between mb-4">
-                <button class="btn btn-secondary" style="width: 150px;" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#filterPanel" aria-controls="filterPanel">
-                    Open Filters
-                </button>
-                <div class="offcanvas offcanvas-start" tabindex="-1" id="filterPanel" aria-labelledby="filterPanelLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="filterPanelLabel">Filters</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
+            <form method="GET" action="{{ route('kids') }}">
+                <div class="d-flex justify-content-between mb-4">
+                    <button class="btn btn-secondary" style="width: 150px;" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#filterPanel" aria-controls="filterPanel">
+                        Open Filters
+                    </button>
 
-                        <div class="container">
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="filterPanel" aria-labelledby="filterPanelLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="filterPanelLabel">Filters</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+
                             <div class="mb-3">
                                 <label class="form-label">Select Category</label>
-                                <select class="form-select">
+                                <select class="form-select" name="category_id">
+                                    <option value="">All Categories</option>
                                     <optgroup label="Shoes">
                                         <option value="1">Sneakers</option>
-                                        <option value="1.1">Boots</option>
-                                        <option value="1.2">Sports shoes</option>
-                                        <option value="1.3">Open shoes</option>
-                                        <option value="1.4">Exclusive</option>
+                                        <option value="2">Boots</option>
+                                        <option value="3">Sports shoes</option>
+                                        <option value="4">Open shoes</option>
+                                        <option value="5">Exclusive</option>
                                     </optgroup>
                                     <optgroup label="Shirts">
-                                        <option value="2">Long sleeved</option>
-                                        <option value="2.1">Short sleeved</option>
-                                        <option value="2.2">Tank tops</option>
-                                        <option value="2.3">Polo shirts</option>
-                                        <option value="2.4">Sport</option>
+                                        <option value="6">Long sleeved</option>
+                                        <option value="7">Short sleeved</option>
+                                        <option value="8">Tank tops</option>
+                                        <option value="9">Polo shirts</option>
+                                        <option value="10">Sport</option>
                                     </optgroup>
-                                    <optgroup label="Panths">
-                                        <option value="3">Jeans</option>
-                                        <option value="3.1">Shorts</option>
-                                        <option value="3.2">Cargo panths</option>
-                                        <option value="3.3">Tracksuit panths</option>
-                                        <option value="3.3">Fabric panths</option>
+                                    <optgroup label="Pants">
+                                        <option value="11">Jeans</option>
+                                        <option value="12">Shorts</option>
+                                        <option value="13">Cargo pants</option>
+                                        <option value="14">Tracksuit pants</option>
+                                        <option value="15">Fabric pants</option>
                                     </optgroup>
                                 </select>
                             </div>
-                        </div>
 
-                        <div class="container">
-                            <div class="range_container">
-                                <div class="sliders_control mb-4">
-                                    <input id="fromSlider" type="range" value="10" min="0" max="100" class="form-range">
-                                    <input id="toSlider" type="range" value="40" min="0" max="100" class="form-range">
+                            <div class="row g-2 mt-3">
+                                <div class="col-6">
+                                    <label for="price_min" class="form-label">Min Price</label>
+                                    <input type="number" name="price_min" id="price_min" class="form-control" placeholder="0">
                                 </div>
-
-                                <div class="row g-2 mt-3">
-                                    <div class="col-6">
-                                        <label for="fromInput" class="form-label mt-3">Min</label>
-                                        <input type="number" id="fromInput" value="10" min="0" max="100" class="form-control">
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="toInput" class="form-label mt-3">Max</label>
-                                        <input type="number" id="toInput" value="40" min="0" max="100" class="form-control">
-                                    </div>
+                                <div class="col-6">
+                                    <label for="price_max" class="form-label">Max Price</label>
+                                    <input type="number" name="price_max" id="price_max" class="form-control" placeholder="1000">
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Style</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="casual">
-                                <label class="form-check-label" for="casual">Casual</label>
+                            <div class="mb-3 mt-3">
+                                <label class="form-label">Style</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="style_fabric_flags[]" value="1" id="casual">
+                                    <label class="form-check-label" for="casual">Casual</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="style_fabric_flags[]" value="2" id="formal">
+                                    <label class="form-check-label" for="formal">Formal</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="style_fabric_flags[]" value="4" id="cozy">
+                                    <label class="form-check-label" for="cozy">Cozy</label>
+                                </div>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="formal">
-                                <label class="form-check-label" for="formal">Formal</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="cozy">
-                                <label class="form-check-label" for="cozy">Cozy</label>
-                            </div>
-                        </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Color</label>
-                            <select class="form-select">
-                                <option>Red</option>
-                                <option>Blue</option>
-                                <option>Green</option>
-                                <option>Black</option>
-                                <option>White</option>
-                                <option>Other</option>
-                            </select>
-                        </div>
+                            <div class="mb-3">
+                                <label class="form-label">Fabric Type</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="style_fabric_flags[]" value="8" id="cotton">
+                                    <label class="form-check-label" for="cotton">Cotton</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="style_fabric_flags[]" value="16" id="wool">
+                                    <label class="form-check-label" for="wool">Wool</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="style_fabric_flags[]" value="32" id="polyester">
+                                    <label class="form-check-label" for="polyester">Polyester</label>
+                                </div>
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Fabric Type</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="cotton">
-                                <label class="form-check-label" for="cotton">Cotton</label>
+                            <div class="mb-3">
+                                <label class="form-label">Color</label>
+                                <select class="form-select" name="colour">
+                                    <option value="">All</option>
+                                    <option value="Red">Red</option>
+                                    <option value="Blue">Blue</option>
+                                    <option value="Green">Green</option>
+                                    <option value="Black">Black</option>
+                                    <option value="White">White</option>
+                                    <option value="Other">Other</option>
+                                </select>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="wool">
-                                <label class="form-check-label" for="wool">Wool</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="polyester">
-                                <label class="form-check-label" for="polyester">Polyester</label>
-                            </div>
-                        </div>
 
+                            <button type="submit" class="btn btn-primary w-100 mt-3">Apply Filters</button>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="orderByDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Order By
+                        </button>
+                        @php
+                            $query = request()->all();
+                        @endphp
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="orderByDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('kids', array_merge($query, ['sort' => 'price_asc'])) }}">
+                                    Price - Low to High
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('kids', array_merge($query, ['sort' => 'price_desc'])) }}">
+                                    Price - High to Low
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('kids', array_merge($query, ['sort' => 'popular'])) }}">
+                                    Most Popular
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('kids', array_merge($query, ['sort' => 'newest'])) }}">
+                                    Newest
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="dropdown">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="orderByDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        Order By
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="orderByDropdown">
-                        <li><a class="dropdown-item" href="{{ route('kids', ['sort' => 'price_asc']) }}">Price - Low to High</a></li>
-                        <li><a class="dropdown-item" href="{{ route('kids', ['sort' => 'price_desc']) }}">Price - High to Low</a></li>
-                        <li><a class="dropdown-item" href="{{ route('kids', ['sort' => 'popular']) }}">Most Popular</a></li>
-                        <li><a class="dropdown-item" href="{{ route('kids', ['sort' => 'newest']) }}">Newest</a></li>
-                    </ul>
-                </div>
-            </div>
+            </form>
 
             <!-- product grid -->
             <div class="col-md-12">
@@ -320,7 +335,7 @@
                 <div class="d-flex flex-column align-items-center mt-4">
                     <!-- info o počte -->
                     <div class="mb-2 text-muted">
-                        Zobrazené {{ $items->firstItem() }} – {{ $items->lastItem() }} z {{ $items->total() }} produktov
+                        Displayed {{ $items->firstItem() }} – {{ $items->lastItem() }} from {{ $items->total() }} products
                     </div>
 
                     <!-- číselné stránkovanie bez šípok -->

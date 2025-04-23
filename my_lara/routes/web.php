@@ -64,7 +64,10 @@ use App\Http\Controllers\ItemController;
 
 Route::get('/kids', [ItemController::class, 'kids'])->name('kids');
 
+
 use App\Http\Controllers\OrderController;
 
 
 Route::get('/account', [OrderController::class, 'showOrders'])->name('account');
+
+
