@@ -48,7 +48,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 use App\Http\Controllers\RegistrationController;
 
-Route::post('/submit_registration', [RegistrationController::class, 'submitRegistration']);
+Route::post('/submit_registration', [\App\Http\Controllers\Auth\RegisterController::class, 'submitRegistration']);
 Route::get('/main', function () {
     return view('main'); // Or replace with your actual controller/view
 });

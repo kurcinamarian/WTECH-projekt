@@ -48,40 +48,59 @@
 <div class="container-fluid top-container py-2">
     <div class="container d-flex justify-content-between align-items-center">
         <a class="text-dark text-decoration-none fw-bold" href="{{ url('main_page') }}">FTW</a>
-        <div>
-            <a class="text-dark text-decoration-none" href="{{ url('register') }}">Register</a>
-            <span class="mx-2 text-dark">|</span>
-            <div class="dropdown d-inline">
-                <a class="text-dark text-decoration-none dropdown-toggle" role="button" id="loginDropdown"
-                   data-bs-toggle="dropdown" aria-expanded="false">
-                    Login
-                </a>
+        @guest
+            <div>
+                <a class="text-dark text-decoration-none" href="{{ url('register') }}">Register</a>
+                <span class="mx-2 text-dark">|</span>
+                <div class="dropdown d-inline">
+                    <a class="text-dark text-decoration-none dropdown-toggle" role="button" id="loginDropdown"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Login
+                    </a>
 
                     <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="loginDropdown"
-                    style="min-width: 250px;">
+                        style="min-width: 250px;">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
 
                             <li>
-                        <div class="mb-2">
-                            <label for="loginName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="loginName" name="email" placeholder="Enter your name">
-                        </div>
-                    </li>
-                    <li>
-                        <div class="mb-2">
-                            <label for="loginPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="loginPassword" name="password"
-                                   placeholder="Enter your password">
-                        </div>
-                    </li>
-                    <li>
-                        <button class="btn btn-secondary w-100">Confirm</button>
-                    </li>
+                                <div class="mb-2">
+                                    <label for="loginName" class="form-label">Name</label>
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror" id="loginName" name="email" placeholder="Enter your email" value="{{ old('email') }}">
+                                    @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </li>
+                            <li>
+                                <div class="mb-2">
+                                    <label for="loginPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="loginPassword" name="password" placeholder="Enter your password">
+                                    @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </li>
+                            <li>
+                                <button class="btn btn-secondary w-100">Confirm</button>
+                            </li>
                         </form>
-                </ul>
-
+                    </ul>
+                </div>
             </div>
+        @endguest
+        @auth
+            <div>
+                <span class="text-dark">{{ Auth::user()->firstname }}</span>
+                <span class="mx-2 text-dark">|</span>
+                <a class="text-dark text-decoration-none" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </div>
+        @endauth
         </div>
     </div>
 </div>

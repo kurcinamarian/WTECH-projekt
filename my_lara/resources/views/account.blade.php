@@ -45,38 +45,7 @@
 <body>
 <!-- top navbar -->
 <div class="container-fluid top-container py-2">
-    <div class="container d-flex justify-content-between align-items-center">
-        <a class="text-dark text-decoration-none fw-bold" href="{{ url('main_page') }}">FTW</a>
-        <div>
-            <a class="text-dark text-decoration-none" href="{{ url('register') }}">Register</a>
-            <span class="mx-2 text-dark">|</span>
-            <div class="dropdown d-inline">
-                <a class="text-dark text-decoration-none dropdown-toggle" role="button" id="loginDropdown"
-                   data-bs-toggle="dropdown" aria-expanded="false">
-                    Login
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="loginDropdown"
-                    style="min-width: 250px;">
-                    <li>
-                        <div class="mb-2">
-                            <label for="loginName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="loginName" placeholder="Enter your name">
-                        </div>
-                    </li>
-                    <li>
-                        <div class="mb-2">
-                            <label for="loginPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="loginPassword"
-                                   placeholder="Enter your password">
-                        </div>
-                    </li>
-                    <li>
-                        <button class="btn btn-secondary w-100">Confirm</button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+
 </div>
 
 <!-- bottom navbar -->
