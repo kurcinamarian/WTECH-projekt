@@ -45,3 +45,10 @@ Route::get('/women', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+use App\Http\Controllers\RegistrationController;
+
+Route::post('/submit_registration', [RegistrationController::class, 'submitRegistration']);
+Route::get('/main', function () {
+    return view('main'); // Or replace with your actual controller/view
+});
