@@ -135,9 +135,10 @@
                     <div class="input-group col-6" style="position: relative;">
                         <input class="form-control rounded-pill" type="search" placeholder="Search" aria-label="Search"
                                style="border-radius: 30px; height: 30px; font-size: 14px; padding-right: 35px;">
-                        <button class="btn btn-outline-secondary rounded-pill position-absolute end-0 me-1 search-icon-btn d-flex align-items-center justify-content-center"
-                                type="submit"
-                                style="border-radius: 30px; height: 30px; background: transparent; border: none;">
+                        <button
+                            class="btn btn-outline-secondary rounded-pill position-absolute end-0 me-1 search-icon-btn d-flex align-items-center justify-content-center"
+                            type="submit"
+                            style="border-radius: 30px; height: 30px; background: transparent; border: none;">
                             <i class="fas fa-magnifying-glass icon"></i>
                         </button>
                     </div>
@@ -155,122 +156,130 @@
 
 <!-- Main_Product -->
 <div class="container my-5">
-    <div class="row">
-        <div class="col-12 col-md-6 mb-4">
-            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="rectangle-wrapper">
-                            <img src="{{ asset('pictures/P-I1.jpg') }}" alt="product1" class="img-fluid">
+    <form method="POST" action="{{ route('shopping_cart.add') }}">
+        @csrf
+        <input type="hidden" name="item_id" value="{{ $item->item_id }}">
+        <div class="row">
+            <div class="col-12 col-md-6 mb-4">
+                <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="rectangle-wrapper">
+                                <img src="{{ asset('pictures/P-I1.jpg') }}" alt="product1" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="rectangle-wrapper">
+                                <img src="{{ asset('pictures/P-I2.jpg') }}" alt="product2" class="img-fluid">
+                            </div>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <div class="rectangle-wrapper">
-                            <img src="{{ asset('pictures/P-I2.jpg') }}" alt="product2" class="img-fluid">
-                        </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"
+                              style="filter: invert(100%);"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"
+                              style="filter: invert(100%);"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 mb-4">
+                <div class="d-flex align-items-center">
+                    <h1 class="me-2">{{ $item->item_name }}</h1>
+                    <button class="btn bg-transparent">
+                        <i class="fa-regular fa-heart text-danger fs-3"></i>
+                    </button>
+                </div>
+                <div class="mb-4">
+                    <span class="text-muted">({{ $item->parameters }})</span>
+                </div>
+                <div class="mb-4">
+                    <p>{{ $item->description }}</p>
+
+                    <h2>Parameters:</h2>
+                    <ul class="list-unstyled">
+                        <li><strong>Style:</strong>
+                            @php
+                                $styles = [
+                                    1 => 'Casual', 2 => 'Formal', 4 => 'Cozy',
+                                ];
+                                $selectedStyles = [];
+                                foreach ($styles as $bit => $name) {
+                                    if ($item->style_fabric & $bit) {
+                                        $selectedStyles[] = $name;
+                                    }
+                                }
+                            @endphp
+                            {{ implode(', ', $selectedStyles) }}
+                        </li>
+
+                        <li><strong>Material:</strong>
+                            @php
+                                $materials = [
+                                    8 => 'Cotton', 16 => 'Wool', 32 => 'Polyester',
+                                ];
+                                $selectedMaterials = [];
+                                foreach ($materials as $bit => $name) {
+                                    if ($item->style_fabric & $bit) {
+                                        $selectedMaterials[] = $name;
+                                    }
+                                }
+                            @endphp
+                            {{ implode(', ', $selectedMaterials) }}
+                        </li>
+                        <li><strong>Color:</strong> {{ $item->colour }}</li>
+                        <li><strong>Brand:</strong> FTW</li>
+                        <li><strong>Season:</strong> Spring/Fall</li>
+                        <li><strong>Release
+                                date:</strong> {{ \Carbon\Carbon::parse($item->release_date)->format('d.m.Y') }}</li>
+                    </ul>
+                </div>
+                <div class="mb-4">
+                    <h4 class="mb-3">Size selection</h4>
+                    <div class="d-flex flex-wrap">
+                        @if($item->category && $item->category->main_category === 'Shoes')
+                            @for($size = 35; $size <= 45; $size++)
+                                <label class="size-btn m-1">
+                                    <input type="radio" name="size" value="{{ $size }}" class="d-none"/>
+                                    <span class="btn btn-outline-dark w-100">{{ $size }}</span>
+                                </label>
+                            @endfor
+                        @else
+                            @foreach(['XS', 'S', 'M', 'L', 'XL'] as $size)
+                                <label class="size-btn m-1">
+                                    <input type="radio" name="size" value="{{ $size }}" class="d-none"/>
+                                    <span class="btn btn-outline-dark w-100">{{ $size }}</span>
+                                </label>
+                            @endforeach
+                        @endif
+
                     </div>
+                    @error('size')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
-                        data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(100%);"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
-                        data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(100%);"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 mb-4">
-            <div class="d-flex align-items-center">
-                <h1 class="me-2">{{ $item->item_name }}</h1>
-                <button class="btn bg-transparent">
-                    <i class="fa-regular fa-heart text-danger fs-3"></i>
-                </button>
-            </div>
-            <div class="mb-4">
-                <span class="text-muted">({{ $item->parameters }})</span>
-            </div>
-            <div class="mb-4">
-                <p>{{ $item->description }}</p>
-
-                <h2>Parameters:</h2>
-                <ul class="list-unstyled">
-                    <li><strong>Style:</strong>
-                        @php
-                            $styles = [
-                                1 => 'Casual', 2 => 'Formal', 4 => 'Cozy',
-                            ];
-                            $selectedStyles = [];
-                            foreach ($styles as $bit => $name) {
-                                if ($item->style_fabric & $bit) {
-                                    $selectedStyles[] = $name;
-                                }
-                            }
-                        @endphp
-                        {{ implode(', ', $selectedStyles) }}
-                    </li>
-
-                    <li><strong>Material:</strong>
-                        @php
-                            $materials = [
-                                8 => 'Cotton', 16 => 'Wool', 32 => 'Polyester',
-                            ];
-                            $selectedMaterials = [];
-                            foreach ($materials as $bit => $name) {
-                                if ($item->style_fabric & $bit) {
-                                    $selectedMaterials[] = $name;
-                                }
-                            }
-                        @endphp
-                        {{ implode(', ', $selectedMaterials) }}
-                    </li>
-                    <li><strong>Color:</strong> {{ $item->colour }}</li>
-                    <li><strong>Brand:</strong> FTW</li>
-                    <li><strong>Season:</strong> Spring/Fall</li>
-                    <li><strong>Release date:</strong> {{ \Carbon\Carbon::parse($item->release_date)->format('d.m.Y') }}</li>
-                </ul>
-            </div>
-            <div class="mb-4">
-                <h4 class="mb-3">Size selection</h4>
-                <div class="d-flex">
-                    <!-- Radio buttons for sizes -->
-                    <label class="size-btn m-1">
-                        <input type="radio" name="size" value="XS" class="d-none" />
-                        <span class="btn btn-outline-dark w-100">XS</span>
-                    </label>
-                    <label class="size-btn m-1">
-                        <input type="radio" name="size" value="S" class="d-none" />
-                        <span class="btn btn-outline-dark w-100">S</span>
-                    </label>
-                    <label class="size-btn m-1">
-                        <input type="radio" name="size" value="M" class="d-none" />
-                        <span class="btn btn-outline-dark w-100">M</span>
-                    </label>
-                    <label class="size-btn m-1">
-                        <input type="radio" name="size" value="L" class="d-none" />
-                        <span class="btn btn-outline-dark w-100">L</span>
-                    </label>
-                    <label class="size-btn m-1">
-                        <input type="radio" name="size" value="XL" class="d-none" />
-                        <span class="btn btn-outline-dark w-100">XL</span>
-                    </label>
+                <!-- Quantity input field -->
+                <div class="mb-4">
+                    <h4 class="mb-3">Quantity</h4>
+                    <input type="number" class="form-control w-25" id="quantity" name="quantity" value="1"
+                           step="1">
+                    @error('quantity')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="price fs-1">{{ number_format($item->price, 2) }} €</div>
+                    <button type="submit" class="btn btn-dark btn-lg">ADD TO CART</button>
                 </div>
             </div>
-            <!-- Quantity input field -->
-            <div class="mb-4">
-                <h4 class="mb-3">Quantity</h4>
-                <input type="number" class="form-control w-25" id="quantity" name="quantity" value="1" min="1" step="1">
-            </div>
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <div class="price fs-1">{{ number_format($item->price, 2) }} €</div>
-                <button type="button" class="btn btn-dark btn-lg">ADD TO CART</button>
-            </div>
         </div>
-    </div>
+    </form>
 </div>
-
 
 
 <!-- Suggested -->
@@ -329,18 +338,34 @@
                         <div class="modal-body">
                             <h1>About Us</h1>
                             <p>
-                                Welcome to <strong>FTW (Fair to Wear)</strong>, where fashion meets responsibility. We believe that what you wear should not only reflect your personal style but also your values. Our mission is to offer clothing that not only looks great but is made with respect for people and the planet.
+                                Welcome to <strong>FTW (Fair to Wear)</strong>, where fashion meets responsibility. We
+                                believe that what you wear should not only reflect your personal style but also your
+                                values. Our mission is to offer clothing that not only looks great but is made with
+                                respect for people and the planet.
                             </p>
                             <p>
-                                At FTW, we carefully select each garment with the environment in mind. Our clothing is made from sustainable, eco-friendly materials, such as organic cotton, recycled fabrics, and low-impact dyes. We work closely with manufacturers who share our commitment to ethical labor practices, ensuring that every piece of clothing is made with care and fairness at every stage of production.
+                                At FTW, we carefully select each garment with the environment in mind. Our clothing is
+                                made from sustainable, eco-friendly materials, such as organic cotton, recycled fabrics,
+                                and low-impact dyes. We work closely with manufacturers who share our commitment to
+                                ethical labor practices, ensuring that every piece of clothing is made with care and
+                                fairness at every stage of production.
                             </p>
-                            We understand that fashion is about more than just trends—it’s about lasting style. That’s why our collections are designed with versatility, durability, and timelessness in mind. Whether you're dressing for a casual day out or a special occasion, FTW’s pieces are crafted to fit seamlessly into your wardrobe, helping you look and feel your best, day after day.
+                            We understand that fashion is about more than just trends—it’s about lasting style. That’s
+                            why our collections are designed with versatility, durability, and timelessness in mind.
+                            Whether you're dressing for a casual day out or a special occasion, FTW’s pieces are crafted
+                            to fit seamlessly into your wardrobe, helping you look and feel your best, day after day.
                             </p>
                             <p>
-                                As a company, we believe in transparency and integrity. We are committed to keeping our customers informed about the journey behind each product, from the materials we use to the people who create them. Our goal is to empower you to make informed choices about your wardrobe, so you can feel proud of every purchase you make.
+                                As a company, we believe in transparency and integrity. We are committed to keeping our
+                                customers informed about the journey behind each product, from the materials we use to
+                                the people who create them. Our goal is to empower you to make informed choices about
+                                your wardrobe, so you can feel proud of every purchase you make.
                             </p>
                             <p>
-                                Join us in shaping a more sustainable future for fashion. At FTW, we’re not just about looking good—we’re about feeling good too. Thank you for choosing us and supporting a brand that values fairness, quality, and the planet. Together, we can make fashion better for everyone.
+                                Join us in shaping a more sustainable future for fashion. At FTW, we’re not just about
+                                looking good—we’re about feeling good too. Thank you for choosing us and supporting a
+                                brand that values fairness, quality, and the planet. Together, we can make fashion
+                                better for everyone.
                             </p>
                         </div>
 

@@ -141,95 +141,86 @@
     <!-- Navbar with Tabs -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="cart-tab" data-bs-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="true">Shopping Cart</a>
+            <a class="nav-link {{$activeTab == 'cart'? "active": ""}}" id="cart-tab" data-bs-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="true">Shopping Cart</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" id="shipping-tab" data-bs-toggle="tab" href="#shipping" role="tab" aria-controls="shipping" aria-selected="false">Shipping Information</a>
+        <li class="nav-item ">
+            <a class="nav-link {{$activeTab == 'shipping'? "active": ""}}" id="shipping-tab" data-bs-toggle="tab" href="#shipping" role="tab" aria-controls="shipping" aria-selected="false">Shipping Information</a>
         </li>
     </ul>
 </div>
 
 <div class="tab-content" id="myTabContent">
     <!-- Shopping Cart Page -->
-    <div class="tab-pane fade show active" id="cart" role="tabpanel" aria-labelledby="cart-tab">
-        <div class="container my-5">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="row align-items-center mb-4 text-center text-md-start">
-                        <div class="col-12 col-md-3 mb-2 mb-md-0">
-                            <img src="{{ asset('pictures/P-I1.jpg') }}" alt="Item 1" class="img-fluid rounded" style="max-width: 100%; height: auto; object-fit: cover;">
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <h6 class="mb-1">Long cross-over trench coat <small>(Women's Coat)</small></h6>
-                            <p class="mb-0">M</p>
-                        </div>
-                        <div class="col-12 col-md-2 text-end mt-2 mt-md-0">
-                            <strong>99.99 €</strong>
-                        </div>
-                        <div class="col-12 col-md-3 text-center mt-2 mt-md-0">
-                            <div class="input-group input-group-sm justify-content-center justify-content-md-start">
-                                <button class="btn btn-outline-secondary" type="button">-</button>
-                                <input type="text" class="form-control text-center" value="1" style="max-width: 40px;">
-                                <button class="btn btn-outline-secondary" type="button">+</button>
-                            </div>
-                        </div>
-                    </div>
+    <div class="tab-content" id="myTabContent">
+        <!-- Shopping Cart Page -->
+        <div class="tab-pane fade {{$activeTab == 'cart'? "show active": ""}}" id="cart" role="tabpanel" aria-labelledby="cart-tab">
+            <div class="container my-5">
+                <div class="row">
+                    <div class="col-md-8">
+                        @if($cartItems->isEmpty())
+                            <p>Your cart is empty.</p>
+                        @else
+                            @php
+                            $totalPrice = 0;
+                            @endphp
+                            @error('quantity')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                            @foreach ($cartItems as $cartItem)
+                                <div class="row align-items-center mb-4 text-center text-md-start">
+                                    <div class="col-12 col-md-3 mb-2 mb-md-0">
+                                        <img src="{{ asset('pictures/' . $cartItem->item->image) }}" alt="{{ $cartItem->item->item_name }}" class="img-fluid rounded" style="max-width: 100%; height: auto; object-fit: cover;">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <h6 class="mb-1">{{ $cartItem->item->item_name }} <small>({{ $cartItem->item->category }})</small></h6>
+                                        <p class="mb-0">{{ $cartItem->size }}</p>
+                                    </div>
+                                    <div class="col-12 col-md-2 text-end mt-2 mt-md-0">
+                                        <strong>{{ number_format($cartItem->item->price, 2) }} €</strong>
+                                        @php
+                                            $totalPrice += $cartItem->quantity*$cartItem->item->price;
 
-                    <div class="row align-items-center mb-4 text-center text-md-start">
-                        <div class="col-12 col-md-3 mb-2 mb-md-0">
-                            <img src="{{ asset('pictures/S-I2.jpg') }}" alt="Item 2" class="img-fluid rounded" style="max-width: 100%; height: auto; object-fit: cover;">
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <h6 class="mb-1">Artisan Patchwork Cap <small>(Men's Hat)</small></h6>
-                            <p class="mb-0">M</p>
-                        </div>
-                        <div class="col-12 col-md-2 text-end mt-2 mt-md-0">
-                            <strong>15.99 €</strong>
-                        </div>
-                        <div class="col-12 col-md-3 text-center mt-2 mt-md-0">
-                            <div class="input-group input-group-sm justify-content-center justify-content-md-start">
-                                <button class="btn btn-outline-secondary" type="button">-</button>
-                                <input type="text" class="form-control text-center" value="1" style="max-width: 40px;">
-                                <button class="btn btn-outline-secondary" type="button">+</button>
-                            </div>
-                        </div>
-                    </div>
+                                        @endphp
+                                    </div>
+                                    <div class="col-12 col-md-3 text-center mt-2 mt-md-0">
+                                        <form action="{{ route('shopping_cart.update') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="cart_item_id" value="{{ $cartItem->shopping_cart_id }}">
+                                            <div class="input-group input-group-sm justify-content-center justify-content-md-start">
 
-                    <div class="row align-items-center mb-4 text-center text-md-start">
-                        <div class="col-12 col-md-3 mb-2 mb-md-0">
-                            <img src="{{ asset('pictures/pexels-urfriendlyphotog-277861001.jpg') }}" alt="Item 3" class="img-fluid rounded" style="max-width: 100%; height: auto; object-fit: cover;">
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <h6 class="mb-1">Hamilton denim jacket <small>(Women's Jacket)</small></h6>
-                            <p class="mb-0">S</p>
-                        </div>
-                        <div class="col-12 col-md-2 text-end mt-2 mt-md-0">
-                            <strong>45.99 €</strong>
-                        </div>
-                        <div class="col-12 col-md-3 text-center mt-2 mt-md-0">
-                            <div class="input-group input-group-sm justify-content-center justify-content-md-start">
-                                <button class="btn btn-outline-secondary" type="button">-</button>
-                                <input type="text" class="form-control text-center" value="1" style="max-width: 40px;">
-                                <button class="btn btn-outline-secondary" type="button">+</button>
-                            </div>
-                        </div>
+                                                <input type="number" class="form-control text-center" name="quantity" value="{{ $cartItem->quantity }}" style="max-width: 140px;" step="1">
+
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary mt-2">Update</button>
+                                        </form>
+                                        <form action="{{ route('shopping_cart.delete', $cartItem->item_id) }}" method="POST" style="display:inline-block;">
+                                            @csrf
+                                            <input type="hidden" name="cart_item_id" value="{{ $cartItem->shopping_cart_id }}">
+                                            <button type="submit" class="btn btn-danger mt-2">Remove</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="border p-3">
-                        <h5 class="mb-4">Summary</h5>
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Subtotal</span>
-                            <span>161.97 €</span>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Estimated Delivery</span>
-                            <span>3.29 €</span>
-                        </div>
-                        <hr/>
-                        <div class="d-flex justify-content-between mb-3">
-                            <span>Total</span>
-                            <strong>165.26 €</strong>
+                    <div class="col-md-4">
+                        <div class="border p-3">
+                            <h5 class="mb-4">Summary</h5>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Subtotal</span>
+                                <span>{{ number_format($totalPrice, 2) }} €</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Estimated Delivery</span>
+                                <span>3.29 €</span>
+                            </div>
+                            <hr/>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Total</span>
+                                <strong>{{ number_format($totalPrice + 3.29, 2) }} €</strong>
+                            </div>
+                            <a href="?tab=shipping" class="btn btn-success w-100">Proceed to Checkout</a>
                         </div>
                     </div>
                 </div>
@@ -237,8 +228,9 @@
         </div>
     </div>
 
+
     <!-- Shipping Information Page -->
-    <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
+    <div class="tab-pane fade {{$activeTab == 'shipping'? "show active": ""}}" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
         <div class="container my-5">
             <h3>Shipping Information</h3>
             <form>

@@ -20,13 +20,7 @@ class OrderController extends Controller
             ->get();
 
         // Group by order_id, and then by item_id + size to combine duplicates
-        $groupedOrders = $rawOrders->groupBy('order_id')->map(function ($ordersInOneOrder) {
-            return $ordersInOneOrder->groupBy(fn($order) => $order->item_id . '_' . $order->size)->map(function ($duplicates) {
-                $first = $duplicates->first();
-                $first->quantity = $duplicates->count(); // add quantity property
-                return $first;
-            });
-        });
+        $groupedOrders = $rawOrders->groupBy('order_id');
 
         // Send the grouped data to the view
         return view('account', compact('groupedOrders'));

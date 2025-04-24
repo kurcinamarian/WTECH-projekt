@@ -74,4 +74,18 @@ Route::get('/account', [OrderController::class, 'showOrders'])->name('account');
 
 Route::get('/items', [ItemController::class, 'index'])->name('items.index');
 
+use App\Http\Controllers\ShoppingCartController;
+
+Route::get('/shopping_cart', [ShoppingCartController::class, 'index'])->name('shopping_cart');
+
+
+Route::post('/shopping_cart/add', [ShoppingCartController::class, 'add'])->name('shopping_cart.add');
+
+Route::post('/shopping_cart/update', [ShoppingCartController::class, 'update'])->name('shopping_cart.update');
+Route::post('/shopping_cart/delete', [ShoppingCartController::class, 'delete'])->name('shopping_cart.delete');
+
+
+
+
+
 

@@ -58,15 +58,17 @@
                         Login
                     </a>
 
-                    <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="loginDropdown"
-                        style="min-width: 250px;">
-                        <form method="POST" action="{{ route('login') }}">
-                            @csrf
+                        <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="loginDropdown"
+                            style="min-width: 250px;">
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
 
                             <li>
                                 <div class="mb-2">
                                     <label for="loginName" class="form-label">Name</label>
-                                    <input type="text" class="form-control @error('email') is-invalid @enderror" id="loginName" name="email" placeholder="Enter your email" value="{{ old('email') }}">
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                           id="loginName" name="email" placeholder="Enter your email"
+                                           value="{{ old('email') }}">
                                     @error('email')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -75,7 +77,8 @@
                             <li>
                                 <div class="mb-2">
                                     <label for="loginPassword" class="form-label">Password</label>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="loginPassword" name="password" placeholder="Enter your password">
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                           id="loginPassword" name="password" placeholder="Enter your password">
                                     @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -84,8 +87,9 @@
                             <li>
                                 <button class="btn btn-secondary w-100">Confirm</button>
                             </li>
-                        </form>
-                    </ul>
+                            </form>
+                        </ul>
+
                 </div>
             </div>
         @endguest
@@ -104,8 +108,8 @@
                 </form>
             </div>
         @endauth
-        </div>
     </div>
+</div>
 </div>
 
 <!-- bottom navbar -->
@@ -458,18 +462,34 @@
                         <div class="modal-body">
                             <h1>About Us</h1>
                             <p>
-                                Welcome to <strong>FTW (Fair to Wear)</strong>, where fashion meets responsibility. We believe that what you wear should not only reflect your personal style but also your values. Our mission is to offer clothing that not only looks great but is made with respect for people and the planet.
+                                Welcome to <strong>FTW (Fair to Wear)</strong>, where fashion meets responsibility. We
+                                believe that what you wear should not only reflect your personal style but also your
+                                values. Our mission is to offer clothing that not only looks great but is made with
+                                respect for people and the planet.
                             </p>
                             <p>
-                                At FTW, we carefully select each garment with the environment in mind. Our clothing is made from sustainable, eco-friendly materials, such as organic cotton, recycled fabrics, and low-impact dyes. We work closely with manufacturers who share our commitment to ethical labor practices, ensuring that every piece of clothing is made with care and fairness at every stage of production.
+                                At FTW, we carefully select each garment with the environment in mind. Our clothing is
+                                made from sustainable, eco-friendly materials, such as organic cotton, recycled fabrics,
+                                and low-impact dyes. We work closely with manufacturers who share our commitment to
+                                ethical labor practices, ensuring that every piece of clothing is made with care and
+                                fairness at every stage of production.
                             </p>
-                            We understand that fashion is about more than just trends—it’s about lasting style. That’s why our collections are designed with versatility, durability, and timelessness in mind. Whether you're dressing for a casual day out or a special occasion, FTW’s pieces are crafted to fit seamlessly into your wardrobe, helping you look and feel your best, day after day.
+                            We understand that fashion is about more than just trends—it’s about lasting style. That’s
+                            why our collections are designed with versatility, durability, and timelessness in mind.
+                            Whether you're dressing for a casual day out or a special occasion, FTW’s pieces are crafted
+                            to fit seamlessly into your wardrobe, helping you look and feel your best, day after day.
                             </p>
                             <p>
-                                As a company, we believe in transparency and integrity. We are committed to keeping our customers informed about the journey behind each product, from the materials we use to the people who create them. Our goal is to empower you to make informed choices about your wardrobe, so you can feel proud of every purchase you make.
+                                As a company, we believe in transparency and integrity. We are committed to keeping our
+                                customers informed about the journey behind each product, from the materials we use to
+                                the people who create them. Our goal is to empower you to make informed choices about
+                                your wardrobe, so you can feel proud of every purchase you make.
                             </p>
                             <p>
-                                Join us in shaping a more sustainable future for fashion. At FTW, we’re not just about looking good—we’re about feeling good too. Thank you for choosing us and supporting a brand that values fairness, quality, and the planet. Together, we can make fashion better for everyone.
+                                Join us in shaping a more sustainable future for fashion. At FTW, we’re not just about
+                                looking good—we’re about feeling good too. Thank you for choosing us and supporting a
+                                brand that values fairness, quality, and the planet. Together, we can make fashion
+                                better for everyone.
                             </p>
                         </div>
 
@@ -755,6 +775,5 @@
         <span style="color: grey; font-size: 0.75rem;">FTW</span>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
