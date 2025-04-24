@@ -38,49 +38,113 @@
 <div class="container-fluid top-container py-2">
     <div class="container d-flex justify-content-between align-items-center">
         <a class="text-dark text-decoration-none fw-bold" href="{{ url('main_page') }}">FTW</a>
-        <div class="ms-auto">
-            <a class="text-dark text-decoration-none" href="{{ url('account') }}">Admin</a>
-            <span class="mx-2 text-dark">|</span>
-            <a class="text-dark text-decoration-none" href="{{ url('main_page') }}">Log out</a>
-        </div>
+        @guest
+            <div>
+                <a class="text-dark text-decoration-none" href="{{ url('register') }}">Register</a>
+                <span class="mx-2 text-dark">|</span>
+                <div class="dropdown d-inline">
+                    <a class="text-dark text-decoration-none dropdown-toggle" role="button" id="loginDropdown"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Login
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="loginDropdown"
+                        style="min-width: 250px;">
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+
+                            <li>
+                                <div class="mb-2">
+                                    <label for="loginName" class="form-label">Name</label>
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                           id="loginName" name="email" placeholder="Enter your email"
+                                           value="{{ old('email') }}">
+                                    @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </li>
+                            <li>
+                                <div class="mb-2">
+                                    <label for="loginPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                           id="loginPassword" name="password" placeholder="Enter your password">
+                                    @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </li>
+                            <li>
+                                <button class="btn btn-secondary w-100">Confirm</button>
+                            </li>
+                        </form>
+                    </ul>
+
+                </div>
+            </div>
+        @endguest
+        @auth
+            <div>
+                <a href="{{ route('account') }}" class="text-dark text-decoration-none">
+                    {{ Auth::user()->firstname }}
+                </a>
+                <span class="mx-2 text-dark">|</span>
+                <a class="text-dark text-decoration-none" href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </div>
+        @endauth
     </div>
 </div>
+</div>
+
 <!-- bottom navbar -->
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-        <a href="{{ url('/') }}" class="me-3 text-dark placeholder-box col-2"> <i
-                class="bi bi-vinyl-fill fs-2"></i></a>
+        <a href="{{ url('/') }}" class="me-3 text-dark placeholder-box col-2">
+            <i class="bi bi-vinyl-fill fs-2"></i>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#NavbarMenu"
                 aria-controls="NavbarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="NavbarMenu">
             <ul class="navbar-nav mx-auto justify-content-center">
-                <li class="nav-item"><a class="nav-link m-2" href="{{ url('men') }}"
-                                        style="font-size: 1.5rem; font-weight: bold;">MEN</a></li>
-                <li class="nav-item"><a class="nav-link m-2" href="{{ url('women') }}"
-                                        style="font-size: 1.5rem; font-weight: bold;">WOMEN</a>
+                <li class="nav-item">
+                    <a class="nav-link m-2" href="{{ url('men') }}"
+                       style="font-size: 1.5rem; font-weight: bold;">MEN</a>
                 </li>
-                <li class="nav-item"><a class="nav-link m-2" href="{{ url('kids') }}"
-                                        style="font-size: 1.5rem; font-weight: bold;">KIDS</a>
+                <li class="nav-item">
+                    <a class="nav-link m-2" href="{{ url('women') }}"
+                       style="font-size: 1.5rem; font-weight: bold;">WOMEN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link m-2" href="{{ url('kids') }}"
+                       style="font-size: 1.5rem; font-weight: bold;">KIDS</a>
                 </li>
             </ul>
             <div class="d-flex align-items-center">
-                <form class="d-flex align-items-center" role="search">
-                    <div class="input-group col-6" style="position: relative;">
-                        <input class="form-control rounded-pill" type="search" placeholder="Search" aria-label="Search"
-                               style="border-radius: 30px; height: 30px; font-size: 14px; padding-right: 35px;">
-                        <button class="btn btn-outline-secondary rounded-pill position-absolute end-0 me-1 search-icon-btn d-flex align-items-center justify-content-center"
-                                type="submit"
-                                style="border-radius: 30px; height: 30px; background: transparent; border: none;">
-                            <i class="fas fa-magnifying-glass icon"></i>
+                <form method="GET" action="{{ route('items.index') }}">
+                    <div class="input-group">
+                        <input type="text" name="search"
+                               class="form-control border-0 shadow-none"
+                               placeholder="Search items..."
+                               value="{{ request('search') }}">
+                        <button class="btn border-0" type="submit">
+                            <i class="fas fa-search"></i> {{-- or use <i class="bi bi-search"></i> --}}
                         </button>
                     </div>
                 </form>
-                <a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box"><i
-                        class="fas fa-heart icon"></i></a>
-                <a href="{{ url('shopping_cart') }}" class="ms-3 text-dark placeholder-box"><i
-                        class="fas fa-shopping-cart icon"></i></a>
+                <a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box" style="hidden">
+                    <i class="fas fa-heart icon"></i>
+                </a>
+                <a href="{{ url('shopping_cart') }}" class="ms-3 text-dark placeholder-box">
+                    <i class="fas fa-shopping-cart icon"></i>
+                </a>
             </div>
         </div>
     </div>

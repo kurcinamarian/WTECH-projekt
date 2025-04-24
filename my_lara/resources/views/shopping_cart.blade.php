@@ -56,36 +56,68 @@
 <div class="container-fluid top-container py-2">
     <div class="container d-flex justify-content-between align-items-center">
         <a class="text-dark text-decoration-none fw-bold" href="{{ url('main_page') }}">FTW</a>
-        <div>
-            <a class="text-dark text-decoration-none" href="{{ url('register') }}">Register</a>
-            <span class="mx-2 text-dark">|</span>
-            <div class="dropdown d-inline">
-                <a class="text-dark text-decoration-none dropdown-toggle" role="button" id="loginDropdown"
-                   data-bs-toggle="dropdown" aria-expanded="false">
-                    Login
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="loginDropdown"
-                    style="min-width: 250px;">
-                    <li>
-                        <div class="mb-2">
-                            <label for="loginName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="loginName" placeholder="Enter your name">
-                        </div>
-                    </li>
-                    <li>
-                        <div class="mb-2">
-                            <label for="loginPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="loginPassword"
-                                   placeholder="Enter your password">
-                        </div>
-                    </li>
-                    <li>
-                        <button class="btn btn-secondary w-100">Confirm</button>
-                    </li>
-                </ul>
+        @guest
+            <div>
+                <a class="text-dark text-decoration-none" href="{{ url('register') }}">Register</a>
+                <span class="mx-2 text-dark">|</span>
+                <div class="dropdown d-inline">
+                    <a class="text-dark text-decoration-none dropdown-toggle" role="button" id="loginDropdown"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Login
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="loginDropdown"
+                        style="min-width: 250px;">
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+
+                            <li>
+                                <div class="mb-2">
+                                    <label for="loginName" class="form-label">Name</label>
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                           id="loginName" name="email" placeholder="Enter your email"
+                                           value="{{ old('email') }}">
+                                    @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </li>
+                            <li>
+                                <div class="mb-2">
+                                    <label for="loginPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                           id="loginPassword" name="password" placeholder="Enter your password">
+                                    @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </li>
+                            <li>
+                                <button class="btn btn-secondary w-100">Confirm</button>
+                            </li>
+                        </form>
+                    </ul>
+
+                </div>
             </div>
-        </div>
+        @endguest
+        @auth
+            <div>
+                <a href="{{ route('account') }}" class="text-dark text-decoration-none">
+                    {{ Auth::user()->firstname }}
+                </a>
+                <span class="mx-2 text-dark">|</span>
+                <a class="text-dark text-decoration-none" href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </div>
+        @endauth
     </div>
+</div>
 </div>
 
 <!-- bottom navbar -->
@@ -114,18 +146,18 @@
                 </li>
             </ul>
             <div class="d-flex align-items-center">
-                <form class="d-flex align-items-center" role="search">
-                    <div class="input-group col-6" style="position: relative;">
-                        <input class="form-control rounded-pill" type="search" placeholder="Search" aria-label="Search"
-                               style="border-radius: 30px; height: 30px; font-size: 14px; padding-right: 35px;">
-                        <button class="btn btn-outline-secondary rounded-pill position-absolute end-0 me-1 search-icon-btn d-flex align-items-center justify-content-center"
-                                type="submit"
-                                style="border-radius: 30px; height: 30px; background: transparent; border: none;">
-                            <i class="fas fa-magnifying-glass icon"></i>
+                <form method="GET" action="{{ route('items.index') }}">
+                    <div class="input-group">
+                        <input type="text" name="search"
+                               class="form-control border-0 shadow-none"
+                               placeholder="Search items..."
+                               value="{{ request('search') }}">
+                        <button class="btn border-0" type="submit">
+                            <i class="fas fa-search"></i> {{-- or use <i class="bi bi-search"></i> --}}
                         </button>
                     </div>
                 </form>
-                <a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box">
+                <a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box" style="hidden">
                     <i class="fas fa-heart icon"></i>
                 </a>
                 <a href="{{ url('shopping_cart') }}" class="ms-3 text-dark placeholder-box">
@@ -148,10 +180,12 @@
     <!-- Navbar with Tabs -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link {{$activeTab == 'cart'? "active": ""}}" id="cart-tab" data-bs-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="true">Shopping Cart</a>
+            <a class="nav-link {{$activeTab == 'cart'? "active": ""}}" id="cart-tab" data-bs-toggle="tab" href="#cart"
+               role="tab" aria-controls="cart" aria-selected="true">Shopping Cart</a>
         </li>
         <li class="nav-item ">
-            <a class="nav-link {{$activeTab == 'shipping'? "active": ""}}" id="shipping-tab" data-bs-toggle="tab" href="#shipping" role="tab" aria-controls="shipping" aria-selected="false">Shipping Information</a>
+            <a class="nav-link {{$activeTab == 'shipping'? "active": ""}}" id="shipping-tab" data-bs-toggle="tab"
+               href="#shipping" role="tab" aria-controls="shipping" aria-selected="false">Shipping Information</a>
         </li>
     </ul>
 </div>
@@ -160,7 +194,8 @@
     <!-- Shopping Cart Page -->
     <div class="tab-content" id="myTabContent">
         <!-- Shopping Cart Page -->
-        <div class="tab-pane fade {{$activeTab == 'cart'? "show active": ""}}" id="cart" role="tabpanel" aria-labelledby="cart-tab">
+        <div class="tab-pane fade {{$activeTab == 'cart'? "show active": ""}}" id="cart" role="tabpanel"
+             aria-labelledby="cart-tab">
             <div class="container my-5">
                 <div class="row">
                     <div class="col-md-8">
@@ -168,7 +203,7 @@
                             <p>Your cart is empty.</p>
                         @else
                             @php
-                            $totalPrice = 0;
+                                $totalPrice = 0;
                             @endphp
                             @error('quantity')
                             <div class="text-danger">{{ $message }}</div>
@@ -176,10 +211,13 @@
                             @foreach ($cartItems as $cartItem)
                                 <div class="row align-items-center mb-4 text-center text-md-start">
                                     <div class="col-12 col-md-3 mb-2 mb-md-0">
-                                        <img src="{{ asset('pictures/' . $cartItem->item->image) }}" alt="{{ $cartItem->item->item_name }}" class="img-fluid rounded" style="max-width: 100%; height: auto; object-fit: cover;">
+                                        <img src="{{ asset('pictures/' . $cartItem->item->image) }}"
+                                             alt="{{ $cartItem->item->item_name }}" class="img-fluid rounded"
+                                             style="max-width: 100%; height: auto; object-fit: cover;">
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <h6 class="mb-1">{{ $cartItem->item->item_name }} <small>({{ $cartItem->item->category->main_category }})</small></h6>
+                                        <h6 class="mb-1">{{ $cartItem->item->item_name }}
+                                            <small>({{ $cartItem->item->category->main_category }})</small></h6>
                                         <p class="mb-0">{{ $cartItem->size }}</p>
                                     </div>
                                     <div class="col-12 col-md-2 text-end mt-2 mt-md-0">
@@ -190,22 +228,32 @@
                                         @endphp
                                     </div>
                                     <div class="col-12 col-md-3 text-center mt-2 mt-md-0">
-                                        <form action="{{ route('shopping_cart.update') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="cart_item_id" value="{{ $cartItem->shopping_cart_id }}">
-                                            <div class="input-group input-group-sm justify-content-center justify-content-md-start">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <!-- Update Form -->
+                                            <form action="{{ route('shopping_cart.update') }}" method="POST" class="d-flex align-items-center gap-2 mb-0">
+                                                @csrf
+                                                <input type="hidden" name="cart_item_id" value="{{ $cartItem->shopping_cart_id }}">
 
-                                                <input type="number" class="form-control text-center" name="quantity" value="{{ $cartItem->quantity }}" style="max-width: 140px;" step="1">
+                                                <div class="input-group input-group-sm" style="max-width: 60px;">
+                                                    <input type="number" class="form-control text-center" name="quantity"
+                                                           value="{{ $cartItem->quantity }}" step="1">
+                                                </div>
 
-                                            </div>
+                                                <button type="submit" class="btn btn-primary px-2" title="Save">
+                                                    <i class="fas fa-save"></i>
+                                                </button>
+                                            </form>
 
-                                            <button type="submit" class="btn btn-primary mt-2">Update</button>
-                                        </form>
-                                        <form action="{{ route('shopping_cart.delete', $cartItem->item_id) }}" method="POST" style="display:inline-block;">
-                                            @csrf
-                                            <input type="hidden" name="cart_item_id" value="{{ $cartItem->shopping_cart_id }}">
-                                            <button type="submit" class="btn btn-danger mt-2">Remove</button>
-                                        </form>
+                                            <!-- Delete Form -->
+                                            <form action="{{ route('shopping_cart.delete', $cartItem->item_id) }}" method="POST" class="mb-0">
+                                                @csrf
+                                                <input type="hidden" name="cart_item_id" value="{{ $cartItem->shopping_cart_id }}">
+                                                <button type="submit" class="btn btn-danger px-2" title="Remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -230,7 +278,7 @@
                             <a href="?tab=shipping" class="btn btn-success w-100">Proceed to Checkout</a>
                         </div>
                     </div>
-                        @endif
+                    @endif
 
                 </div>
             </div>
@@ -239,7 +287,8 @@
 
 
     <!-- Shipping Information Page -->
-    <div class="tab-pane fade {{$activeTab == 'shipping'? "show active": ""}}" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
+    <div class="tab-pane fade {{$activeTab == 'shipping'? "show active": ""}}" id="shipping" role="tabpanel"
+         aria-labelledby="shipping-tab">
         <div class="container my-5">
             <h3>Shipping Information</h3>
             <form method="post" action="{{route('shopping_cart.save')}}">
@@ -274,7 +323,7 @@
                 <div class="row">
                     <div class="col-sm-12 col-md-6 mb-3">
                         <label class="form-label">City</label>
-                        <input type="text" name="city" class="form-control" >
+                        <input type="text" name="city" class="form-control">
                         @error('city')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -297,11 +346,35 @@
                         @enderror
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 mb-3">
+                        <label class="form-label d-block">Delivery Method</label>
 
-            <div class="d-flex mt-4">
-                <button class="btn btn-secondary me-3" type="submit" name="payment_method" value = "card">Pay by Card</button>
-                <button class="btn btn-secondary ms-3"  type="submit" name="payment_method" value = "COD">Cash on Delivery</button>
-            </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="delivery_method" id="first_class"
+                                   value="first_class" checked>
+                            <label class="form-check-label" for="first_class">
+                                First Class
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="delivery_method" id="second_class"
+                                   value="second_class">
+                            <label class="form-check-label" for="second_class">
+                                Second Class
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex mt-4">
+                    <button class="btn btn-secondary me-3" type="submit" name="payment_method" value="card">Pay by
+                        Card
+                    </button>
+                    <button class="btn btn-secondary ms-3" type="submit" name="payment_method" value="COD">Cash on
+                        Delivery
+                    </button>
+                </div>
             </form>
         </div>
     </div>
@@ -309,75 +382,36 @@
 </div>
 
 
-
 <!-- Suggested -->
 <div class="container-fluid bg-white justify-content-between">
     <div class="container">
-        <div class="row">
-            <div class="col-12 text">
-                <h2 class="text-dark">Suggested</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper ">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/S-I1.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-12 text">
+                    <h2 class="text-dark">Suggested</h2>
+                </div>
+                @foreach ($suggestedItems as $suggested)
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="rectangle-wrapper">
+                            <a href="{{ route('product_info', ['id' => $suggested->item_id]) }}"
+                               class="text-decoration-none">
+                                <div class="rectangle-square bg-light position-relative">
+                                    <img src="{{ asset('pictures/' . $suggested->photo) }}"
+                                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
+                                         alt="{{ $suggested->item_name }}">
+                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                                        <i class="fa-regular fa-heart text-danger fs-3"></i>
+                                    </button>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="mt-2">
+                            <span class="product-name fs-4">{{ $suggested->item_name }}</span><br>
+                            <span class="product-category text-muted fs-6">({{ $suggested->main_category }})</span><br>
+                            <span class="product-price fs-4">{{ number_format($suggested->price, 2) }} €</span>
                         </div>
                     </div>
-                </a>
-                <div class="mt-2">
-                    <span class="product-name fs-4">Urban Ease Sweatshirt</span><br>
-                    <span class="product-category text-muted fs-6">(Women's T-shirt)</span><br>
-                    <span class="product-price fs-4">19.99 €</span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper ">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/S-I2.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
-                        </div>
-                    </div>
-                </a>
-                <div class="mt-2">
-                    <span class="product-name fs-4">Artisan Patchwork Cap</span><br>
-                    <span class="product-category text-muted fs-6">(Men's Hat)</span><br>
-                    <span class="product-price fs-4">15.99 €</span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper ">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/S-I3.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
-                        </div>
-                    </div>
-                </a>
-                <div class="mt-2">
-                    <span class="product-name fs-4">Flowing Linen Shirt</span><br>
-                    <span class="product-category text-muted fs-6">(Women's Tops)</span><br>
-                    <span class="product-price fs-4">23.99 €</span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper ">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/S-I4.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
-                        </div>
-                    </div>
-                </a>
-                <div class="mt-2">
-                    <span class="product-name fs-4">Arctic Denim Puffer</span><br>
-                    <span class="product-category text-muted fs-6">(Women's Outerwear)</span><br>
-                    <span class="product-price fs-4">49.99 €</span>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -404,18 +438,34 @@
                         <div class="modal-body">
                             <h1>About Us</h1>
                             <p>
-                                Welcome to <strong>FTW (Fair to Wear)</strong>, where fashion meets responsibility. We believe that what you wear should not only reflect your personal style but also your values. Our mission is to offer clothing that not only looks great but is made with respect for people and the planet.
+                                Welcome to <strong>FTW (Fair to Wear)</strong>, where fashion meets responsibility. We
+                                believe that what you wear should not only reflect your personal style but also your
+                                values. Our mission is to offer clothing that not only looks great but is made with
+                                respect for people and the planet.
                             </p>
                             <p>
-                                At FTW, we carefully select each garment with the environment in mind. Our clothing is made from sustainable, eco-friendly materials, such as organic cotton, recycled fabrics, and low-impact dyes. We work closely with manufacturers who share our commitment to ethical labor practices, ensuring that every piece of clothing is made with care and fairness at every stage of production.
+                                At FTW, we carefully select each garment with the environment in mind. Our clothing is
+                                made from sustainable, eco-friendly materials, such as organic cotton, recycled fabrics,
+                                and low-impact dyes. We work closely with manufacturers who share our commitment to
+                                ethical labor practices, ensuring that every piece of clothing is made with care and
+                                fairness at every stage of production.
                             </p>
-                            We understand that fashion is about more than just trends—it’s about lasting style. That’s why our collections are designed with versatility, durability, and timelessness in mind. Whether you're dressing for a casual day out or a special occasion, FTW’s pieces are crafted to fit seamlessly into your wardrobe, helping you look and feel your best, day after day.
+                            We understand that fashion is about more than just trends—it’s about lasting style. That’s
+                            why our collections are designed with versatility, durability, and timelessness in mind.
+                            Whether you're dressing for a casual day out or a special occasion, FTW’s pieces are crafted
+                            to fit seamlessly into your wardrobe, helping you look and feel your best, day after day.
                             </p>
                             <p>
-                                As a company, we believe in transparency and integrity. We are committed to keeping our customers informed about the journey behind each product, from the materials we use to the people who create them. Our goal is to empower you to make informed choices about your wardrobe, so you can feel proud of every purchase you make.
+                                As a company, we believe in transparency and integrity. We are committed to keeping our
+                                customers informed about the journey behind each product, from the materials we use to
+                                the people who create them. Our goal is to empower you to make informed choices about
+                                your wardrobe, so you can feel proud of every purchase you make.
                             </p>
                             <p>
-                                Join us in shaping a more sustainable future for fashion. At FTW, we’re not just about looking good—we’re about feeling good too. Thank you for choosing us and supporting a brand that values fairness, quality, and the planet. Together, we can make fashion better for everyone.
+                                Join us in shaping a more sustainable future for fashion. At FTW, we’re not just about
+                                looking good—we’re about feeling good too. Thank you for choosing us and supporting a
+                                brand that values fairness, quality, and the planet. Together, we can make fashion
+                                better for everyone.
                             </p>
                         </div>
 

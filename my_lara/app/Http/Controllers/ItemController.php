@@ -86,9 +86,26 @@ class ItemController extends Controller
         $search = $request->input('search');
 
         $items = Item::when($search, function ($query, $search) {
-            return $query->where('item_name', 'LIKE', '%' . $search . '%');
-        })->paginate(25);
+            return $query->whereRaw('LOWER(item_name) LIKE ?', ['%' . strtolower($search) . '%']);
+        })->paginate(9);
 
-        return view('index', compact('items'));
+        return view('index', compact('items',));
+    }
+
+    public function main()
+    {
+        // Fetch suggested items for the main page
+        $suggestedItems = Item::take(4) // Limit to 4 products
+        ->get(); // Get all suggested items (You can apply a category filter here if needed)
+
+        return view('main', compact('suggestedItems')); // Pass suggested items to the main page view
+    }
+
+    public function cart()
+    {
+        // Fetch suggested items for the main page
+        $suggestedItems = Item::take(4)->get(); // Limit to 4 products
+
+        return $suggestedItems; // Pass suggested items to the main page view
     }
 }

@@ -80,36 +80,68 @@
 <div class="container-fluid top-container py-2">
     <div class="container d-flex justify-content-between align-items-center">
         <a class="text-dark text-decoration-none fw-bold" href="{{ url('main_page') }}">FTW</a>
-        <div>
-            <a class="text-dark text-decoration-none" href="{{ url('register') }}">Register</a>
-            <span class="mx-2 text-dark">|</span>
-            <div class="dropdown d-inline">
-                <a class="text-dark text-decoration-none dropdown-toggle" role="button" id="loginDropdown"
-                   data-bs-toggle="dropdown" aria-expanded="false">
-                    Login
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="loginDropdown"
-                    style="min-width: 250px;">
-                    <li>
-                        <div class="mb-2">
-                            <label for="loginName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="loginName" placeholder="Enter your name">
-                        </div>
-                    </li>
-                    <li>
-                        <div class="mb-2">
-                            <label for="loginPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="loginPassword"
-                                   placeholder="Enter your password">
-                        </div>
-                    </li>
-                    <li>
-                        <button class="btn btn-secondary w-100">Confirm</button>
-                    </li>
-                </ul>
+        @guest
+            <div>
+                <a class="text-dark text-decoration-none" href="{{ url('register') }}">Register</a>
+                <span class="mx-2 text-dark">|</span>
+                <div class="dropdown d-inline">
+                    <a class="text-dark text-decoration-none dropdown-toggle" role="button" id="loginDropdown"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Login
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="loginDropdown"
+                        style="min-width: 250px;">
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+
+                            <li>
+                                <div class="mb-2">
+                                    <label for="loginName" class="form-label">Name</label>
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                           id="loginName" name="email" placeholder="Enter your email"
+                                           value="{{ old('email') }}">
+                                    @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </li>
+                            <li>
+                                <div class="mb-2">
+                                    <label for="loginPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                           id="loginPassword" name="password" placeholder="Enter your password">
+                                    @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </li>
+                            <li>
+                                <button class="btn btn-secondary w-100">Confirm</button>
+                            </li>
+                        </form>
+                    </ul>
+
+                </div>
             </div>
-        </div>
+        @endguest
+        @auth
+            <div>
+                <a href="{{ route('account') }}" class="text-dark text-decoration-none">
+                    {{ Auth::user()->firstname }}
+                </a>
+                <span class="mx-2 text-dark">|</span>
+                <a class="text-dark text-decoration-none" href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </div>
+        @endauth
     </div>
+</div>
 </div>
 
 <!-- bottom navbar -->
@@ -138,18 +170,18 @@
                 </li>
             </ul>
             <div class="d-flex align-items-center">
-                <form class="d-flex align-items-center" role="search">
-                    <div class="input-group col-6" style="position: relative;">
-                        <input class="form-control rounded-pill" type="search" placeholder="Search" aria-label="Search"
-                               style="border-radius: 30px; height: 30px; font-size: 14px; padding-right: 35px;">
-                        <button class="btn btn-outline-secondary rounded-pill position-absolute end-0 me-1 search-icon-btn d-flex align-items-center justify-content-center"
-                                type="submit"
-                                style="border-radius: 30px; height: 30px; background: transparent; border: none;">
-                            <i class="fas fa-magnifying-glass icon"></i>
+                <form method="GET" action="{{ route('items.index') }}">
+                    <div class="input-group">
+                        <input type="text" name="search"
+                               class="form-control border-0 shadow-none"
+                               placeholder="Search items..."
+                               value="{{ request('search') }}">
+                        <button class="btn border-0" type="submit">
+                            <i class="fas fa-search"></i> {{-- or use <i class="bi bi-search"></i> --}}
                         </button>
                     </div>
                 </form>
-                <a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box">
+                <a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box" style="hidden">
                     <i class="fas fa-heart icon"></i>
                 </a>
                 <a href="{{ url('shopping_cart') }}" class="ms-3 text-dark placeholder-box">
@@ -160,12 +192,11 @@
     </div>
 </nav>
 
-
 <div class="container-fluid bg-white justify-content-between">
     <div class="container">
         <div class="row">
             <div class="col-12 mt-4">
-                <h1 class="text-start">Men</h1>
+                <h1 class="text-start">Women</h1>
             </div>
         </div>
     </div>

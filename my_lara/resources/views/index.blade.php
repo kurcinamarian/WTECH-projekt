@@ -66,7 +66,9 @@
                             <li>
                                 <div class="mb-2">
                                     <label for="loginName" class="form-label">Name</label>
-                                    <input type="text" class="form-control @error('email') is-invalid @enderror" id="loginName" name="email" placeholder="Enter your email" value="{{ old('email') }}">
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                           id="loginName" name="email" placeholder="Enter your email"
+                                           value="{{ old('email') }}">
                                     @error('email')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -75,7 +77,8 @@
                             <li>
                                 <div class="mb-2">
                                     <label for="loginPassword" class="form-label">Password</label>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="loginPassword" name="password" placeholder="Enter your password">
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                           id="loginPassword" name="password" placeholder="Enter your password">
                                     @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -86,6 +89,7 @@
                             </li>
                         </form>
                     </ul>
+
                 </div>
             </div>
         @endguest
@@ -145,7 +149,7 @@
                         </button>
                     </div>
                 </form>
-                <a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box">
+                <a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box" style="hidden">
                     <i class="fas fa-heart icon"></i>
                 </a>
                 <a href="{{ url('shopping_cart') }}" class="ms-3 text-dark placeholder-box">

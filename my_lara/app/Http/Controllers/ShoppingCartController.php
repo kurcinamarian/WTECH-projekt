@@ -113,10 +113,11 @@ class ShoppingCartController extends Controller
             $cartItems = ShoppingCart::where('session_id', $sessionId)->get();
         }
         $activeTab = request('tab','cart');
+        $suggestedItems = app(ItemController::class)->cart();
 
 
         // Send the grouped data to the view
-        return view('shopping_cart', compact('cartItems', 'activeTab'));
+        return view('shopping_cart', compact('cartItems', 'activeTab','suggestedItems'));
     }
 
     public function save(request $request)
@@ -147,6 +148,7 @@ class ShoppingCartController extends Controller
         ]);
         $order_info->delivery_address = $address;
         $order_info->payment_method = $request->payment_method;
+        $order_info->delivery_method = $request->delivery_method;
         $order_info->user_id = $userId;
 
         // Save the changes
