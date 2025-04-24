@@ -138,6 +138,13 @@
 
 
 <div class="container mt-5 mb-5">
+    @foreach (['success', 'error', 'warning', 'info'] as $msg)
+        @if(session()->has($msg))
+            <div class="alert alert-{{ $msg == 'error'?'danger':$msg}}">
+                {{ session()->get($msg) }}
+            </div>
+        @endif
+    @endforeach
     <!-- Navbar with Tabs -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
@@ -172,7 +179,7 @@
                                         <img src="{{ asset('pictures/' . $cartItem->item->image) }}" alt="{{ $cartItem->item->item_name }}" class="img-fluid rounded" style="max-width: 100%; height: auto; object-fit: cover;">
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <h6 class="mb-1">{{ $cartItem->item->item_name }} <small>({{ $cartItem->item->category }})</small></h6>
+                                        <h6 class="mb-1">{{ $cartItem->item->item_name }} <small>({{ $cartItem->item->category->main_category }})</small></h6>
                                         <p class="mb-0">{{ $cartItem->size }}</p>
                                     </div>
                                     <div class="col-12 col-md-2 text-end mt-2 mt-md-0">
@@ -201,8 +208,8 @@
                                         </form>
                                     </div>
                                 </div>
+
                             @endforeach
-                        @endif
                     </div>
                     <div class="col-md-4">
                         <div class="border p-3">
@@ -223,6 +230,8 @@
                             <a href="?tab=shipping" class="btn btn-success w-100">Proceed to Checkout</a>
                         </div>
                     </div>
+                        @endif
+
                 </div>
             </div>
         </div>
@@ -233,48 +242,67 @@
     <div class="tab-pane fade {{$activeTab == 'shipping'? "show active": ""}}" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
         <div class="container my-5">
             <h3>Shipping Information</h3>
-            <form>
+            <form method="post" action="{{route('shopping_cart.save')}}">
+                @csrf
                 <div class="row">
                     <div class="mb-3 col-sm-12 col-md-6">
                         <label class="form-label">Phone Number</label>
-                        <input type="tel" class="form-control" value="">
+                        <input type="tel" class="form-control" value="" name="phone_number">
+                        @error('phone_number')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
-                    <div class="mb-3 col-sm-12 col-md-6">
-                        <label class="form-label">Email</label>
-                        <input type="text" class="form-control" value="">
-                    </div>
+
                 </div>
                 <div class="row">
                     <div class="mb-3 col-sm-12 col-md-6">
                         <label class="form-label">Street</label>
-                        <input type="text" class="form-control" value="">
+                        <input type="text" name="street" class="form-control">
+                        @error('street')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
+
                     <div class="mb-3 col-sm-12 col-md-6">
-                        <label class="form-label">House number</label>
-                        <input type="text" class="form-control" value="">
+                        <label class="form-label">House Number</label>
+                        <input type="text" name="house_number" class="form-control">
+                        @error('house_number')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 col-md-6 mb-3">
                         <label class="form-label">City</label>
-                        <input type="text" class="form-control" value="">
+                        <input type="text" name="city" class="form-control" >
+                        @error('city')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-sm-12 col-md-6 mb-3">
                         <label class="form-label">ZIP Code</label>
-                        <input type="text" class="form-control" value="">
+                        <input type="text" name="zip" class="form-control">
+                        @error('zip')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-sm-12 col-md-6 mb-3">
                         <label class="form-label">Country</label>
-                        <input type="text" class="form-control" value="">
+                        <input type="text" name="country" class="form-control">
+                        @error('country')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
-            </form>
+
             <div class="d-flex mt-4">
-                <a class="btn btn-secondary me-3" data-bs-toggle="tab" href="#" role="tab" aria-controls="payment">Pay by Card</a>
-                <a class="btn btn-secondary ms-3" data-bs-toggle="tab" href="#" role="tab" aria-controls="payment">Pay When Delivered</a>
+                <button class="btn btn-secondary me-3" type="submit" name="payment_method" value = "card">Pay by Card</button>
+                <button class="btn btn-secondary ms-3"  type="submit" name="payment_method" value = "COD">Cash on Delivery</button>
             </div>
+            </form>
         </div>
     </div>
 

@@ -83,6 +83,7 @@ Route::post('/shopping_cart/add', [ShoppingCartController::class, 'add'])->name(
 
 Route::post('/shopping_cart/update', [ShoppingCartController::class, 'update'])->name('shopping_cart.update');
 Route::post('/shopping_cart/delete', [ShoppingCartController::class, 'delete'])->name('shopping_cart.delete');
+Route::post('/shopping_cart/save', [ShoppingCartController::class, 'save'])->name('shopping_cart.save');
 
 
 

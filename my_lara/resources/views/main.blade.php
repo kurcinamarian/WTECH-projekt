@@ -149,7 +149,7 @@
                         </button>
                     </div>
                 </form>
-                <a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box">
+                <a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box" style="hidden">
                     <i class="fas fa-heart icon"></i>
                 </a>
                 <a href="{{ url('shopping_cart') }}" class="ms-3 text-dark placeholder-box">
@@ -159,6 +159,17 @@
         </div>
     </div>
 </nav>
+<div class="container mt-4">
+    @foreach (['success', 'error', 'warning', 'info'] as $msg)
+        @if(session()->has($msg))
+            <div class="alert alert-{{ $msg == 'error'?'danger':$msg}}">
+                {{ session()->get($msg) }}
+            </div>
+        @endif
+    @endforeach
+</div>
+
+
 <!-- title photo -->
 <div class="container-fluid bg-white p-0 mb-5">
     <img src="{{ asset('pictures/MP-I1.jpg') }}" alt="Title_photo" class="img-fluid">
