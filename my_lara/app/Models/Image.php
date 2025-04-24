@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
-    protected $table = 'Images';
+    protected $table = 'images';
 
     protected $fillable = [
         'item_id', 'image'
@@ -14,6 +14,6 @@ class Image extends Model
 
     public function item()
     {
-        return $this->belongsTo(Item::class, 'item_id');
+        return $this->belongsTo(Item::class, 'item_id', 'item_id');
     }
 }

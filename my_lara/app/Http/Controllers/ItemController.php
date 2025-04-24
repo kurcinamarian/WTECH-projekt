@@ -74,4 +74,11 @@ class ItemController extends Controller
 
         return view('product_info', compact('item', 'suggestedItems'));
     }
+
+    public function showKids()
+    {
+        $items = Item::with('image')->where('parameters', 'KIDS')->paginate(9);
+        return view('kids', compact('items'));
+    }
+
 }

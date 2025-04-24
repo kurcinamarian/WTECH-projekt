@@ -313,9 +313,14 @@
                         <div class="col-sm-12 col-md-6 col-lg-4">
                             <div class="rectangle-wrapper">
                                 <a href="{{ route('product_info', ['id' => $item->item_id]) }}" class="text-decoration-none">                                  <div class="rectangle-square bg-light position-relative">
-                                        <img src="{{ asset('pictures/default.jpg') }}"
+                                        @php
+                                            $imageName = $item->image?->image_name ?? 'default';
+                                        @endphp
+
+                                        <img src="{{ asset('dataset_pics/' . $imageName) }}"
                                              class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-                                             alt="Sample Image">
+                                             alt="Product Image">
+
                                         <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
                                             <i class="fa-regular fa-heart text-danger fs-3"></i>
                                         </button>

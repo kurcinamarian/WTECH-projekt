@@ -159,17 +159,27 @@
         <div class="col-12 col-md-6 mb-4">
             <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="rectangle-wrapper">
-                            <img src="{{ asset('pictures/P-I1.jpg') }}" alt="product1" class="img-fluid">
+                    @php
+                        $image1 = $item->image?->image_name ?? 'default.jpg';
+                        $image2 = $item->image?->image_name_2 ?? null;
+                        $images = [$image1];
+
+                        if ($image2) {
+                            $images[] = $image2;
+                        }
+                    @endphp
+
+                    @foreach ($images as $index => $img)
+                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                            <div class="rectangle-wrapper">
+                                <img src="{{ asset('dataset_pics/' . $img) }}"
+                                     alt="{{ $item->item_name }} {{ $index + 1 }}"
+                                     class="img-fluid">
+                            </div>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="rectangle-wrapper">
-                            <img src="{{ asset('pictures/P-I2.jpg') }}" alt="product2" class="img-fluid">
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
+
                 <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
                         data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(100%);"></span>
@@ -182,6 +192,7 @@
                 </button>
             </div>
         </div>
+
         <div class="col-12 col-md-6 mb-4">
             <div class="d-flex align-items-center">
                 <h1 class="me-2">{{ $item->item_name }}</h1>
@@ -287,7 +298,10 @@
                             <a href="{{ route('product_info', ['id' => $suggested->item_id]) }}"
                                class="text-decoration-none">
                                 <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/' . $suggested->photo) }}"
+                                    @php
+                                        $imagePath = asset('dataset_pics/' . ($suggested->image?->image_name ?? 'default.jpg'));
+                                    @endphp
+                                    <img src="{{ $imagePath }}"
                                          class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
                                          alt="{{ $suggested->item_name }}">
                                     <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
@@ -307,6 +321,7 @@
         </div>
     </div>
 </div>
+
 
 
 <!-- Bottom bar -->

@@ -22,10 +22,6 @@ class Item extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function images()
-    {
-        return $this->hasMany(Image::class, 'item_id');
-    }
 
     public function shoppingCarts()
     {
@@ -42,5 +38,9 @@ class Item extends Model
     {
         return $this->belongsToMany(OrderInfo::class, 'Order', 'item_id', 'order_id')
             ->withPivot('size');
+    }
+    public function image()
+    {
+        return $this->hasOne(Image::class, 'item_id', 'item_id');
     }
 }
