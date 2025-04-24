@@ -312,8 +312,7 @@
                     @foreach ($items as $item)
                         <div class="col-sm-12 col-md-6 col-lg-4">
                             <div class="rectangle-wrapper">
-                                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                                    <div class="rectangle-square bg-light position-relative">
+                                <a href="{{ route('product_info', ['id' => $item->item_id]) }}" class="text-decoration-none">                                  <div class="rectangle-square bg-light position-relative">
                                         <img src="{{ asset('pictures/default.jpg') }}"
                                              class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
                                              alt="Sample Image">

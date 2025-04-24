@@ -18,7 +18,6 @@ class ItemController extends Controller
 
         $query = Item::query()->where('main_category', 'like', '%KIDS%');
 
-
         if (!empty($categoryId)) {
             $query->where('category_id', $categoryId);
         }
@@ -56,13 +55,23 @@ class ItemController extends Controller
             default:
                 $query->orderBy('item_id', 'desc');
                 break;
-
         }
 
         $items = $query->paginate(9)->appends($request->all());
 
-
         return view('kids', compact('items'));
     }
 
+    public function show($id)
+    {
+        $item = Item::findOrFail($id);
+
+        // Get suggested items (limit to 3, no pagination)
+        $suggestedItems = Item::where('main_category', $item->main_category)
+            ->where('item_id', '!=', $id) // exclude current item
+            ->take(4) // Limit to 4 products
+            ->get(); // Fetch the results
+
+        return view('product_info', compact('item', 'suggestedItems'));
+    }
 }

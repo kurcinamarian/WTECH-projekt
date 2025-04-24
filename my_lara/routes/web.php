@@ -26,9 +26,7 @@ Route::get('/men', function () {
     return view('men'); // resources/views/men.blade.php
 })->name('men');
 
-Route::get('/product_info', function () {
-    return view('product_info'); // resources/views/product_info.blade.php
-})->name('product_info');
+
 
 Route::get('/register', function () {
     return view('register'); // resources/views/register.blade.php
@@ -63,6 +61,9 @@ Route::middleware('auth')->group(function () {
 use App\Http\Controllers\ItemController;
 
 Route::get('/kids', [ItemController::class, 'kids'])->name('kids');
+
+Route::get('/product/{id}', [ItemController::class, 'show'])->name('product_info');
+
 
 
 use App\Http\Controllers\OrderController;

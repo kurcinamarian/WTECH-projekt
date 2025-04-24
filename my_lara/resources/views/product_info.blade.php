@@ -43,6 +43,28 @@
             color: black;
         }
 
+        /* Style for the size buttons */
+        .size-btn input:checked + span {
+            background-color: gray;
+            color: white;
+            border-color: gray;
+        }
+
+        .size-btn span {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .size-btn span:hover {
+            background-color: #f8f9fa;
+        }
+
+        .size-btn input {
+            display: none;
+        }
+
     </style>
 </head>
 
@@ -131,6 +153,7 @@
     </div>
 </nav>
 
+<!-- Main_Product -->
 <div class="container my-5">
     <div class="row">
         <div class="col-12 col-md-6 mb-4">
@@ -161,118 +184,130 @@
         </div>
         <div class="col-12 col-md-6 mb-4">
             <div class="d-flex align-items-center">
-                <h1 class="me-2">Long cross-over trench coat </h1>
+                <h1 class="me-2">{{ $item->item_name }}</h1>
                 <button class="btn bg-transparent">
                     <i class="fa-regular fa-heart text-danger fs-3"></i>
                 </button>
             </div>
             <div class="mb-4">
-                <span class="text-muted">(Women's Coat)</span>
+                <span class="text-muted">({{ $item->parameters }})</span>
             </div>
             <div class="mb-4">
-                <p>Long, fashionable cross-over trench coat in a light beige color. It features a classic trench coat design elegant elements.
+                <p>{{ $item->description }}</p>
 
                 <h2>Parameters:</h2>
                 <ul class="list-unstyled">
-                    <li><strong>Material:</strong> 65% Cotton, 35% Polyester</li>
-                    <li><strong>Color:</strong> Light Beige (Pantone 7502 C)</li>
-                    <li><strong>Length:</strong> 60 inches</li>
-                    <li><strong>Closure:</strong> Double-breasted, 4 buttons, self-fabric belt with metal buckle</li>
-                    <li><strong>Sleeve Length:</strong> 24 inches</li>
+                    <li><strong>Style:</strong>
+                        @php
+                            $styles = [
+                                1 => 'Casual', 2 => 'Formal', 4 => 'Cozy',
+                            ];
+                            $selectedStyles = [];
+                            foreach ($styles as $bit => $name) {
+                                if ($item->style_fabric & $bit) {
+                                    $selectedStyles[] = $name;
+                                }
+                            }
+                        @endphp
+                        {{ implode(', ', $selectedStyles) }}
+                    </li>
+
+                    <li><strong>Material:</strong>
+                        @php
+                            $materials = [
+                                8 => 'Cotton', 16 => 'Wool', 32 => 'Polyester',
+                            ];
+                            $selectedMaterials = [];
+                            foreach ($materials as $bit => $name) {
+                                if ($item->style_fabric & $bit) {
+                                    $selectedMaterials[] = $name;
+                                }
+                            }
+                        @endphp
+                        {{ implode(', ', $selectedMaterials) }}
+                    </li>
+                    <li><strong>Color:</strong> {{ $item->colour }}</li>
                     <li><strong>Brand:</strong> FTW</li>
                     <li><strong>Season:</strong> Spring/Fall</li>
+                    <li><strong>Release date:</strong> {{ \Carbon\Carbon::parse($item->release_date)->format('d.m.Y') }}</li>
                 </ul>
             </div>
             <div class="mb-4">
                 <h4 class="mb-3">Size selection</h4>
                 <div class="d-flex">
-                    <button type="button" class="btn btn-outline-dark size-btn m-1">XS</button>
-                    <button type="button" class="btn btn-outline-dark size-btn m-1">S</button>
-                    <button type="button" class="btn btn-outline-dark size-btn m-1">M</button>
-                    <button type="button" class="btn btn-outline-dark size-btn m-1">L</button>
-                    <button type="button" class="btn btn-outline-dark size-btn m-1">XL</button>
+                    <!-- Radio buttons for sizes -->
+                    <label class="size-btn m-1">
+                        <input type="radio" name="size" value="XS" class="d-none" />
+                        <span class="btn btn-outline-dark w-100">XS</span>
+                    </label>
+                    <label class="size-btn m-1">
+                        <input type="radio" name="size" value="S" class="d-none" />
+                        <span class="btn btn-outline-dark w-100">S</span>
+                    </label>
+                    <label class="size-btn m-1">
+                        <input type="radio" name="size" value="M" class="d-none" />
+                        <span class="btn btn-outline-dark w-100">M</span>
+                    </label>
+                    <label class="size-btn m-1">
+                        <input type="radio" name="size" value="L" class="d-none" />
+                        <span class="btn btn-outline-dark w-100">L</span>
+                    </label>
+                    <label class="size-btn m-1">
+                        <input type="radio" name="size" value="XL" class="d-none" />
+                        <span class="btn btn-outline-dark w-100">XL</span>
+                    </label>
                 </div>
             </div>
+            <!-- Quantity input field -->
+            <div class="mb-4">
+                <h4 class="mb-3">Quantity</h4>
+                <input type="number" class="form-control w-25" id="quantity" name="quantity" value="1" min="1" step="1">
+            </div>
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <div class="price fs-1">99.99 €</div>
+                <div class="price fs-1">{{ number_format($item->price, 2) }} €</div>
                 <button type="button" class="btn btn-dark btn-lg">ADD TO CART</button>
             </div>
         </div>
     </div>
 </div>
 
+
+
 <!-- Suggested -->
 <div class="container-fluid bg-white justify-content-between">
     <div class="container">
-        <div class="row">
-            <div class="col-12 text">
-                <h2 class="text-dark">Suggested</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper ">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/S-I1.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-12 text">
+                    <h2 class="text-dark">Suggested</h2>
+                </div>
+                @foreach ($suggestedItems as $suggested)
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="rectangle-wrapper">
+                            <a href="{{ route('product_info', ['id' => $suggested->item_id]) }}"
+                               class="text-decoration-none">
+                                <div class="rectangle-square bg-light position-relative">
+                                    <img src="{{ asset('pictures/' . $suggested->photo) }}"
+                                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
+                                         alt="{{ $suggested->item_name }}">
+                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                                        <i class="fa-regular fa-heart text-danger fs-3"></i>
+                                    </button>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="mt-2">
+                            <span class="product-name fs-4">{{ $suggested->item_name }}</span><br>
+                            <span class="product-category text-muted fs-6">({{ $suggested->main_category }})</span><br>
+                            <span class="product-price fs-4">{{ number_format($suggested->price, 2) }} €</span>
                         </div>
                     </div>
-                </a>
-                <div class="mt-2">
-                    <span class="product-name fs-4">Urban Ease Sweatshirt</span><br>
-                    <span class="product-category text-muted fs-6">(Women's T-shirt)</span><br>
-                    <span class="product-price fs-4">19.99 €</span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper ">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/S-I2.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
-                        </div>
-                    </div>
-                </a>
-                <div class="mt-2">
-                    <span class="product-name fs-4">Artisan Patchwork Cap</span><br>
-                    <span class="product-category text-muted fs-6">(Men's Hat)</span><br>
-                    <span class="product-price fs-4">15.99 €</span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper ">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/S-I3.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
-                        </div>
-                    </div>
-                </a>
-                <div class="mt-2">
-                    <span class="product-name fs-4">Flowing Linen Shirt</span><br>
-                    <span class="product-category text-muted fs-6">(Women's Tops)</span><br>
-                    <span class="product-price fs-4">23.99 €</span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper ">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/S-I4.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
-                        </div>
-                    </div>
-                </a>
-                <div class="mt-2">
-                    <span class="product-name fs-4">Arctic Denim Puffer</span><br>
-                    <span class="product-category text-muted fs-6">(Women's Outerwear)</span><br>
-                    <span class="product-price fs-4">49.99 €</span>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Bottom bar -->
 <div class="container-fluid bg-light">
