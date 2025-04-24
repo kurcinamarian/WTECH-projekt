@@ -49,3 +49,43 @@ VALUES
 ('Pants', 'Tracksuit pants'),
 ('Pants', 'Fabric pants'),
 ('Other', 'Other');
+
+
+
+INSERT INTO images (item_id, image_name, image_name_2)
+VALUES
+(1,'Kids Sneaker Red Casual Cotton.jpg', 'Kids Sneaker Red Casual Cotton_2.jpg'),
+(2,'Kids Boot Blue Formal Wool.jpg', 'Kids Boot Blue Formal Wool_2.jpg'),
+(3,'Kids Shirt Green Cozy Polyester.jpg', 'Kids Shirt Green Cozy Polyester_2.jpg'),
+(4,'Kids Jeans Black Casual Wool.jpg', 'Kids Jeans Black Casual Wool.jpg_2'),
+(5,'Kids Polo White Formal Cotton.jpg', 'Kids Polo White Formal Cotton_2.jpg'),
+
+(6,'Kids Longsleeve Cozy and Formal Cotton and Polyester.jpg', 'Kids Longsleeve Cozy and Formal Cotton and Polyester_2.jpg'),
+(7,'Kids Tracksuit Panths Casual Wool.jpg', 'Kids Tracksuit Panths Casual Wool_2.jpg'),
+(8,'Kids Tank Top Casual Cotton.jpg', 'Kids Tank Top Casual Cotton_2.jpg'),
+(9,'Kids Exclusive Shoes Cozy Wool.jpg', 'Kids Exclusive Shoes Cozy Wool_2.jpg'),
+(10,'Kids Fabric Panths Formal Polyester.jpg', 'Kids Fabric Panths Formal Polyester_2.jpg'),
+
+(11,'Men Sneaker Black Casual.jpg', 'Men Sneaker Black Casual_2.jpg'),
+(12,'Men Boot Red Cozy Cotton.jpg', 'Men Boot Red Cozy Cotton_2.jpg'),
+(13,'Men Shirt Blue Formal.jpg', 'Men Shirt Blue Formal_2.jpg'),
+(14,'Women Tank Top White Polyester.jpg', 'Women Tank Top White Polyester_2.jpg'),
+(15,'Women Dress Green Cotton Wool.jpg', 'Women Dress Green Cotton Wool_2.jpg'),
+
+(16,'Kids Sport Shoe Casual and Cozy.jpg', 'Kids Sport Shoe Casual and Cozy_2.jpg'),
+(17,'Kids Shorts Casual.jpg', 'Kids Shorts Casual.jpg_2'),
+(18,'Kids Cotton Shirt.jpg', 'Kids Cotton Shirt_2.jpg'),
+(17,'Kids Shorts Casual.jpg', 'Kids Shorts Casual_2.jpg'),
+(18,'Kids Cotton Shirt.jpg', 'Kids Cotton Shirt_2.jpg'),
+(19,'Kids Wool Jacket.jpg', 'Kids Wool Jacket_2.jpg'),
+(20,'Kids Polyester Pants.jpg', 'Kids Polyester Pants_2.jpg');
+
+
+
+
+PRIKAZY!!
+php artisan db:seed --class=CategoriesTableSeeder
+php artisan db:seed --class=ItemsTableSeeder
+
+Alternatively, you can run all seeders at once with:
+php artisan db:seed
