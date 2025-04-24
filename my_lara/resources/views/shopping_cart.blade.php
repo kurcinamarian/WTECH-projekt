@@ -216,8 +216,7 @@
                                              style="max-width: 100%; height: auto; object-fit: cover;">
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <h6 class="mb-1">{{ $cartItem->item->item_name }}
-                                            <small>({{ $cartItem->item->category->main_category }})</small></h6>
+                                        <h6 class="mb-1">{{ $cartItem->item->item_name }} <small>({{ $cartItem->item->category->main_category }})</small></h6>
                                         <p class="mb-0">{{ $cartItem->size }}</p>
                                     </div>
                                     <div class="col-12 col-md-2 text-end mt-2 mt-md-0">
@@ -399,9 +398,9 @@
                                     <img src="{{ asset('pictures/' . $suggested->photo) }}"
                                          class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
                                          alt="{{ $suggested->item_name }}">
-                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                                    <!--<button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
                                         <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                    </button>
+                                    </button>-->
                                 </div>
                             </a>
                         </div>

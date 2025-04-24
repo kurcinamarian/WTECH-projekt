@@ -353,9 +353,9 @@
                                              class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
                                              alt="Product Image">
 
-                                        <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
-                                            <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                        </button>
+                                        <!--<button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                                        <i class="fa-regular fa-heart text-danger fs-3"></i>
+                                    </button>-->
                                     </div>
                                 </a>
                             </div>

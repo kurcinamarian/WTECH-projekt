@@ -29,7 +29,7 @@
         }
 
         .rectangle {
-            padding: 47% 0 0;
+            padding: 49% 0 0;
         }
 
         .rectangle-wrapper {
@@ -149,9 +149,9 @@
                         </button>
                     </div>
                 </form>
-                <a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box" style="hidden">
+                <!--<a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box" style="hidden">
                     <i class="fas fa-heart icon"></i>
-                </a>
+                </a>-->
                 <a href="{{ url('shopping_cart') }}" class="ms-3 text-dark placeholder-box">
                     <i class="fas fa-shopping-cart icon"></i>
                 </a>
@@ -159,7 +159,7 @@
         </div>
     </div>
 </nav>
-<div class="container mt-4">
+<div class="container">
     @foreach (['success', 'error', 'warning', 'info'] as $msg)
         @if(session()->has($msg))
             <div class="alert alert-{{ $msg == 'error'?'danger':$msg}}">
@@ -172,7 +172,7 @@
 
 <!-- title photo -->
 <div class="container-fluid bg-white p-0 mb-5">
-    <img src="{{ asset('pictures/MP-I1.jpg') }}" alt="Title_photo" class="img-fluid">
+    <img src="{{ asset('dataset_pics/MP-I1.jpg') }}" alt="Title_photo" class="img-fluid">
 </div>
 <!-- categories photos -->
 <div class="container-fluid bg-white justify-content-between">
@@ -182,7 +182,7 @@
                 <a href="{{ url('men') }}" class="text-decoration-none">
                     <div class="rectangle-wrapper">
                         <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/MP-I2.jpg') }}"
+                            <img src="{{ asset('dataset_pics/MP-I2.jpg') }}"
                                  class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="MEN">
                             <div class="position-absolute top-0 end-0 m-4 p-1 bg-light border rounded-5">
                                 <span class="fs-4 text-dark ms-2 me-2">MEN</span>
@@ -196,7 +196,7 @@
                 <a href="{{ url('women') }}" class="text-decoration-none">
                     <div class="rectangle-wrapper">
                         <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/MP-I3.jpg') }}"
+                            <img src="{{ asset('dataset_pics/MP-I3.jpg') }}"
                                  class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="WOMEN">
                             <div class="position-absolute top-0 end-0 m-4 p-1 bg-light border rounded-5">
                                 <span class="fs-4 text-dark ms-2 me-2">WOMEN</span>
@@ -210,7 +210,7 @@
                 <a href="{{ url('kids') }}" class="text-decoration-none">
                     <div class="rectangle-wrapper">
                         <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/MP-I4.jpg') }}"
+                            <img src="{{ asset('dataset_pics/MP-I4.jpg') }}"
                                  class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="KIDS">
                             <div class="position-absolute top-0 end-0 m-4 p-1 bg-light border rounded-5">
                                 <span class="fs-4 text-dark ms-2 me-2">KIDS</span>
@@ -227,40 +227,40 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
+                <a href="" class="text-decoration-none">
                     <div class="rectangle-wrapper">
                         <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/F-I1.jpg') }}" alt="Featured"
+                            <img src="{{ asset('dataset_pics/F-I1.jpg') }}" alt="Featured"
                                  class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
+                <a href="" class="text-decoration-none">
                     <div class="rectangle-wrapper">
                         <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/F-I2.jpg') }}" alt="Featured"
+                            <img src="{{ asset('dataset_pics/F-I2.jpg') }}" alt="Featured"
                                  class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
+                <a href="" class="text-decoration-none">
                     <div class="rectangle-wrapper">
                         <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/F-I3.jpg') }}" alt="Featured"
+                            <img src="{{ asset('dataset_pics/F-I3.jpg') }}" alt="Featured"
                                  class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
+                <a href="" class="text-decoration-none">
                     <div class="rectangle-wrapper">
                         <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/F-I4.jpg') }}" alt="Featured"
+                            <img src="{{ asset('dataset_pics/F-I4.jpg') }}" alt="Featured"
                                  class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
                         </div>
                     </div>
@@ -274,9 +274,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-12">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
+                <a href="" class="text-decoration-none">
                     <div class="rectangle-square bg-light position-relative">
-                        <img src="{{ asset('pictures/F-I5.jpg') }}" alt="Featured"
+                        <img src="{{ asset('dataset_pics/F-I5.jpg') }}" alt="Featured"
                              class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
                         <div class="position-absolute top-0 end-0 m-3 p-2 bg-light border rounded-5">
                             <span class="fs-3 fw-bold text-dark ms-3 me-3">New Collection</span>
@@ -287,9 +287,9 @@
             <div class="col-md-6 col-sm-12">
                 <div class="row">
                     <div class="col-12">
-                        <a href="{{ url('product_info') }}" class="text-decoration-none">
+                        <a href="" class="text-decoration-none">
                             <div class="rectangle bg-light position-relative">
-                                <img src="{{ asset('pictures/F-I7.jpg') }}" alt="Featured"
+                                <img src="{{ asset('dataset_pics/F-I7.jpg') }}" alt="Featured"
                                      class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
                             </div>
                         </a>
@@ -297,9 +297,9 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <a href="{{ url('product_info') }}" class="text-decoration-none">
+                        <a href="" class="text-decoration-none">
                             <div class="rectangle bg-light position-relative">
-                                <img src="{{ asset('pictures/F-I6.jpg') }}" alt="Featured"
+                                <img src="{{ asset('dataset_pics/F-I6.jpg') }}" alt="Featured"
                                      class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
                             </div>
                         </a>
@@ -323,12 +323,15 @@
                             <a href="{{ route('product_info', ['id' => $suggested->item_id]) }}"
                                class="text-decoration-none">
                                 <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/' . $suggested->photo) }}"
+                                    @php
+                                        $imageName = $suggested->image?->image_name ?? 'default';
+                                    @endphp
+                                    <img src="{{ asset('dataset_pics/' . $imageName) }}"
                                          class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
                                          alt="{{ $suggested->item_name }}">
-                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                                    <!--<button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
                                         <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                    </button>
+                                    </button>-->
                                 </div>
                             </a>
                         </div>
@@ -351,18 +354,21 @@
                 <div class="col-12 text">
                     <h2 class="text-dark">Suggested</h2>
                 </div>
-                @foreach ($suggestedItems as $suggested)
+                @foreach ($suggestedItems2 as $suggested)
                     <div class="col-sm-6 col-lg-3">
                         <div class="rectangle-wrapper">
                             <a href="{{ route('product_info', ['id' => $suggested->item_id]) }}"
                                class="text-decoration-none">
                                 <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/' . $suggested->photo) }}"
+                                    @php
+                                        $imageName = $suggested->image?->image_name ?? 'default';
+                                    @endphp
+                                    <img src="{{ asset('dataset_pics/' . $imageName) }}"
                                          class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
                                          alt="{{ $suggested->item_name }}">
-                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                                    <!--<button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
                                         <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                    </button>
+                                    </button>-->
                                 </div>
                             </a>
                         </div>

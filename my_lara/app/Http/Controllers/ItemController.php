@@ -95,11 +95,12 @@ class ItemController extends Controller
     public function main()
     {
         // Fetch suggested items for the main page
-        $suggestedItems = Item::take(4) // Limit to 4 products
-        ->get(); // Get all suggested items (You can apply a category filter here if needed)
-
-        return view('main', compact('suggestedItems')); // Pass suggested items to the main page view
+        $suggestedItems = Item::inRandomOrder()->take(4)->get();
+        $suggestedItems2 = Item::inRandomOrder()->take(4)->get();
+        return view('main', compact('suggestedItems','suggestedItems2')); // Pass suggested items to the main page view
     }
+
+
 
     public function cart()
     {

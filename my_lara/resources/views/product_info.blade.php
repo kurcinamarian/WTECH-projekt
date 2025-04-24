@@ -231,17 +231,18 @@
             <div class="col-12 col-md-6 mb-4">
                 <div class="d-flex align-items-center">
                     <h1 class="me-2">{{ $item->item_name }}</h1>
-                    <button class="btn bg-transparent">
+                    <!--<button class="btn bg-transparent">
                         <i class="fa-regular fa-heart text-danger fs-3"></i>
-                    </button>
+                    </button>-->
                 </div>
-                <div class="mb-4">
-                    <span class="text-muted">({{ $item->parameters }})</span>
-                </div>
+                <p>({{ $item->main_category }})</p>
                 <div class="mb-4">
                     <p>{{ $item->description }}</p>
 
                     <h2>Parameters:</h2>
+                    <div class="mb-4">
+                        <span class="text-muted">({{ $item->parameters }})</span>
+                    </div>
                     <ul class="list-unstyled">
                         <li><strong>Style:</strong>
                             @php
