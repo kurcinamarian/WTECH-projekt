@@ -43,4 +43,14 @@ class Item extends Model
         return $this->belongsToMany(OrderInfo::class, 'Order', 'item_id', 'order_id')
             ->withPivot('size');
     }
+
+    public function scopeSearch($query, $searchTerm)
+    {
+        if ($searchTerm) {
+            return $query->where('item_name', 'like', "%$searchTerm%")
+                ->orWhere('description', 'like', "%$searchTerm%");
+        }
+
+        return $query;
+    }
 }

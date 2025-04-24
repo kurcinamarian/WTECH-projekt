@@ -104,8 +104,8 @@
                 </form>
             </div>
         @endauth
-        </div>
     </div>
+</div>
 </div>
 
 <!-- bottom navbar -->
@@ -155,285 +155,50 @@
         </div>
     </div>
 </nav>
-<!-- title photo -->
-<div class="container-fluid bg-white p-0 mb-5">
-    <img src="{{ asset('pictures/MP-I1.jpg') }}" alt="Title_photo" class="img-fluid">
-</div>
-<!-- categories photos -->
-<div class="container-fluid bg-white justify-content-between">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-md-4">
-                <a href="{{ url('men') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/MP-I2.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="MEN">
-                            <div class="position-absolute top-0 end-0 m-4 p-1 bg-light border rounded-5">
-                                <span class="fs-4 text-dark ms-2 me-2">MEN</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+<div class="container mt-4">
+    <h2>Search Results</h2>
 
-            <div class="col-sm-12 col-md-4">
-                <a href="{{ url('women') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/MP-I3.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="WOMEN">
-                            <div class="position-absolute top-0 end-0 m-4 p-1 bg-light border rounded-5">
-                                <span class="fs-4 text-dark ms-2 me-2">WOMEN</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-sm-12 col-md-4">
-                <a href="{{ url('kids') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/MP-I4.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="KIDS">
-                            <div class="position-absolute top-0 end-0 m-4 p-1 bg-light border rounded-5">
-                                <span class="fs-4 text-dark ms-2 me-2">KIDS</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- featured -->
-<div class="container-fluid bg-white justify-content-between">
-    <div class="container">
+    <!-- product grid -->
+    <div class="col-md-12">
         <div class="row">
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
+            @foreach ($items as $item)
+                <div class="col-sm-12 col-md-6 col-lg-4">
                     <div class="rectangle-wrapper">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/F-I1.jpg') }}" alt="Featured"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/F-I2.jpg') }}" alt="Featured"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/F-I3.jpg') }}" alt="Featured"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/F-I4.jpg') }}" alt="Featured"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- featured num-2 -->
-<div class="container-fluid bg-white justify-content-between">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-sm-12">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-square bg-light position-relative">
-                        <img src="{{ asset('pictures/F-I5.jpg') }}" alt="Featured"
-                             class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
-                        <div class="position-absolute top-0 end-0 m-3 p-2 bg-light border rounded-5">
-                            <span class="fs-3 fw-bold text-dark ms-3 me-3">New Collection</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-6 col-sm-12">
-                <div class="row">
-                    <div class="col-12">
                         <a href="{{ url('product_info') }}" class="text-decoration-none">
-                            <div class="rectangle bg-light position-relative">
-                                <img src="{{ asset('pictures/F-I7.jpg') }}" alt="Featured"
-                                     class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
+                            <div class="rectangle-square bg-light position-relative">
+                                <img src="{{ asset('pictures/default.jpg') }}"
+                                     class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
+                                     alt="Sample Image">
+                                <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                                    <i class="fa-regular fa-heart text-danger fs-3"></i>
+                                </button>
                             </div>
                         </a>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <a href="{{ url('product_info') }}" class="text-decoration-none">
-                            <div class="rectangle bg-light position-relative">
-                                <img src="{{ asset('pictures/F-I6.jpg') }}" alt="Featured"
-                                     class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
-                            </div>
-                        </a>
+                    <div class="mt-2">
+                        <span class="product-name fs-4">{{ $item->item_name }}</span><br>
+                        <span class="product-category text-muted fs-6">({{ $item->main_category }})</span><br>
+                        <span class="product-price fs-4">{{ number_format($item->price, 2) }} €</span>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
-    </div>
-</div>
-<!-- NEW -->
-<div class="container-fluid bg-white justify-content-between">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text">
-                <h2 class="text-dark">NEW</h2>
+
+        <!-- pagination info and links -->
+        <div class="d-flex flex-column align-items-center mt-4">
+            <!-- info o počte -->
+            <div class="mb-2 text-muted">
+                Zobrazené {{ $items->firstItem() }} – {{ $items->lastItem() }} z {{ $items->total() }} produktov
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper ">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/N-I1.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="New">
-                        </div>
-                    </div>
-                </a>
-                <div class="mt-2">
-                    <span class="product-name fs-5">Leather Ankle Boots</span><br>
-                    <span class="product-category text-muted fs-6">(Women's Boots)</span><br>
-                    <span class="product-price fs-4">119.99 €</span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper ">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/N-I2.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="New">
-                        </div>
-                    </div>
-                </a>
-                <div class="mt-2">
-                    <span class="product-name fs-4">"Structured Sienna" Pantsuit</span><br>
-                    <span class="product-category text-muted fs-6">(Men's Suits)</span><br>
-                    <span class="product-price fs-4">54.99 €</span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper ">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/N-I3.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="New">
-                        </div>
-                    </div>
-                </a>
-                <div class="mt-2">
-                    <span class="product-name fs-5">"Cloud Nine" Drape Jumpsuit</span><br>
-                    <span class="product-category text-muted fs-6">(Men's Jumpsuits)</span><br>
-                    <span class="product-price fs-4">23.99 €</span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper ">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/N-I4.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="New">
-                        </div>
-                    </div>
-                </a>
-                <div class="mt-2">
-                    <span class="product-name fs-4">"Nebula" sport suit</span><br>
-                    <span class="product-category text-muted fs-6">(Men's sport suit)</span><br>
-                    <span class="product-price fs-4">49.99 €</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Suggested -->
-<div class="container-fluid bg-white justify-content-between">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text">
-                <h2 class="text-dark">Suggested</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper ">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/S-I1.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
-                        </div>
-                    </div>
-                </a>
-                <div class="mt-2">
-                    <span class="product-name fs-4">Urban Ease Sweatshirt</span><br>
-                    <span class="product-category text-muted fs-6">(Women's T-shirt)</span><br>
-                    <span class="product-price fs-4">19.99 €</span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper ">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/S-I2.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
-                        </div>
-                    </div>
-                </a>
-                <div class="mt-2">
-                    <span class="product-name fs-4">Artisan Patchwork Cap</span><br>
-                    <span class="product-category text-muted fs-6">(Men's Hat)</span><br>
-                    <span class="product-price fs-4">15.99 €</span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper ">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/S-I3.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
-                        </div>
-                    </div>
-                </a>
-                <div class="mt-2">
-                    <span class="product-name fs-4">Flowing Linen Shirt</span><br>
-                    <span class="product-category text-muted fs-6">(Women's Tops)</span><br>
-                    <span class="product-price fs-4">23.99 €</span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="{{ url('product_info') }}" class="text-decoration-none">
-                    <div class="rectangle-wrapper ">
-                        <div class="rectangle-square bg-light position-relative">
-                            <img src="{{ asset('pictures/S-I4.jpg') }}"
-                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" alt="Suggested">
-                        </div>
-                    </div>
-                </a>
-                <div class="mt-2">
-                    <span class="product-name fs-4">Arctic Denim Puffer</span><br>
-                    <span class="product-category text-muted fs-6">(Women's Outerwear)</span><br>
-                    <span class="product-price fs-4">49.99 €</span>
-                </div>
+
+            <!-- číselné stránkovanie bez šípok -->
+            <div class="pagination">
+                @for ($i = 1; $i <= $items->lastPage(); $i++)
+                    <a href="{{ $items->url($i) }}"
+                       class="btn btn-sm mx-1 {{ $items->currentPage() == $i ? 'btn-dark text-white' : 'btn-outline-secondary' }}">
+                        {{ $i }}
+                    </a>
+                @endfor
             </div>
         </div>
     </div>

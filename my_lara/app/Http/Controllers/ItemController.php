@@ -74,4 +74,14 @@ class ItemController extends Controller
 
         return view('product_info', compact('item', 'suggestedItems'));
     }
+    public function index(Request $request)
+    {
+        $search = $request->input('search');
+
+        $items = Item::when($search, function ($query, $search) {
+            return $query->where('item_name', 'LIKE', '%' . $search . '%');
+        })->paginate(25);
+
+        return view('index', compact('items'));
+    }
 }

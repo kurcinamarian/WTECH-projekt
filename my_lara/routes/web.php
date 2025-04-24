@@ -72,3 +72,6 @@ use App\Http\Controllers\OrderController;
 Route::get('/account', [OrderController::class, 'showOrders'])->name('account');
 
 
+Route::get('/items', [ItemController::class, 'index'])->name('items.index');
+
+
