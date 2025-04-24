@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     protected $table = 'items';
+    public $timestamps = false;
 
     protected $primaryKey = 'item_id';
 
@@ -42,5 +43,15 @@ class Item extends Model
     public function image()
     {
         return $this->hasOne(Image::class, 'item_id', 'item_id');
+    }
+
+    public function scopeSearch($query, $searchTerm)
+    {
+        if ($searchTerm) {
+            return $query->where('item_name', 'like', "%$searchTerm%")
+                ->orWhere('description', 'like', "%$searchTerm%");
+        }
+
+        return $query;
     }
 }

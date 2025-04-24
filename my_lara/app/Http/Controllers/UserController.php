@@ -25,7 +25,7 @@ class UserController extends Controller
             'city' => 'nullable|string|max:255',
             'zip' => 'nullable|string|max:10',
             'country' => 'nullable|string|max:255',
-            'profile_image' => 'sometimes|image|max:2048',
+
             'email_notifications' => 'boolean',
             'new_offers' => 'boolean',
             'newsletters' => 'boolean',

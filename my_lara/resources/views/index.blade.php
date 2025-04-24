@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product</title>
+    <title>Fair to wear</title>
     <link rel="icon" type="image/png" href="{{ asset('pictures/album.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -25,8 +25,11 @@
         }
 
         .rectangle-square {
-            background-color: #ccc;
             padding: 100% 0 0;
+        }
+
+        .rectangle {
+            padding: 47% 0 0;
         }
 
         .rectangle-wrapper {
@@ -38,71 +41,71 @@
             color: gray;
         }
 
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            color: black;
-        }
-
-        /* Style for the size buttons */
-        .size-btn input:checked + span {
-            background-color: gray;
-            color: white;
-            border-color: gray;
-        }
-
-        .size-btn span {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .size-btn span:hover {
-            background-color: #f8f9fa;
-        }
-
-        .size-btn input {
-            display: none;
-        }
-
     </style>
 </head>
-
 <body>
 <!-- top navbar -->
 <div class="container-fluid top-container py-2">
     <div class="container d-flex justify-content-between align-items-center">
         <a class="text-dark text-decoration-none fw-bold" href="{{ url('main_page') }}">FTW</a>
-        <div>
-            <a class="text-dark text-decoration-none" href="{{ url('register') }}">Register</a>
-            <span class="mx-2 text-dark">|</span>
-            <div class="dropdown d-inline">
-                <a class="text-dark text-decoration-none dropdown-toggle" role="button" id="loginDropdown"
-                   data-bs-toggle="dropdown" aria-expanded="false">
-                    Login
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="loginDropdown"
-                    style="min-width: 250px;">
-                    <li>
-                        <div class="mb-2">
-                            <label for="loginName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="loginName" placeholder="Enter your name">
-                        </div>
-                    </li>
-                    <li>
-                        <div class="mb-2">
-                            <label for="loginPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="loginPassword"
-                                   placeholder="Enter your password">
-                        </div>
-                    </li>
-                    <li>
-                        <button class="btn btn-secondary w-100">Confirm</button>
-                    </li>
-                </ul>
+        @guest
+            <div>
+                <a class="text-dark text-decoration-none" href="{{ url('register') }}">Register</a>
+                <span class="mx-2 text-dark">|</span>
+                <div class="dropdown d-inline">
+                    <a class="text-dark text-decoration-none dropdown-toggle" role="button" id="loginDropdown"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Login
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="loginDropdown"
+                        style="min-width: 250px;">
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+
+                            <li>
+                                <div class="mb-2">
+                                    <label for="loginName" class="form-label">Name</label>
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror" id="loginName" name="email" placeholder="Enter your email" value="{{ old('email') }}">
+                                    @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </li>
+                            <li>
+                                <div class="mb-2">
+                                    <label for="loginPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="loginPassword" name="password" placeholder="Enter your password">
+                                    @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </li>
+                            <li>
+                                <button class="btn btn-secondary w-100">Confirm</button>
+                            </li>
+                        </form>
+                    </ul>
+                </div>
             </div>
-        </div>
+        @endguest
+        @auth
+            <div>
+                <a href="{{ route('account') }}" class="text-dark text-decoration-none">
+                    {{ Auth::user()->firstname }}
+                </a>
+                <span class="mx-2 text-dark">|</span>
+                <a class="text-dark text-decoration-none" href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </div>
+        @endauth
     </div>
+</div>
 </div>
 
 <!-- bottom navbar -->
@@ -131,15 +134,14 @@
                 </li>
             </ul>
             <div class="d-flex align-items-center">
-                <form class="d-flex align-items-center" role="search">
-                    <div class="input-group col-6" style="position: relative;">
-                        <input class="form-control rounded-pill" type="search" placeholder="Search" aria-label="Search"
-                               style="border-radius: 30px; height: 30px; font-size: 14px; padding-right: 35px;">
-                        <button
-                            class="btn btn-outline-secondary rounded-pill position-absolute end-0 me-1 search-icon-btn d-flex align-items-center justify-content-center"
-                            type="submit"
-                            style="border-radius: 30px; height: 30px; background: transparent; border: none;">
-                            <i class="fas fa-magnifying-glass icon"></i>
+                <form method="GET" action="{{ route('items.index') }}">
+                    <div class="input-group">
+                        <input type="text" name="search"
+                               class="form-control border-0 shadow-none"
+                               placeholder="Search items..."
+                               value="{{ request('search') }}">
+                        <button class="btn border-0" type="submit">
+                            <i class="fas fa-search"></i> {{-- or use <i class="bi bi-search"></i> --}}
                         </button>
                     </div>
                 </form>
@@ -153,171 +155,54 @@
         </div>
     </div>
 </nav>
+<div class="container mt-4">
+    <h2>Search Results</h2>
 
-<!-- Main_Product -->
-<div class="container my-5">
-    <form method="POST" action="{{ route('shopping_cart.add') }}">
-        @csrf
-        <input type="hidden" name="item_id" value="{{ $item->item_id }}">
+    <!-- product grid -->
+    <div class="col-md-12">
         <div class="row">
-            <div class="col-12 col-md-6 mb-4">
-                <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="rectangle-wrapper">
-                                <img src="{{ asset('pictures/P-I1.jpg') }}" alt="product1" class="img-fluid">
+            @foreach ($items as $item)
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="rectangle-wrapper">
+                        <a href="{{ url('product_info') }}" class="text-decoration-none">
+                            <div class="rectangle-square bg-light position-relative">
+                                <img src="{{ asset('pictures/default.jpg') }}"
+                                     class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
+                                     alt="Sample Image">
+                                <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                                    <i class="fa-regular fa-heart text-danger fs-3"></i>
+                                </button>
                             </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="rectangle-wrapper">
-                                <img src="{{ asset('pictures/P-I2.jpg') }}" alt="product2" class="img-fluid">
-                            </div>
-                        </div>
+                        </a>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
-                            data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"
-                              style="filter: invert(100%);"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
-                            data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"
-                              style="filter: invert(100%);"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 mb-4">
-                <div class="d-flex align-items-center">
-                    <h1 class="me-2">{{ $item->item_name }}</h1>
-                    <button class="btn bg-transparent">
-                        <i class="fa-regular fa-heart text-danger fs-3"></i>
-                    </button>
-                </div>
-                <div class="mb-4">
-                    <span class="text-muted">({{ $item->parameters }})</span>
-                </div>
-                <div class="mb-4">
-                    <p>{{ $item->description }}</p>
-
-                    <h2>Parameters:</h2>
-                    <ul class="list-unstyled">
-                        <li><strong>Style:</strong>
-                            @php
-                                $styles = [
-                                    1 => 'Casual', 2 => 'Formal', 4 => 'Cozy',
-                                ];
-                                $selectedStyles = [];
-                                foreach ($styles as $bit => $name) {
-                                    if ($item->style_fabric & $bit) {
-                                        $selectedStyles[] = $name;
-                                    }
-                                }
-                            @endphp
-                            {{ implode(', ', $selectedStyles) }}
-                        </li>
-
-                        <li><strong>Material:</strong>
-                            @php
-                                $materials = [
-                                    8 => 'Cotton', 16 => 'Wool', 32 => 'Polyester',
-                                ];
-                                $selectedMaterials = [];
-                                foreach ($materials as $bit => $name) {
-                                    if ($item->style_fabric & $bit) {
-                                        $selectedMaterials[] = $name;
-                                    }
-                                }
-                            @endphp
-                            {{ implode(', ', $selectedMaterials) }}
-                        </li>
-                        <li><strong>Color:</strong> {{ $item->colour }}</li>
-                        <li><strong>Brand:</strong> FTW</li>
-                        <li><strong>Season:</strong> Spring/Fall</li>
-                        <li><strong>Release
-                                date:</strong> {{ \Carbon\Carbon::parse($item->release_date)->format('d.m.Y') }}</li>
-                    </ul>
-                </div>
-                <div class="mb-4">
-                    <h4 class="mb-3">Size selection</h4>
-                    <div class="d-flex flex-wrap">
-                        @if($item->category && $item->category->main_category === 'Shoes')
-                            @for($size = 35; $size <= 45; $size++)
-                                <label class="size-btn m-1">
-                                    <input type="radio" name="size" value="{{ $size }}" class="d-none"/>
-                                    <span class="btn btn-outline-dark w-100">{{ $size }}</span>
-                                </label>
-                            @endfor
-                        @else
-                            @foreach(['XS', 'S', 'M', 'L', 'XL'] as $size)
-                                <label class="size-btn m-1">
-                                    <input type="radio" name="size" value="{{ $size }}" class="d-none"/>
-                                    <span class="btn btn-outline-dark w-100">{{ $size }}</span>
-                                </label>
-                            @endforeach
-                        @endif
-
+                    <div class="mt-2">
+                        <span class="product-name fs-4">{{ $item->item_name }}</span><br>
+                        <span class="product-category text-muted fs-6">({{ $item->main_category }})</span><br>
+                        <span class="product-price fs-4">{{ number_format($item->price, 2) }} €</span>
                     </div>
-                    @error('size')
-                    <div class="text-danger">{{ $message }}</div>
-                    @enderror
                 </div>
-                <!-- Quantity input field -->
-                <div class="mb-4">
-                    <h4 class="mb-3">Quantity</h4>
-                    <input type="number" class="form-control w-25" id="quantity" name="quantity" value="1"
-                           step="1">
-                    @error('quantity')
-                    <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div class="price fs-1">{{ number_format($item->price, 2) }} €</div>
-                    <button type="submit" class="btn btn-dark btn-lg">ADD TO CART</button>
-                </div>
-            </div>
+            @endforeach
         </div>
-    </form>
-</div>
 
+        <!-- pagination info and links -->
+        <div class="d-flex flex-column align-items-center mt-4">
+            <!-- info o počte -->
+            <div class="mb-2 text-muted">
+                Zobrazené {{ $items->firstItem() }} – {{ $items->lastItem() }} z {{ $items->total() }} produktov
+            </div>
 
-<!-- Suggested -->
-<div class="container-fluid bg-white justify-content-between">
-    <div class="container">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-12 text">
-                    <h2 class="text-dark">Suggested</h2>
-                </div>
-                @foreach ($suggestedItems as $suggested)
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="rectangle-wrapper">
-                            <a href="{{ route('product_info', ['id' => $suggested->item_id]) }}"
-                               class="text-decoration-none">
-                                <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/' . $suggested->photo) }}"
-                                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-                                         alt="{{ $suggested->item_name }}">
-                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
-                                        <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="mt-2">
-                            <span class="product-name fs-4">{{ $suggested->item_name }}</span><br>
-                            <span class="product-category text-muted fs-6">({{ $suggested->main_category }})</span><br>
-                            <span class="product-price fs-4">{{ number_format($suggested->price, 2) }} €</span>
-                        </div>
-                    </div>
-                @endforeach
+            <!-- číselné stránkovanie bez šípok -->
+            <div class="pagination">
+                @for ($i = 1; $i <= $items->lastPage(); $i++)
+                    <a href="{{ $items->url($i) }}"
+                       class="btn btn-sm mx-1 {{ $items->currentPage() == $i ? 'btn-dark text-white' : 'btn-outline-secondary' }}">
+                        {{ $i }}
+                    </a>
+                @endfor
             </div>
         </div>
     </div>
 </div>
-
-
 <!-- Bottom bar -->
 <div class="container-fluid bg-light">
     <div class="container py-3 d-flex justify-content-between align-items-center">
@@ -338,34 +223,18 @@
                         <div class="modal-body">
                             <h1>About Us</h1>
                             <p>
-                                Welcome to <strong>FTW (Fair to Wear)</strong>, where fashion meets responsibility. We
-                                believe that what you wear should not only reflect your personal style but also your
-                                values. Our mission is to offer clothing that not only looks great but is made with
-                                respect for people and the planet.
+                                Welcome to <strong>FTW (Fair to Wear)</strong>, where fashion meets responsibility. We believe that what you wear should not only reflect your personal style but also your values. Our mission is to offer clothing that not only looks great but is made with respect for people and the planet.
                             </p>
                             <p>
-                                At FTW, we carefully select each garment with the environment in mind. Our clothing is
-                                made from sustainable, eco-friendly materials, such as organic cotton, recycled fabrics,
-                                and low-impact dyes. We work closely with manufacturers who share our commitment to
-                                ethical labor practices, ensuring that every piece of clothing is made with care and
-                                fairness at every stage of production.
+                                At FTW, we carefully select each garment with the environment in mind. Our clothing is made from sustainable, eco-friendly materials, such as organic cotton, recycled fabrics, and low-impact dyes. We work closely with manufacturers who share our commitment to ethical labor practices, ensuring that every piece of clothing is made with care and fairness at every stage of production.
                             </p>
-                            We understand that fashion is about more than just trends—it’s about lasting style. That’s
-                            why our collections are designed with versatility, durability, and timelessness in mind.
-                            Whether you're dressing for a casual day out or a special occasion, FTW’s pieces are crafted
-                            to fit seamlessly into your wardrobe, helping you look and feel your best, day after day.
+                            We understand that fashion is about more than just trends—it’s about lasting style. That’s why our collections are designed with versatility, durability, and timelessness in mind. Whether you're dressing for a casual day out or a special occasion, FTW’s pieces are crafted to fit seamlessly into your wardrobe, helping you look and feel your best, day after day.
                             </p>
                             <p>
-                                As a company, we believe in transparency and integrity. We are committed to keeping our
-                                customers informed about the journey behind each product, from the materials we use to
-                                the people who create them. Our goal is to empower you to make informed choices about
-                                your wardrobe, so you can feel proud of every purchase you make.
+                                As a company, we believe in transparency and integrity. We are committed to keeping our customers informed about the journey behind each product, from the materials we use to the people who create them. Our goal is to empower you to make informed choices about your wardrobe, so you can feel proud of every purchase you make.
                             </p>
                             <p>
-                                Join us in shaping a more sustainable future for fashion. At FTW, we’re not just about
-                                looking good—we’re about feeling good too. Thank you for choosing us and supporting a
-                                brand that values fairness, quality, and the planet. Together, we can make fashion
-                                better for everyone.
+                                Join us in shaping a more sustainable future for fashion. At FTW, we’re not just about looking good—we’re about feeling good too. Thank you for choosing us and supporting a brand that values fairness, quality, and the planet. Together, we can make fashion better for everyone.
                             </p>
                         </div>
 
@@ -651,7 +520,6 @@
         <span style="color: grey; font-size: 0.75rem;">FTW</span>
     </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

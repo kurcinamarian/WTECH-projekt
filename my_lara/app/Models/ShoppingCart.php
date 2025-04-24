@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ShoppingCart extends Model
 {
-    protected $table = 'Shopping_cart';
+    public $timestamps = false;
+
+    protected $table = 'shopping_cart';
+    protected $primaryKey = 'shopping_cart_id';
 
     protected $fillable = [
-        'user_id', 'item_id', 'size'
+        'user_id', 'item_id', 'size' , 'session_id' , 'quantity'
     ];
 
     public function user()
