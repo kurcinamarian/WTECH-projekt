@@ -181,9 +181,9 @@
                         </button>
                     </div>
                 </form>
-                <a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box" style="hidden">
+                <!--<a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box" style="hidden">
                     <i class="fas fa-heart icon"></i>
-                </a>
+                </a>-->
                 <a href="{{ url('shopping_cart') }}" class="ms-3 text-dark placeholder-box">
                     <i class="fas fa-shopping-cart icon"></i>
                 </a>
@@ -191,6 +191,7 @@
         </div>
     </div>
 </nav>
+
 
 <div class="container-fluid bg-white justify-content-between">
     <div class="container">
@@ -202,248 +203,185 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="d-flex justify-content-between mb-4">
-                <button class="btn btn-secondary" style="width: 150px;" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#filterPanel" aria-controls="filterPanel">
-                    Open Filters
-                </button>
-                <div class="offcanvas offcanvas-start" tabindex="-1" id="filterPanel" aria-labelledby="filterPanelLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="filterPanelLabel">Filters</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
+            <form method="GET" action="{{ route('women') }}">
+                <div class="d-flex justify-content-between mb-4">
+                    <button class="btn btn-secondary" style="width: 150px;" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#filterPanel" aria-controls="filterPanel">
+                        Open Filters
+                    </button>
 
-                        <div class="container">
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="filterPanel" aria-labelledby="filterPanelLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="filterPanelLabel">Filters</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+
                             <div class="mb-3">
                                 <label class="form-label">Select Category</label>
-                                <select class="form-select">
+                                <select class="form-select" name="category_id">
+                                    <option value="">All Categories</option>
                                     <optgroup label="Shoes">
                                         <option value="1">Sneakers</option>
-                                        <option value="1.1">Boots</option>
-                                        <option value="1.2">Sports shoes</option>
-                                        <option value="1.3">Open shoes</option>
-                                        <option value="1.4">Exclusive</option>
+                                        <option value="2">Boots</option>
+                                        <option value="3">Sports shoes</option>
+                                        <option value="4">Open shoes</option>
+                                        <option value="5">Exclusive</option>
                                     </optgroup>
                                     <optgroup label="Shirts">
-                                        <option value="2">Long sleeved</option>
-                                        <option value="2.1">Short sleeved</option>
-                                        <option value="2.2">Tank tops</option>
-                                        <option value="2.3">Polo shirts</option>
-                                        <option value="2.4">Sport</option>
+                                        <option value="6">Long sleeved</option>
+                                        <option value="7">Short sleeved</option>
+                                        <option value="8">Tank tops</option>
+                                        <option value="9">Polo shirts</option>
+                                        <option value="10">Sport</option>
                                     </optgroup>
-                                    <optgroup label="Panths">
-                                        <option value="3">Jeans</option>
-                                        <option value="3.1">Shorts</option>
-                                        <option value="3.2">Cargo panths</option>
-                                        <option value="3.3">Tracksuit panths</option>
-                                        <option value="3.3">Fabric panths</option>
+                                    <optgroup label="Pants">
+                                        <option value="11">Jeans</option>
+                                        <option value="12">Shorts</option>
+                                        <option value="13">Cargo pants</option>
+                                        <option value="14">Tracksuit pants</option>
+                                        <option value="15">Fabric pants</option>
                                     </optgroup>
                                 </select>
                             </div>
-                        </div>
 
-                        <div class="container">
-                            <div class="range_container">
-                                <div class="sliders_control mb-4">
-                                    <input id="fromSlider" type="range" value="10" min="0" max="100" class="form-range">
-                                    <input id="toSlider" type="range" value="40" min="0" max="100" class="form-range">
+                            <div class="row g-2 mt-3">
+                                <div class="col-6">
+                                    <label for="price_min" class="form-label">Min Price</label>
+                                    <input type="number" name="price_min" id="price_min" class="form-control" placeholder="0">
                                 </div>
-
-                                <div class="row g-2 mt-3">
-                                    <div class="col-6">
-                                        <label for="fromInput" class="form-label mt-3">Min</label>
-                                        <input type="number" id="fromInput" value="10" min="0" max="100" class="form-control">
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="toInput" class="form-label mt-3">Max</label>
-                                        <input type="number" id="toInput" value="40" min="0" max="100" class="form-control">
-                                    </div>
+                                <div class="col-6">
+                                    <label for="price_max" class="form-label">Max Price</label>
+                                    <input type="number" name="price_max" id="price_max" class="form-control" placeholder="1000">
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Style</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="casual">
-                                <label class="form-check-label" for="casual">Casual</label>
+                            <div class="mb-3 mt-3">
+                                <label class="form-label">Style</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="style_fabric_flags[]" value="1" id="casual">
+                                    <label class="form-check-label" for="casual">Casual</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="style_fabric_flags[]" value="2" id="formal">
+                                    <label class="form-check-label" for="formal">Formal</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="style_fabric_flags[]" value="4" id="cozy">
+                                    <label class="form-check-label" for="cozy">Cozy</label>
+                                </div>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="formal">
-                                <label class="form-check-label" for="formal">Formal</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="cozy">
-                                <label class="form-check-label" for="cozy">Cozy</label>
-                            </div>
-                        </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Color</label>
-                            <select class="form-select">
-                                <option>Red</option>
-                                <option>Blue</option>
-                                <option>Green</option>
-                                <option>Black</option>
-                                <option>White</option>
-                                <option>Other</option>
-                            </select>
-                        </div>
+                            <div class="mb-3">
+                                <label class="form-label">Fabric Type</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="style_fabric_flags[]" value="8" id="cotton">
+                                    <label class="form-check-label" for="cotton">Cotton</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="style_fabric_flags[]" value="16" id="wool">
+                                    <label class="form-check-label" for="wool">Wool</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="style_fabric_flags[]" value="32" id="polyester">
+                                    <label class="form-check-label" for="polyester">Polyester</label>
+                                </div>
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Fabric Type</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="cotton">
-                                <label class="form-check-label" for="cotton">Cotton</label>
+                            <div class="mb-3">
+                                <label class="form-label">Color</label>
+                                <select class="form-select" name="colour">
+                                    <option value="">All</option>
+                                    <option value="Red">Red</option>
+                                    <option value="Blue">Blue</option>
+                                    <option value="Green">Green</option>
+                                    <option value="Black">Black</option>
+                                    <option value="White">White</option>
+                                    <option value="Other">Other</option>
+                                </select>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="wool">
-                                <label class="form-check-label" for="wool">Wool</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="polyester">
-                                <label class="form-check-label" for="polyester">Polyester</label>
-                            </div>
-                        </div>
 
+                            <button type="submit" class="btn btn-primary w-100 mt-3">Apply Filters</button>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="orderByDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Order By
+                        </button>
+                        @php
+                            $query = request()->all();
+                        @endphp
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="orderByDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('women', array_merge($query, ['sort' => 'price_asc'])) }}">
+                                    Price - Low to High
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('women', array_merge($query, ['sort' => 'price_desc'])) }}">
+                                    Price - High to Low
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('women', array_merge($query, ['sort' => 'popular'])) }}">
+                                    Most Popular
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('women', array_merge($query, ['sort' => 'newest'])) }}">
+                                    Newest
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="dropdown">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="orderByDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        Order By
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="orderByDropdown">
-                        <li><a class="dropdown-item" href="#">Price - Low to High</a></li>
-                        <li><a class="dropdown-item" href="#">Price - High to Low</a></li>
-                        <li><a class="dropdown-item" href="#">Most Popular</a></li>
-                        <li><a class="dropdown-item" href="#">Newest</a></li>
-                    </ul>
-                </div>
-            </div>
+            </form>
 
             <!-- product grid -->
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="rectangle-wrapper">
-                            <a href="{{ url('product_info') }}" class="text-decoration-none">
-                                <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/S-I1.jpg') }}"
-                                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-                                         alt="Sample Image">
-                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
-                                        <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
+                    @foreach ($items as $item)
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="rectangle-wrapper">
+                                <a href="{{ route('product_info', ['id' => $item->item_id]) }}" class="text-decoration-none">                                  <div class="rectangle-square bg-light position-relative">
+                                        @php
+                                            $imageName = $item->image?->image_name ?? 'default';
+                                        @endphp
 
-                        <div class="mt-2">
-                            <span class="product-name fs-4">Urban Ease Sweatshirt</span><br>
-                            <span class="product-category text-muted fs-6">(Women's T-shirt)</span><br>
-                            <span class="product-price fs-4">19.99 €</span>
+                                        <img src="{{ asset('dataset_pics/' . $imageName) }}"
+                                             class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
+                                             alt="Product Image">
+
+                                        <!--<button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                                        <i class="fa-regular fa-heart text-danger fs-3"></i>
+                                    </button>-->
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="mt-2">
+                                <span class="product-name fs-4">{{ $item->item_name }}</span><br>
+                                <span class="product-category text-muted fs-6">({{ $item->main_category }})</span><br>
+                                <span class="product-price fs-4">{{ number_format($item->price, 2) }} €</span>
+                            </div>
                         </div>
+                    @endforeach
+                </div>
+                <!-- pagination info and links -->
+                <div class="d-flex flex-column align-items-center mt-4">
+                    <!-- info o počte -->
+                    <div class="mb-2 text-muted">
+                        Displayed {{ $items->firstItem() }} – {{ $items->lastItem() }} from {{ $items->total() }} products
                     </div>
 
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="rectangle-wrapper">
-                            <a href="{{ url('product_info') }}" class="text-decoration-none">
-                                <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/S-I2.jpg') }}"
-                                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-                                         alt="Sample Image">
-                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
-                                        <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                    </button>
-                                </div>
+                    <!-- číselné stránkovanie bez šípok -->
+                    <div class="pagination">
+                        @for ($i = 1; $i <= $items->lastPage(); $i++)
+                            <a href="{{ $items->url($i) }}"
+                               class="btn btn-sm mx-1 {{ $items->currentPage() == $i ? 'btn-dark text-white' : 'btn-outline-secondary' }}">
+                                {{ $i }}
                             </a>
-                        </div>
-                        <div class="mt-2">
-                            <span class="product-name fs-4">Artisan Patchwork Cap</span><br>
-                            <span class="product-category text-muted fs-6">(Men's Hat)</span><br>
-                            <span class="product-price fs-4">15.99 €</span>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="rectangle-wrapper">
-                            <a href="{{ url('product_info') }}" class="text-decoration-none">
-                                <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/S-I3.jpg') }}"
-                                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-                                         alt="Sample Image">
-                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
-                                        <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="mt-2">
-                            <span class="product-name fs-4">Flowing Linen Shirt</span><br>
-                            <span class="product-category text-muted fs-6">Sportswear</span><br>
-                            <span class="product-price fs-4">23.99 €</span>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="rectangle-wrapper">
-                            <a href="{{ url('product_info') }}" class="text-decoration-none">
-                                <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/S-I4.jpg') }}"
-                                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-                                         alt="Sample Image">
-                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
-                                        <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="mt-2">
-                            <span class="product-name fs-4">Arctic Denim Puffer</span><br>
-                            <span class="product-category text-muted fs-6">(Women's Outerwear)</span><br>
-                            <span class="product-price fs-4">49.99 €</span>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="rectangle-wrapper">
-                            <a href="{{ url('product_info') }}" class="text-decoration-none">
-                                <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/P-I6.jpg') }}"
-                                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-                                         alt="Sample Image">
-                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
-                                        <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="mt-2">
-                            <span class="product-name fs-4">Summertime high heels</span><br>
-                            <span class="product-category text-muted fs-6">(Women's High heels)</span><br>
-                            <span class="product-price fs-4">29.99 €</span>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="rectangle-wrapper">
-                            <a href="{{ url('product_info') }}" class="text-decoration-none">
-                                <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/P-I1.jpg') }}"
-                                         class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-                                         alt="Sample Image">
-                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
-                                        <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                    </button>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="mt-2">
-                            <span class="product-name fs-4">Long cross-over trench coat</span><br>
-                            <span class="product-category text-muted fs-6">(Women's Coat)</span><br>
-                            <span class="product-price fs-4">$99.99</span>
-                        </div>
+                        @endfor
                     </div>
                 </div>
             </div>

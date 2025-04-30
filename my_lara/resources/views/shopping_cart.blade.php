@@ -157,9 +157,9 @@
                         </button>
                     </div>
                 </form>
-                <a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box" style="hidden">
+                <!--<a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box" style="hidden">
                     <i class="fas fa-heart icon"></i>
-                </a>
+                </a>-->
                 <a href="{{ url('shopping_cart') }}" class="ms-3 text-dark placeholder-box">
                     <i class="fas fa-shopping-cart icon"></i>
                 </a>
@@ -210,11 +210,6 @@
                             @enderror
                             @foreach ($cartItems as $cartItem)
                                 <div class="row align-items-center mb-4 text-center text-md-start">
-                                    <div class="col-12 col-md-3 mb-2 mb-md-0">
-                                        <img src="{{ asset('pictures/' . $cartItem->item->image) }}"
-                                             alt="{{ $cartItem->item->item_name }}" class="img-fluid rounded"
-                                             style="max-width: 100%; height: auto; object-fit: cover;">
-                                    </div>
                                     <div class="col-12 col-md-4">
                                         <h6 class="mb-1">{{ $cartItem->item->item_name }} <small>({{ $cartItem->item->category->main_category }})</small></h6>
                                         <p class="mb-0">{{ $cartItem->size }}</p>
@@ -395,7 +390,10 @@
                             <a href="{{ route('product_info', ['id' => $suggested->item_id]) }}"
                                class="text-decoration-none">
                                 <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/' . $suggested->photo) }}"
+                                    @php
+                                        $imageName = $suggested->image?->image_name ?? 'default';
+                                    @endphp
+                                    <img src="{{ asset('dataset_pics/' . $imageName) }}"
                                          class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
                                          alt="{{ $suggested->item_name }}">
                                     <!--<button class="position-absolute bottom-0 end-0 m-3 btn btn-light">

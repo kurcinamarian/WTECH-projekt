@@ -61,6 +61,8 @@ Route::middleware('auth')->group(function () {
 use App\Http\Controllers\ItemController;
 
 Route::get('/kids', [ItemController::class, 'kids'])->name('kids');
+Route::get('/men', [ItemController::class, 'mene'])->name('men');
+Route::get('/women', [ItemController::class, 'womene'])->name('women');
 
 Route::get('/product/{id}', [ItemController::class, 'show'])->name('product_info');
 

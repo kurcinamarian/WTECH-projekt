@@ -174,9 +174,9 @@
                         </button>
                     </div>
                 </form>
-                <a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box" style="hidden">
+                <!--<a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box" style="hidden">
                     <i class="fas fa-heart icon"></i>
-                </a>
+                </a>-->
                 <a href="{{ url('shopping_cart') }}" class="ms-3 text-dark placeholder-box">
                     <i class="fas fa-shopping-cart icon"></i>
                 </a>
@@ -187,6 +187,13 @@
 
 <!-- Main_Product -->
 <div class="container my-5">
+    @foreach (['success', 'error', 'warning', 'info'] as $msg)
+        @if(session()->has($msg))
+            <div class="alert alert-{{ $msg == 'error'?'danger':$msg}}">
+                {{ session()->get($msg) }}
+            </div>
+        @endif
+    @endforeach
     <form method="POST" action="{{ route('shopping_cart.add') }}">
         @csrf
         <input type="hidden" name="item_id" value="{{ $item->item_id }}">
@@ -235,7 +242,7 @@
                         <i class="fa-regular fa-heart text-danger fs-3"></i>
                     </button>-->
                 </div>
-                <p>({{ $item->main_category }})</p>
+                <p>({{$item->category->main_category }})</p>
                 <div class="mb-4">
                     <p>{{ $item->description }}</p>
 
@@ -283,7 +290,7 @@
                 <div class="mb-4">
                     <h4 class="mb-3">Size selection</h4>
                     <div class="d-flex flex-wrap">
-                        @if($item->category && $item->category->main_category === 'Shoes')
+                        @if($item->category &&  $item->category->main_category == 'Shoes')
                             @for($size = 35; $size <= 45; $size++)
                                 <label class="size-btn m-1">
                                     <input type="radio" name="size" value="{{ $size }}" class="d-none"/>
@@ -337,12 +344,15 @@
                             <a href="{{ route('product_info', ['id' => $suggested->item_id]) }}"
                                class="text-decoration-none">
                                 <div class="rectangle-square bg-light position-relative">
-                                    <img src="{{ asset('pictures/' . $suggested->photo) }}"
+                                    @php
+                                        $imagePath = asset('dataset_pics/' . ($suggested->image?->image_name ?? 'default.jpg'));
+                                    @endphp
+                                    <img src="{{ $imagePath }}"
                                          class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
                                          alt="{{ $suggested->item_name }}">
-                                    <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
+                                    <!--<button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
                                         <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                    </button>
+                                    </button>-->
                                 </div>
                             </a>
                         </div>
@@ -357,6 +367,7 @@
         </div>
     </div>
 </div>
+
 
 
 <!-- Bottom bar -->

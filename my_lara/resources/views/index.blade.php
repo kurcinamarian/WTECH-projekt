@@ -149,9 +149,9 @@
                         </button>
                     </div>
                 </form>
-                <a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box" style="hidden">
+                <!--<a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box" style="hidden">
                     <i class="fas fa-heart icon"></i>
-                </a>
+                </a>-->
                 <a href="{{ url('shopping_cart') }}" class="ms-3 text-dark placeholder-box">
                     <i class="fas fa-shopping-cart icon"></i>
                 </a>
@@ -168,14 +168,17 @@
             @foreach ($items as $item)
                 <div class="col-sm-12 col-md-6 col-lg-4">
                     <div class="rectangle-wrapper">
-                        <a href="{{ url('product_info') }}" class="text-decoration-none">
+                        <a href="{{ route('product_info', ['id' => $item->item_id]) }}" class="text-decoration-none">
                             <div class="rectangle-square bg-light position-relative">
-                                <img src="{{ asset('pictures/default.jpg') }}"
+                                @php
+                                    $imagePath = asset('dataset_pics/' . ($item->image?->image_name ?? 'default.jpg'));
+                                @endphp
+                                <img src="{{ $imagePath }}"
                                      class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-                                     alt="Sample Image">
-                                <button class="position-absolute bottom-0 end-0 m-3 btn btn-light">
-                                    <i class="fa-regular fa-heart text-danger fs-3"></i>
-                                </button>
+                                     alt="{{ $item->item_name }}">
+                                <!--<a href="{{ url('liked') }}" class="ms-3 text-dark placeholder-box" style="hidden">
+                    <i class="fas fa-heart icon"></i>
+                </a>-->
                             </div>
                         </a>
                     </div>
