@@ -89,8 +89,8 @@ Route::post('/shopping_cart/save', [ShoppingCartController::class, 'save'])->nam
 Route::get('/', [ItemController::class, 'main'])->name('main');
 
 Route::get('/admin', [ItemController::class, 'show_all'])->name('admin.show_all');
-Route::delete('/admin/items/{item_id}', [ItemController::class, 'destroy'])->name('admin.items.destroy');
-Route::put('/admin/items/{item_id}', [ItemController::class, 'update'])->name('admin.items.update');
+Route::delete('/admin/items/{item_id}/delete', [ItemController::class, 'destroy'])->name('admin.items.destroy');
+Route::put('/admin/items/{item_id}/update', [ItemController::class, 'update'])->name('admin.items.update');
 // Upload multiple images
 Route::post('/admin/items/{item}/images', [ItemController::class, 'updateImages'])->name('admin.items.updateImages');
 

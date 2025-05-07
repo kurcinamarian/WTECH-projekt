@@ -240,6 +240,38 @@ class ItemController extends Controller
     // Update an item (edit)
     public function update(Request $request, $id)
     {
-        // TODO: Validate and update item with given ID
+        $item = Item::findOrFail($id);
+
+        // Validate request
+        /*$validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'big_category' => 'required|string',
+            'category_id' => 'required|integer|exists:categories,id',
+            'price' => 'required|numeric|min:0',
+            'description' => 'nullable|string',
+            'parameters' => 'nullable|string',
+            'color' => 'required|string',
+            'style_fabric' => 'array', // optional, defaults to []
+        ]);*/
+
+        // Assign values
+        $item->item_name = $request->item_name;
+        $item->main_category = $request->big_category;
+        $item->category_id = $request->category_id;
+        $item->price = $request->price;
+        $item->description = $request->description;
+        $item->parameters = $request->parameters;
+        $item->colour = $request->color;
+
+        // Calculate combined style_fabric (bitwise OR)
+        $styleFabricValues = $request->input('style_fabric', []);
+        $combinedStyleFabric = array_reduce($styleFabricValues, function ($carry, $value) {
+            return $carry | (int)$value;
+        }, 0);
+        $item->style_fabric = $combinedStyleFabric;
+
+        $item->save();
+
+        return redirect()->back()->with('success', 'Item updated successfully.');
     }
 }
