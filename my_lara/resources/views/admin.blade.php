@@ -155,179 +155,213 @@
         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addItemModal">Add Item</button>
         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCategoryModal">Add Category</button>
     </div>
+    <div class="container">
+        @foreach($items as $item)
+            <div class="list-group mb-4">
+                <div class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-start p-3 border rounded mb-3">
+                        <!-- LEFT: Item Info -->
+                        <div>
+                            <h5>{{ $item->item_name }}</h5>
+                            <p class="mb-1">#{{ $item->item_id }}</p>
+                            <p class="mb-1">Price: {{ number_format($item->price, 2) }} €</p>
+                            <p class="mb-1">Category:
+                                {{ $item->category->main_category ?? 'Unknown' }} >
+                                {{ $item->category->secondary_category ?? 'Unknown' }}
+                            </p>
+                        </div>
 
-    <div class="list-group">
-        <div class="list-group-item">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <h5 class="mb-1">Long cross-over trench coat</h5>
-                        <h6 class="mb-1">#1</h6>
-                        <p class="mb-1">Price: 99.99 €</p>
-                        <p>Category:</p>
+
+                        <!-- RIGHT: Images + Delete Button -->
+                        <div class="d-flex flex-column align-items-end gap-2">
+                            <div class="d-flex gap-2 mt-2">
+                                <button class="btn btn-sm btn-secondary" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseItem{{ $item->item_id }}">Edit Item
+                                </button>
+                                <form action="{{ route('admin.items.destroy', $item->item_id) }}" method="POST">
+                                    @csrf @method('DELETE')
+                                    <button class="btn btn-danger btn-sm mt-2" title="Delete Item">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="d-flex gap-2">
+                                @php
+                                    $imageName = $image?->image_name ?? 'default.jpg';
+                                    $imageName2 = $image?->image_name_2 ?? 'default.jpg';
+                                @endphp
+                                <img src="{{ asset('dataset_pics/' . $imageName) }}" class="rounded border"
+                                     style="width: 100px; height: 100px; object-fit: cover;">
+                                <img src="{{ asset('dataset_pics/' . $imageName2) }}" class="rounded border"
+                                     style="width: 100px; height: 100px; object-fit: cover;">
+                            </div>
+
+
+                        </div>
                     </div>
-                    <div class="ms-3 d-flex flex-wrap gap-2">
-                        <img src="{{ asset('pictures/P-I1.jpg') }}" class="rounded border img-fluid"
-                             style="max-width: 100px; height: auto; object-fit: cover;">
-                        <img src="{{ asset('pictures/P-I2.jpg') }}" class="rounded border img-fluid"
-                             style="max-width: 100px; height: auto; object-fit: cover;">
+                    <div class="collapse mt-3" id="collapseItem{{ $item->item_id }}">
+                        <form method="POST" action="{{ route('admin.items.update', $item->item_id) }}"
+                              enctype="multipart/form-data" class="border p-3">
+                            @csrf @method('PUT')
+                            <div class="row mb-3">
+                                <div class="col-md-3">
+                                    <label class="form-label">Item Name</label>
+                                    <input type="text" name="name" class="form-control" value="{{ $item->name }}">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Main Category</label>
+                                    <select name="big_category" class="form-select">
+                                        <option value="MEN" {{ $item->big_category === 'MEN' ? 'selected' : '' }}>MEN
+                                        </option>
+                                        <option value="WOMEN" {{ $item->big_category === 'WOMEN' ? 'selected' : '' }}>
+                                            WOMEN
+                                        </option>
+                                        <option value="KIDS" {{ $item->big_category === 'KIDS' ? 'selected' : '' }}>
+                                            KIDS
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Subcategory</label>
+                                    <select name="category_id" class="form-select">
+                                        @foreach($categories as $main => $group)
+                                            <optgroup label="{{ $main }}">
+                                                @foreach($group as $category)
+                                                    <option
+                                                        value="{{ $category->id }}" {{ $item->category_id == $category->id ? 'selected' : '' }}>
+                                                        {{ $category->secondary_category }}
+                                                    </option>
+                                                @endforeach
+                                            </optgroup>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Price (€)</label>
+                                    <input type="number" step="0.01" name="price" class="form-control"
+                                           value="{{ $item->price }}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Description</label>
+                                    <textarea name="description" class="form-control"
+                                              rows="3">{{ $item->description }}</textarea>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Parameters</label>
+                                    <textarea name="parameters" class="form-control"
+                                              rows="3">{{ $item->parameters }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">Style</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="style[]"
+                                               value="1" {{ $item->style_flags & 0b001 ? 'checked' : '' }}> Casual
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="style[]"
+                                               value="2" {{ $item->style_flags & 0b010 ? 'checked' : '' }}> Formal
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="style[]"
+                                               value="4" {{ $item->style_flags & 0b100 ? 'checked' : '' }}> Cozy
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Fabric</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="fabric[]"
+                                               value="1" {{ $item->fabric_flags & 0b001 ? 'checked' : '' }}> Cotton
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="fabric[]"
+                                               value="2" {{ $item->fabric_flags & 0b010 ? 'checked' : '' }}> Wool
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="fabric[]"
+                                               value="4" {{ $item->fabric_flags & 0b100 ? 'checked' : '' }}> Polyester
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Color</label>
+                                    <select name="color" class="form-select">
+                                        <option value="Red" {{ $item->color == 'Red' ? 'selected' : '' }}>Red</option>
+                                        <option value="Blue" {{ $item->color == 'Blue' ? 'selected' : '' }}>Blue
+                                        </option>
+                                        <option value="Green" {{ $item->color == 'Green' ? 'selected' : '' }}>Green
+                                        </option>
+                                        <option value="Black" {{ $item->color == 'Black' ? 'selected' : '' }}>Black
+                                        </option>
+                                        <option value="White" {{ $item->color == 'White' ? 'selected' : '' }}>White
+                                        </option>
+                                        <option value="Other" {{ $item->color == 'Other' ? 'selected' : '' }}>Other
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="container">
+                                <h2>Edit Images for Item: {{ $item->item_name }}</h2>
+
+                                {{-- Upload Images Form --}}
+                                <form action="{{ route('admin.items.updateImages', $item->item_id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Upload Images</label>
+                                        <input type="file" name="images[]" class="form-control mb-2" multiple>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Upload</button>
+                                </form>
+
+                                <hr>
+
+                                {{-- Existing Images with Delete Icons --}}
+                                <h4>Existing Images</h4>
+                                <div class="d-flex flex-wrap gap-3">
+                                    @foreach ($item->image as $image)
+                                        <div class="position-relative">
+                                            @php
+                                                $imageName = $image?->image_name ?? 'default.jpg';
+                                            @endphp
+                                            <img src="{{ asset('dataset_pics/' . $imageName) }}"
+                                                 class="img-thumbnail"
+                                                 style="width: 100px; height: 100px; object-fit: cover;">
+
+                                            {{-- Delete Icon --}}
+                                            <form action="{{ route('admin.images.destroy', $image->image_id) }}" method="POST"
+                                                  class="position-absolute top-0 end-0 m-1">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger" title="Delete Image"
+                                                        onclick="return confirm('Delete this image?')">
+                                                    <i class="bi bi-x-circle"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-success">Save Changes</button>
+                                <button type="button" class="btn btn-secondary" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseItem{{ $item->id }}">Cancel
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <button class="btn btn-danger btn-sm" title="Delete Item">
-                    <i class="bi bi-trash"></i>
-                </button>
             </div>
-            <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#collapseItem1"
-                    aria-expanded="false"
-                    aria-controls="collapseItem1">Edit Item
-            </button>
-            <div class="collapse mt-3" id="collapseItem1">
-                <div class="border p-3">
-                    <form class="mt-3">
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <label for="itemName" class="form-label">Item Name</label>
-                                <input type="text" class="form-control" id="itemName"
-                                       value="Long cross-over trench coat">
-                            </div>
-                            <div class="col-md-3">
-                                <label for="categoryId" class="form-label">Category</label>
-                                <select class="form-select" id="categoryId">
-                                    <optgroup label="Shoes">
-                                        <option value="1">Sneakers</option>
-                                        <option value="1.1">Boots</option>
-                                        <option value="1.2">Sports shoes</option>
-                                        <option value="1.3">Open shoes</option>
-                                        <option value="1.4">Exclusive</option>
-                                    </optgroup>
-                                    <optgroup label="Shirts">
-                                        <option value="2">Long sleeved</option>
-                                        <option value="2.1">Short sleeved</option>
-                                        <option value="2.2">Tank tops</option>
-                                        <option value="2.3">Polo shirts</option>
-                                        <option value="2.4">Sport</option>
-                                    </optgroup>
-                                    <optgroup label="Panths">
-                                        <option value="3">Jeans</option>
-                                        <option value="3.1">Shorts</option>
-                                        <option value="3.2">Cargo panths</option>
-                                        <option value="3.3">Tracksuit panths</option>
-                                        <option value="3.3">Fabric panths</option>
-                                    </optgroup>
-                                    <option selected value="4">Other</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="categoryId" class="form-label">Category</label>
-                                <select class="form-select" id="bigcategoryId">
-                                    <option value="1">MEN</option>
-                                    <option selected value="1">WOMEN</option>
-                                    <option value="1">KIDS</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="itemPrice" class="form-label">Price</label>
-                                <input type="number" class="form-control" id="itemPrice" value="99.99">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="itemDescription" class="form-label">Description</label>
-                                <textarea class="form-control" id="itemDescription"
-                                          rows="3">Long, fashionable cross-over trench coat in a light beige color. It features a classic trench coat design elegant elements.</textarea>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="itemParameters" class="form-label">Parameters</label>
-                                <textarea class="form-control" id="itemParameters"
-                                          rows="3">Material: 65% Cotton, 35% Polyester
-Color: Light Beige (Pantone 7502 C)
-Length: 60 inches
-Closure: Double-breasted, 4 buttons, self-fabric belt with metal buckle
-Sleeve Length: 24 inches
-Brand: FTW
-Season: Spring/Fall</textarea>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-4">
-                                <label class="form-label">Style</label>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="casual1">
-                                    <label class="form-check-label" for="casual1">Casual</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="formal1" checked>
-                                    <label class="form-check-label" for="formal1">Formal</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="cozy1">
-                                    <label class="form-check-label" for="cozy1">Cozy</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label">Fabric Type</label>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="cotton1" checked>
-                                    <label class="form-check-label" for="cotton1">Cotton</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="wool1">
-                                    <label class="form-check-label" for="wool1">Wool</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="polyester1" checked>
-                                    <label class="form-check-label" for="polyester1">Polyester</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label">Color</label>
-                                <select class="form-select">
-                                    <option>Red</option>
-                                    <option>Blue</option>
-                                    <option>Green</option>
-                                    <option>Black</option>
-                                    <option>White</option>
-                                    <option selected>Other</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Images</label>
-                            <div class="d-flex">
-                                <div class="position-relative me-2">
-                                    <img src="{{ asset('pictures/P-I1.jpg') }}" alt="Image" class="img-thumbnail"
-                                         style="width: 100px; height: 100px; object-fit: cover;">
-                                    <button class="btn btn-danger btn-sm position-absolute top-0 end-0"
-                                            title="Delete Image"
-                                            style="z-index: 1;">
-                                        <i class="bi bi-x-circle"></i>
-                                    </button>
-                                </div>
-                                <div class="position-relative me-2">
-                                    <img src="{{ asset('pictures/P-I2.jpg') }}" alt="Image" class="img-thumbnail"
-                                         style="width: 100px; height: 100px; object-fit: cover;">
-                                    <button class="btn btn-danger btn-sm position-absolute top-0 end-0"
-                                            title="Delete Image"
-                                            style="z-index: 1;">
-                                        <i class="bi bi-x-circle"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="mt-2">
-                                <input type="file" class="form-control mb-2" id="newImage" accept="image/*">
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <button type="submit" class="btn btn-secondary">Save Changes</button>
-                            <button type="button" class="btn btn-secondary" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseItem1">Cancel
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
+
 
     <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -611,7 +645,7 @@ Season: Spring/Fall</textarea>
                                 is made from sustainable, eco-friendly materials, such as organic cotton, recycled
                                 fabrics, and low-impact dyes. We work closely with manufacturers who share our
                                 commitment to ethical labor practices, ensuring that every piece of clothing is made
-                                with care and fairness at every stage of production.
+                                with care and fairness at every stage of itemion.
                             </p>
                             We understand that fashion is about more than just trends—it’s about lasting style.
                             That’s why our collections are designed with versatility, durability, and timelessness
@@ -621,7 +655,7 @@ Season: Spring/Fall</textarea>
                             </p>
                             <p>
                                 As a company, we believe in transparency and integrity. We are committed to keeping
-                                our customers informed about the journey behind each product, from the materials we
+                                our customers informed about the journey behind each item, from the materials we
                                 use to the people who create them. Our goal is to empower you to make informed
                                 choices about your wardrobe, so you can feel proud of every purchase you make.
                             </p>

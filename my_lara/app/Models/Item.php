@@ -54,4 +54,38 @@ class Item extends Model
 
         return $query;
     }
+
+    public static $fabricFlags = [
+        1 => 'Polyester',
+        2 => 'Silk',
+        4 => 'Cotton',
+    ];
+
+    public function getFabricTypeListAttribute()
+    {
+        $names = [];
+        foreach (self::$fabricFlags as $bit => $name) {
+            if ($this->fabric_type & $bit) {
+                $names[] = $name;
+            }
+        }
+        return $names;
+    }
+
+    public static $styleFlags = [
+        1 => 'Casual',
+        2 => 'Formal',
+        4 => 'Sport',
+    ];
+
+    public function getStyleListAttribute()
+    {
+        $names = [];
+        foreach (self::$styleFlags as $bit => $name) {
+            if ($this->style & $bit) {
+                $names[] = $name;
+            }
+        }
+        return $names;
+    }
 }
