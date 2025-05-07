@@ -232,9 +232,26 @@ class ItemController extends Controller
         ]);
     }
 
-    public function destroy($id)
+    public function destroy($item_id)
     {
-        // TODO: Delete item with given ID
+        $item = Item::findOrFail($item_id);
+
+        // Optionally: delete related images if needed
+        foreach ($item->images as $image) {
+            // Remove image file from storage (optional, only if you manage physical files)
+            $imagePath = public_path('dataset_pics/' . $image->image_name);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+
+            // Delete image record from DB
+            $image->delete();
+        }
+
+        // Delete the item
+        $item->delete();
+
+        return redirect()->back()->with('success', 'Item deleted successfully.');
     }
 
     // Update an item (edit)

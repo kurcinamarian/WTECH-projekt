@@ -8,8 +8,10 @@ class Image extends Model
 {
     protected $table = 'images';
 
+    protected $primaryKey = 'image_id';
+
     protected $fillable = [
-        'image_id','item_id', 'image_name'
+        'item_id', 'image_name'
     ];
 
     public function item()
