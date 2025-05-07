@@ -346,7 +346,7 @@
                             <div class="rectangle-wrapper">
                                 <a href="{{ route('product_info', ['id' => $item->item_id]) }}" class="text-decoration-none">                                  <div class="rectangle-square bg-light position-relative">
                                         @php
-                                            $imageName = $item->image?->image_name ?? 'default';
+                                            $imageName = $item->images->first()?->image_name ?? 'default'
                                         @endphp
 
                                         <img src="{{ asset('dataset_pics/' . $imageName) }}"

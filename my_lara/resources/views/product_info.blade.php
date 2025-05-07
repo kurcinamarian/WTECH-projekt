@@ -202,25 +202,20 @@
                 <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         @php
-                            $image1 = $item->image?->image_name ?? 'default.jpg';
-                            $image2 = $item->image?->image_name_2 ?? null;
-                            $images = [$image1];
-
-                            if ($image2) {
-                                $images[] = $image2;
-                            }
+                            $images = $item->images; // assumes you defined a relation in the Item model: images()
                         @endphp
 
-                        @foreach ($images as $index => $img)
+                        @foreach ($images as $index => $image)
                             <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
                                 <div class="rectangle-wrapper">
-                                    <img src="{{ asset('dataset_pics/' . $img) }}"
+                                    <img src="{{ asset('dataset_pics/' . $image->image_name) }}"
                                          alt="{{ $item->item_name }} {{ $index + 1 }}"
                                          class="img-fluid">
                                 </div>
                             </div>
                         @endforeach
                     </div>
+
                     <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
                             data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"
@@ -345,9 +340,9 @@
                                class="text-decoration-none">
                                 <div class="rectangle-square bg-light position-relative">
                                     @php
-                                        $imagePath = asset('dataset_pics/' . ($suggested->image?->image_name ?? 'default.jpg'));
+                                        $imageName = $suggested->images->first()?->image_name ?? 'default';
                                     @endphp
-                                    <img src="{{ $imagePath }}"
+                                    <img src="{{ asset('dataset_pics/' . $imageName) }}"
                                          class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
                                          alt="{{ $suggested->item_name }}">
                                     <!--<button class="position-absolute bottom-0 end-0 m-3 btn btn-light">

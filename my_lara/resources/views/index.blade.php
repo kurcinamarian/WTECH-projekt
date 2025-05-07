@@ -171,7 +171,8 @@
                         <a href="{{ route('product_info', ['id' => $item->item_id]) }}" class="text-decoration-none">
                             <div class="rectangle-square bg-light position-relative">
                                 @php
-                                    $imagePath = asset('dataset_pics/' . ($item->image?->image_name ?? 'default.jpg'));
+                                    $imagePath = asset('dataset_pics/' . ($item->images->first()?->image_name ?? 'default'));
+
                                 @endphp
                                 <img src="{{ $imagePath }}"
                                      class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"

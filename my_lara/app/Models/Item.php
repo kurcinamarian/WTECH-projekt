@@ -40,9 +40,9 @@ class Item extends Model
         return $this->belongsToMany(OrderInfo::class, 'Order', 'item_id', 'order_id')
             ->withPivot('size');
     }
-    public function image()
+    public function images()
     {
-        return $this->hasOne(Image::class, 'item_id', 'item_id');
+        return $this->hasMany(Image::class, 'item_id', 'item_id');
     }
 
     public function scopeSearch($query, $searchTerm)

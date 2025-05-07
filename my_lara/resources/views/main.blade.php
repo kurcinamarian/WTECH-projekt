@@ -324,7 +324,7 @@
                                class="text-decoration-none">
                                 <div class="rectangle-square bg-light position-relative">
                                     @php
-                                        $imageName = $suggested->image?->image_name ?? 'default';
+                                        $imageName = $suggested->images->first()?->image_name ?? 'default';
                                     @endphp
                                     <img src="{{ asset('dataset_pics/' . $imageName) }}"
                                          class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
@@ -361,7 +361,7 @@
                                class="text-decoration-none">
                                 <div class="rectangle-square bg-light position-relative">
                                     @php
-                                        $imageName = $suggested->image?->image_name ?? 'default';
+                                        $imageName = $suggested->images->first()?->image_name ?? 'default';
                                     @endphp
                                     <img src="{{ asset('dataset_pics/' . $imageName) }}"
                                          class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
