@@ -9,11 +9,12 @@ class Image extends Model
     protected $table = 'images';
 
     protected $fillable = [
-        'item_id', 'image'
+        'image_id','item_id', 'image_name'
     ];
 
     public function item()
     {
         return $this->belongsTo(Item::class, 'item_id', 'item_id');
     }
+
 }

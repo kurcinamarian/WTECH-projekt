@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Item;
 
@@ -218,5 +219,27 @@ class ItemController extends Controller
         $suggestedItems = Item::take(4)->get(); // Limit to 4 products
 
         return $suggestedItems; // Pass suggested items to the main page view
+    }
+
+    public function show_all()
+    {
+        $items = Item::all();
+        $categories = Category::all()->groupBy('main_category');
+
+        return view('admin', [
+            'items' => $items,
+            'categories' => $categories
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        // TODO: Delete item with given ID
+    }
+
+    // Update an item (edit)
+    public function update(Request $request, $id)
+    {
+        // TODO: Validate and update item with given ID
     }
 }
