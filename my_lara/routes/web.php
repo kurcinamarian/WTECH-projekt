@@ -77,6 +77,7 @@ Route::get('/account', [OrderController::class, 'showOrders'])->name('account');
 Route::get('/items', [ItemController::class, 'index'])->name('items.index');
 
 use App\Http\Controllers\ShoppingCartController;
+use App\Http\Controllers\ImageController;
 
 Route::get('/shopping_cart', [ShoppingCartController::class, 'index'])->name('shopping_cart');
 
@@ -91,11 +92,9 @@ Route::get('/', [ItemController::class, 'main'])->name('main');
 Route::get('/admin', [ItemController::class, 'show_all'])->name('admin.show_all');
 Route::delete('/admin/items/{item_id}/delete', [ItemController::class, 'destroy'])->name('admin.items.destroy');
 Route::put('/admin/items/{item_id}/update', [ItemController::class, 'update'])->name('admin.items.update');
-// Upload multiple images
-Route::post('/admin/items/{item}/images', [ItemController::class, 'updateImages'])->name('admin.items.updateImages');
-
-// Delete a single image
+Route::post('/admin/items/{item}/images', [ImageController::class, 'updateImages'])->name('admin.items.updateImages');
 Route::delete('/admin/images/{image_id}', [ImageController::class, 'destroy'])->name('admin.images.destroy');
+Route::post('/items', [ItemController::class, 'store'])->name('items.store');
 
 
 

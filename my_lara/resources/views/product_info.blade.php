@@ -202,7 +202,7 @@
                 <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         @php
-                            $images = $item->images; // assumes you defined a relation in the Item model: images()
+                            $images = $item->images;
                         @endphp
 
                         @foreach ($images as $index => $image)
@@ -210,7 +210,7 @@
                                 <div class="rectangle-wrapper">
                                     <img src="{{ asset('dataset_pics/' . $image->image_name) }}"
                                          alt="{{ $item->item_name }} {{ $index + 1 }}"
-                                         class="img-fluid">
+                                         class="img-fluid" style="aspect-ratio: 1 / 1">
                                 </div>
                             </div>
                         @endforeach
