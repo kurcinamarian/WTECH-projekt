@@ -149,18 +149,35 @@
         </div>
     </div>
 </nav>
+<div class="container mt-5">
+    <div class=" justify-content-between mb-4">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+    </div>
+</div>
 <!-- Admin menu -->
 <div class="container mt-5">
     <div class="d-flex justify-content-between mb-4">
         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addItemModal">Add Item</button>
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCategoryModal">Add Category</button>
     </div>
     <div class="container">
         @foreach($items as $item)
             <div class="list-group mb-4">
                 <div class="list-group-item">
                     <div class="d-flex justify-content-between align-items-start p-3 border rounded mb-3">
-                        <!-- LEFT: Item Info -->
                         <div>
                             <h5>{{ $item->item_name }}</h5>
                             <p class="mb-1">#{{ $item->item_id }}</p>
@@ -172,7 +189,6 @@
                         </div>
 
 
-                        <!-- RIGHT: Images + Delete Button -->
                         <div class="d-flex flex-column align-items-end gap-2">
                             <div class="d-flex gap-2 mt-2">
                                 <button class="btn btn-sm btn-secondary" data-bs-toggle="collapse"
@@ -190,21 +206,27 @@
                         </div>
                     </div>
                     <div class="collapse mt-3" id="collapseItem{{ $item->item_id }}">
-                        {{-- MAIN ITEM UPDATE FORM --}}
-                        <form method="POST" action="{{ route('admin.items.update', $item->item_id) }}" enctype="multipart/form-data" class="border p-3">
+                        <form method="POST" action="{{ route('admin.items.update', $item->item_id) }}"
+                              enctype="multipart/form-data" class="border p-3">
                             @csrf @method('PUT')
 
                             <div class="row mb-3">
                                 <div class="col-md-3">
                                     <label class="form-label">Item Name</label>
-                                    <input type="text" name="item_name" class="form-control" value="{{ $item->item_name }}">
+                                    <input type="text" name="item_name" class="form-control"
+                                           value="{{ $item->item_name }}">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Main Category</label>
                                     <select name="big_category" class="form-select">
-                                        <option value="MEN" {{ $item->main_category === 'MEN' ? 'selected' : '' }}>MEN</option>
-                                        <option value="WOMEN" {{ $item->main_category === 'WOMEN' ? 'selected' : '' }}>WOMEN</option>
-                                        <option value="KIDS" {{ $item->main_category === 'KIDS' ? 'selected' : '' }}>KIDS</option>
+                                        <option value="MEN" {{ $item->main_category === 'MEN' ? 'selected' : '' }}>MEN
+                                        </option>
+                                        <option value="WOMEN" {{ $item->main_category === 'WOMEN' ? 'selected' : '' }}>
+                                            WOMEN
+                                        </option>
+                                        <option value="KIDS" {{ $item->main_category === 'KIDS' ? 'selected' : '' }}>
+                                            KIDS
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
@@ -213,7 +235,8 @@
                                         @foreach($categories as $main => $group)
                                             <optgroup label="{{ $main }}">
                                                 @foreach($group as $category)
-                                                    <option value="{{ $category->category_id }}" {{ $item->category_id == $category->category_id ? 'selected' : '' }}>
+                                                    <option
+                                                        value="{{ $category->category_id }}" {{ $item->category_id == $category->category_id ? 'selected' : '' }}>
                                                         {{ $category->secondary_category }}
                                                     </option>
                                                 @endforeach
@@ -223,18 +246,21 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Price (€)</label>
-                                    <input type="number" step="0.01" name="price" class="form-control" value="{{ $item->price }}">
+                                    <input type="number" step="0.01" name="price" class="form-control"
+                                           value="{{ $item->price }}">
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label class="form-label">Description</label>
-                                    <textarea name="description" class="form-control" rows="3">{{ $item->description }}</textarea>
+                                    <textarea name="description" class="form-control"
+                                              rows="3">{{ $item->description }}</textarea>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Parameters</label>
-                                    <textarea name="parameters" class="form-control" rows="3">{{ $item->parameters }}</textarea>
+                                    <textarea name="parameters" class="form-control"
+                                              rows="3">{{ $item->parameters }}</textarea>
                                 </div>
                             </div>
 
@@ -242,49 +268,62 @@
                                 <div class="col-md-4">
                                     <label class="form-label">Style</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="style_fabric[]" value="1" {{ $item->style_fabric & 0b001 ? 'checked' : '' }}> Casual
+                                        <input class="form-check-input" type="checkbox" name="style_fabric[]"
+                                               value="1" {{ $item->style_fabric & 0b001 ? 'checked' : '' }}> Casual
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="style_fabric[]" value="2" {{ $item->style_fabric & 0b010 ? 'checked' : '' }}> Formal
+                                        <input class="form-check-input" type="checkbox" name="style_fabric[]"
+                                               value="2" {{ $item->style_fabric & 0b010 ? 'checked' : '' }}> Formal
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="style_fabric[]" value="4" {{ $item->style_fabric & 0b100 ? 'checked' : '' }}> Cozy
+                                        <input class="form-check-input" type="checkbox" name="style_fabric[]"
+                                               value="4" {{ $item->style_fabric & 0b100 ? 'checked' : '' }}> Cozy
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Fabric</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="style_fabric[]" value="8" {{ $item->style_fabric & 0b1000 ? 'checked' : '' }}> Cotton
+                                        <input class="form-check-input" type="checkbox" name="style_fabric[]"
+                                               value="8" {{ $item->style_fabric & 0b1000 ? 'checked' : '' }}> Cotton
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="style_fabric[]" value="16" {{ $item->style_fabric & 0b10000 ? 'checked' : '' }}> Wool
+                                        <input class="form-check-input" type="checkbox" name="style_fabric[]"
+                                               value="16" {{ $item->style_fabric & 0b10000 ? 'checked' : '' }}> Wool
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="style_fabric[]" value="32" {{ $item->style_fabric & 0b100000 ? 'checked' : '' }}> Polyester
+                                        <input class="form-check-input" type="checkbox" name="style_fabric[]"
+                                               value="32" {{ $item->style_fabric & 0b100000 ? 'checked' : '' }}>
+                                        Polyester
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Color</label>
                                     <select name="color" class="form-select">
                                         <option value="Red" {{ $item->colour == 'Red' ? 'selected' : '' }}>Red</option>
-                                        <option value="Blue" {{ $item->colour == 'Blue' ? 'selected' : '' }}>Blue</option>
-                                        <option value="Green" {{ $item->colour == 'Green' ? 'selected' : '' }}>Green</option>
-                                        <option value="Black" {{ $item->colour == 'Black' ? 'selected' : '' }}>Black</option>
-                                        <option value="White" {{ $item->colour == 'White' ? 'selected' : '' }}>White</option>
-                                        <option value="Other" {{ $item->colour == 'Other' ? 'selected' : '' }}>Other</option>
+                                        <option value="Blue" {{ $item->colour == 'Blue' ? 'selected' : '' }}>Blue
+                                        </option>
+                                        <option value="Green" {{ $item->colour == 'Green' ? 'selected' : '' }}>Green
+                                        </option>
+                                        <option value="Black" {{ $item->colour == 'Black' ? 'selected' : '' }}>Black
+                                        </option>
+                                        <option value="White" {{ $item->colour == 'White' ? 'selected' : '' }}>White
+                                        </option>
+                                        <option value="Other" {{ $item->colour == 'Other' ? 'selected' : '' }}>Other
+                                        </option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="d-flex justify-content-between">
                                 <button type="submit" class="btn btn-success">Save Changes</button>
-                                <button type="button" class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#collapseItem{{ $item->item_id }}">Cancel</button>
+                                <button type="button" class="btn btn-secondary" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseItem{{ $item->item_id }}">Cancel
+                                </button>
                             </div>
                         </form>
 
                         <hr>
 
-                        {{-- SEPARATE IMAGE SECTION (OUTSIDE MAIN FORM) --}}
                         <div class="container mt-3">
                             <h4>Images</h4>
                             <div class="d-flex flex-wrap gap-3">
@@ -293,13 +332,15 @@
                                         @php
                                             $imageName = $image?->image_name ?? 'default.jpg';
                                         @endphp
-                                        <img src="{{ asset('dataset_pics/' . $imageName) }}" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
+                                        <img src="{{ asset('dataset_pics/' . $imageName) }}" class="img-thumbnail"
+                                             style="width: 100px; height: 100px; object-fit: cover;">
 
-                                        {{-- Delete Image Form (separate form) --}}
-                                        <form action="{{ route('admin.images.destroy', $image->image_id) }}" method="POST" class="position-absolute top-0 end-0 m-1">
+                                        <form action="{{ route('admin.images.destroy', $image->image_id) }}"
+                                              method="POST" class="position-absolute top-0 end-0 m-1">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" title="Delete Image" onclick="return confirm('Delete this image?')">
+                                            <button type="submit" class="btn btn-sm btn-danger" title="Delete Image"
+                                                    onclick="return confirm('Delete this image?')">
                                                 <i class="bi bi-x-circle"></i>
                                             </button>
                                         </form>
@@ -307,23 +348,15 @@
                                 @endforeach
                             </div>
 
-                            {{-- Upload New Images Form (separate form) --}}
-                            <form action="{{ route('admin.items.updateImages', $item->item_id) }}" method="POST" enctype="multipart/form-data" class="mt-3">
+                            <form action="{{ route('admin.items.updateImages', $item->item_id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3 col-4">
                                     <label class="form-label">Upload Images</label>
                                     <input type="file" name="images[]" class="form-control mb-2" multiple>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Upload</button>
+                                <button type="submit" class="btn btn-secondary">Upload</button>
                             </form>
                         </div>
-
-                            <div class="d-flex justify-content-between">
-                                <button type="button" class="btn btn-secondary" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseItem{{ $item->item_id }}">Cancel
-                                </button>
-                            </div>
-
                     </div>
                 </div>
             </div>
@@ -339,113 +372,115 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form method="POST" action="{{ route('items.store') }}" enctype="multipart/form-data">
+                        @csrf
+
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="newItemName" class="form-label">Item Name</label>
-                                <input type="text" class="form-control" id="newItemName"
-                                       placeholder="Enter item name">
+                                <input type="text" class="form-control" id="newItemName" name="item_name" placeholder="Enter item name" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="newItemPrice" class="form-label">Price</label>
-                                <input type="number" class="form-control" id="newItemPrice"
-                                       placeholder="Enter price">
+                                <input type="number" class="form-control" id="newItemPrice" name="price" placeholder="Enter price" step="0.01" required>
                             </div>
                         </div>
+
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="newItemDescription" class="form-label">Description</label>
-                                <textarea class="form-control" id="newItemDescription" rows="3"
-                                          placeholder="Enter description"></textarea>
+                                <textarea class="form-control" id="newItemDescription" name="description" rows="3" placeholder="Enter description" required></textarea>
                             </div>
                             <div class="col-md-6">
                                 <label for="newItemParameters" class="form-label">Parameters</label>
-                                <textarea class="form-control" id="newItemParameters" rows="3"
-                                          placeholder="Enter parameters"></textarea>
+                                <textarea class="form-control" id="newItemParameters" name="parameters" rows="3" placeholder="Enter parameters"></textarea>
                             </div>
                         </div>
-                        <div class="row">
+
+                        <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="categoryId" class="form-label">Category</label>
-                                <select class="form-select" id="categoryIdadd">
+                                <label for="categoryIdadd" class="form-label">Category</label>
+                                <select class="form-select" id="categoryIdadd" name="category_id" required>
                                     <optgroup label="Shoes">
                                         <option value="1">Sneakers</option>
-                                        <option value="1.1">Boots</option>
-                                        <option value="1.2">Sports shoes</option>
-                                        <option value="1.3">Open shoes</option>
-                                        <option value="1.4">Exclusive</option>
+                                        <option value="2">Boots</option>
+                                        <option value="3">Sports shoes</option>
+                                        <option value="4">Open shoes</option>
+                                        <option value="5">Exclusive</option>
                                     </optgroup>
                                     <optgroup label="Shirts">
-                                        <option value="2">Long sleeved</option>
-                                        <option value="2.1">Short sleeved</option>
-                                        <option value="2.2">Tank tops</option>
-                                        <option value="2.3">Polo shirts</option>
-                                        <option value="2.4">Sport</option>
+                                        <option value="6">Long sleeved</option>
+                                        <option value="7">Short sleeved</option>
+                                        <option value="8">Tank tops</option>
+                                        <option value="9">Polo shirts</option>
+                                        <option value="10">Sport</option>
                                     </optgroup>
-                                    <optgroup label="Panths">
-                                        <option value="3">Jeans</option>
-                                        <option value="3.1">Shorts</option>
-                                        <option value="3.2">Cargo panths</option>
-                                        <option value="3.3">Tracksuit panths</option>
-                                        <option value="3.3">Fabric panths</option>
+                                    <optgroup label="Pants">
+                                        <option value="11">Jeans</option>
+                                        <option value="12">Shorts</option>
+                                        <option value="13">Cargo pants</option>
+                                        <option value="14">Tracksuit pants</option>
+                                        <option value="15">Fabric pants</option>
                                     </optgroup>
-                                    <option selected value="4">Other</option>
+                                    <option value="16" selected>Other</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label for="categoryId" class="form-label">Category</label>
-                                <select class="form-select" id="bigcategoryIdadd">
-                                    <option value="1">MEN</option>
-                                    <option value="2">WOMEN</option>
-                                    <option value="3">KIDS</option>
+                                <label for="bigcategoryIdadd" class="form-label">Main Category</label>
+                                <select class="form-select" id="bigcategoryIdadd" name="main_category" required>
+                                    <option value="MEN">MEN</option>
+                                    <option value="WOMEN">WOMEN</option>
+                                    <option value="KIDS">KIDS</option>
                                 </select>
                             </div>
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">Style</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="casual">
+                                <input class="form-check-input" type="checkbox" name="style[]" value="1" id="casual">
                                 <label class="form-check-label" for="casual">Casual</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="formal">
+                                <input class="form-check-input" type="checkbox" name="style[]" value="2" id="formal">
                                 <label class="form-check-label" for="formal">Formal</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="cozy">
+                                <input class="form-check-input" type="checkbox" name="style[]" value="4" id="cozy">
                                 <label class="form-check-label" for="cozy">Cozy</label>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Color</label>
-                            <select class="form-select">
-                                <option>Red</option>
-                                <option>Blue</option>
-                                <option>Green</option>
-                                <option>Black</option>
-                                <option>White</option>
+                            <select class="form-select" name="colour" required>
+                                <option value="Red">Red</option>
+                                <option value="Blue">Blue</option>
+                                <option value="Green">Green</option>
+                                <option value="Black">Black</option>
+                                <option value="White">White</option>
                             </select>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Fabric Type</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="cotton">
+                                <input class="form-check-input" type="checkbox" name="fabric[]" value="8" id="cotton">
                                 <label class="form-check-label" for="cotton">Cotton</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="wool">
+                                <input class="form-check-input" type="checkbox" name="fabric[]" value="16" id="wool">
                                 <label class="form-check-label" for="wool">Wool</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="polyester">
+                                <input class="form-check-input" type="checkbox" name="fabric[]" value="32" id="polyester">
                                 <label class="form-check-label" for="polyester">Polyester</label>
                             </div>
                         </div>
-                        <div class="col-12 mb-3">
-                            <label for="newItemImages" class="form-label">Images</label>
-                            <input type="file" class="form-control" id="newItemImages" accept="image/*" multiple>
+
+                        <div class="mb-3">
+                            <label for="newItemImages" class="form-label">Images (min. 2)</label>
+                            <input type="file" class="form-control" id="newItemImages" name="images[]" accept="image/*" multiple required>
                         </div>
 
                         <button type="submit" class="btn btn-secondary">Add Item</button>

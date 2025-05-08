@@ -9,46 +9,48 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
-    // Store multiple images
-    public function updateImages(Request $request, $itemId)
+    public function updateImages(Request $request, $item_id)
     {
+        $item = Item::findOrFail($item_id);
+
         $request->validate([
-            'images' => 'required|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validate the image files
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif',
+        ], [
+            'images.required' => 'Please select at least one image to upload.',
+            'images.*.image' => 'Each file must be a valid image.',
+            'images.*.mimes' => 'Images must be of type: jpeg, png, jpg, gif.',
+            'images.*.max' => 'Each image must be under 2MB.',
         ]);
 
-        // Find the item
-        $item = Item::findOrFail($itemId);
-
-        // Loop through the uploaded images and save each one
         foreach ($request->file('images') as $imageFile) {
-            $imageName = time() . '-' . $imageFile->getClientOriginalName();
-
-            // Save the image to the public folder
+            $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
             $imageFile->move(public_path('dataset_pics'), $imageName);
 
-            // Store image info in the database
-            $image = new Image();
-            $image->item_id = $item->item_id;
-            $image->image_name = $imageName;
-            $image->save();
+            Image::create([
+                'item_id' => $item->item_id,
+                'image_name' => $imageName,
+            ]);
         }
 
         return back()->with('success', 'Images uploaded successfully.');
     }
 
-    // Delete a single image
-    public function destroy($id)
+    public function destroy($image_id)
     {
-        $image = Image::findOrFail($id);
+        $image = Image::findOrFail($image_id);
+        $item = $image->item;
 
-        // Delete the image file from disk
-        $filePath = public_path('dataset_pics/' . $image->image_name);
-        if (file_exists($filePath)) {
-            unlink($filePath);
+        if ($item->images()->count() <= 2) {
+            return back()->withErrors(['delete' => 'At least 2 images must remain for this item.']);
         }
 
-        // Delete the image from the database
+        // Delete the image file from storage
+        $imagePath = public_path('dataset_pics/' . $image->image_name);
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
+        // Delete from database
         $image->delete();
 
         return back()->with('success', 'Image deleted successfully.');

@@ -8,6 +8,8 @@ class Image extends Model
 {
     protected $table = 'images';
 
+    public $timestamps = false;
+
     protected $primaryKey = 'image_id';
 
     protected $fillable = [

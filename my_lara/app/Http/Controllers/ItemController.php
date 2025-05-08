@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Image;
 
 class ItemController extends Controller
 {
@@ -176,8 +177,6 @@ class ItemController extends Controller
     public function show($id)
     {
         $item = Item::findOrFail($id);
-
-        // Get suggested items (limit to 3, no pagination)
         $suggestedItems = Item::where('main_category', $item->main_category)
             ->where('item_id', '!=', $id) // exclude current item
             ->take(4) // Limit to 4 products
@@ -205,7 +204,6 @@ class ItemController extends Controller
 
     public function main()
     {
-        // Fetch suggested items for the main page
         $suggestedItems = Item::inRandomOrder()->take(4)->get();
         $suggestedItems2 = Item::inRandomOrder()->take(4)->get();
         return view('main', compact('suggestedItems','suggestedItems2')); // Pass suggested items to the main page view
@@ -215,10 +213,9 @@ class ItemController extends Controller
 
     public function cart()
     {
-        // Fetch suggested items for the main page
-        $suggestedItems = Item::take(4)->get(); // Limit to 4 products
+        $suggestedItems = Item::take(4)->get();
 
-        return $suggestedItems; // Pass suggested items to the main page view
+        return $suggestedItems;
     }
 
     public function show_all()
@@ -236,25 +233,22 @@ class ItemController extends Controller
     {
         $item = Item::findOrFail($item_id);
 
-        // Optionally: delete related images if needed
         foreach ($item->images as $image) {
             // Remove image file from storage (optional, only if you manage physical files)
             $imagePath = public_path('dataset_pics/' . $image->image_name);
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             }
-
+            info("Deleting file: {$imagePath}");
             // Delete image record from DB
             $image->delete();
         }
 
-        // Delete the item
         $item->delete();
 
         return redirect()->back()->with('success', 'Item deleted successfully.');
     }
 
-    // Update an item (edit)
     public function update(Request $request, $id)
     {
         $item = Item::findOrFail($id);
@@ -271,7 +265,6 @@ class ItemController extends Controller
             'style_fabric' => 'array', // optional, defaults to []
         ]);*/
 
-        // Assign values
         $item->item_name = $request->item_name;
         $item->main_category = $request->big_category;
         $item->category_id = $request->category_id;
@@ -280,7 +273,6 @@ class ItemController extends Controller
         $item->parameters = $request->parameters;
         $item->colour = $request->color;
 
-        // Calculate combined style_fabric (bitwise OR)
         $styleFabricValues = $request->input('style_fabric', []);
         $combinedStyleFabric = array_reduce($styleFabricValues, function ($carry, $value) {
             return $carry | (int)$value;
@@ -290,5 +282,53 @@ class ItemController extends Controller
         $item->save();
 
         return redirect()->back()->with('success', 'Item updated successfully.');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'item_name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'description' => 'required|string',
+            'parameters' => 'nullable|string',
+            'category_id' => 'required|numeric',
+            'style' => 'nullable|array',
+            'fabric' => 'nullable|array',
+            'colour' => 'required|string',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif',
+        ]);
+
+        if (!$request->hasFile('images') || count($request->file('images')) < 2) {
+            return back()->withErrors(['images' => 'You must upload at least 2 images.'])->withInput();
+        }
+
+        $styleValue = collect($request->style)->sum();
+        $fabricValue = collect($request->fabric)->sum();
+        $styleFabric = $styleValue + $fabricValue;
+
+        $item = Item::create([
+            'item_name' => $request->item_name,
+            'price' => $request->price,
+            'description' => $request->description,
+            'parameters' => $request->parameters,
+            'category_id' => $request->category_id,
+            'main_category' => $request->main_category,
+            'style_fabric' => $styleFabric,
+            'colour' => $request->colour,
+            'times_bought' => 0,
+            'release_date' => now(),
+        ]);
+
+        foreach ($request->file('images') as $image) {
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('dataset_pics'), $imageName);
+
+            Image::create([
+                'item_id' => $item->item_id,
+                'image_name' => $imageName,
+            ]);
+        }
+
+        return back()->with('success', 'Item added successfully!');
     }
 }
