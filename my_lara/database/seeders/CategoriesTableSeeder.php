@@ -22,7 +22,7 @@ class CategoriesTableSeeder extends Seeder
             ['category_id' => 7, 'main_category' => 'Shirts', 'secondary_category' => 'Short sleeved'],
             ['category_id' => 8, 'main_category' => 'Shirts', 'secondary_category' => 'Tank tops'],
             ['category_id' => 9, 'main_category' => 'Shirts', 'secondary_category' => 'Polo shirts'],
-            ['category_id' => 10, 'main_category' => 'Shirts', 'secondary_category' => 'Sport'],
+            ['category_id' => 10, 'main_category' => 'Shirts', 'secondary_category' => 'Sport Shirts'],
             ['category_id' => 11, 'main_category' => 'Pants',  'secondary_category' => 'Jeans'],
             ['category_id' => 12, 'main_category' => 'Pants',  'secondary_category' => 'Shorts'],
             ['category_id' => 13, 'main_category' => 'Pants',  'secondary_category' => 'Cargo pants'],
