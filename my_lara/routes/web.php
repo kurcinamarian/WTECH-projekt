@@ -7,37 +7,37 @@ Route::get('/', function () {
 })->name('main');
 
 Route::get('/account', function () {
-    return view('account'); // resources/views/account.blade.php
+    return view('account');
 })->name('account');
 
 Route::get('/admin', function () {
-    return view('admin'); // resources/views/admin.blade.php
+    return view('admin');
 })->name('admin');
 
 Route::get('/kids', function () {
-    return view('kids'); // resources/views/kids.blade.php
+    return view('kids');
 })->name('kids');
 
 Route::get('/liked', function () {
-    return view('liked'); // resources/views/liked.blade.php
+    return view('liked');
 })->name('liked');
 
 Route::get('/men', function () {
-    return view('men'); // resources/views/men.blade.php
+    return view('men');
 })->name('men');
 
 
 
 Route::get('/register', function () {
-    return view('register'); // resources/views/register.blade.php
+    return view('register');
 })->name('register');
 
 Route::get('/shopping_cart', function () {
-    return view('shopping_cart'); // resources/views/shopping_cart.blade.php
+    return view('shopping_cart');
 })->name('shopping_cart');
 
 Route::get('/women', function () {
-    return view('women'); // resources/views/women.blade.php
+    return view('women');
 })->name('women');
 
 Auth::routes();
@@ -47,7 +47,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('/submit_registration', [\App\Http\Controllers\Auth\RegisterController::class, 'submitRegistration']);
 Route::get('/main', function () {
-    return view('main'); // Or replace with your actual controller/view
+    return view('main');
 });
 
 use App\Http\Controllers\UserController;
