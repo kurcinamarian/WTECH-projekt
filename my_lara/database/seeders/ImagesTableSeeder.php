@@ -83,6 +83,7 @@ class ImagesTableSeeder extends Seeder
             [ 'item_id' => 34, 'image_name' => 'KIDS Boots Blue Formal and Cozy Cotton and Wool_2.jpg' ],
             [ 'item_id' => 35, 'image_name' => 'MEN Sports shoes Green Formal and Cozy Cotton and Polyester.jpg' ],
             [ 'item_id' => 35, 'image_name' => 'MEN Sports shoes Green Formal and Cozy Cotton and Polyester_2.jpg' ],
+            #--------------------------------------------------------------------------------------------------------------
             [ 'item_id' => 36, 'image_name' => 'WOMEN Open shoes Green Formal and Cozy Wool and Polyester.jpg' ],
             [ 'item_id' => 36, 'image_name' => 'WOMEN Open shoes Green Formal and Cozy Wool and Polyester_2.jpg' ],
             [ 'item_id' => 37, 'image_name' => 'KIDS Exclusive Shoes Black Casual and Formal Cotton and Wool.jpg' ],#d
@@ -95,8 +96,8 @@ class ImagesTableSeeder extends Seeder
             [ 'item_id' => 40, 'image_name' => 'KIDS Tank tops Green Casual and Cozy Cotton and Wool_2.jpg' ],
             [ 'item_id' => 41, 'image_name' => 'MEN Polo shirts Black Casual and Cozy Cotton and Polyester.jpg' ],
             [ 'item_id' => 41, 'image_name' => 'MEN Polo shirts Black Casual and Cozy Cotton and Polyester_2.jpg' ],
-            [ 'item_id' => 42, 'image_name' => 'WOMEN Sport Blue Casual and Cozy Wool and Polyester.jpg' ],
-            [ 'item_id' => 42, 'image_name' => 'WOMEN Sport Blue Casual and Cozy Wool and Polyester_2.jpg' ],
+            [ 'item_id' => 42, 'image_name' => 'WOMEN Sport Shoes Blue Casual and Cozy Wool and Polyester.jpg' ],
+            [ 'item_id' => 42, 'image_name' => 'WOMEN Sport Shoes Blue Casual and Cozy Wool and Polyester_2.jpg' ],
             [ 'item_id' => 43, 'image_name' => 'KIDS Jeans Black Formal and Cozy Cotton and Wool.jpg' ],#d
             [ 'item_id' => 43, 'image_name' => 'KIDS Jeans Black Formal and Cozy Cotton and Wool_2.jpg' ],
             [ 'item_id' => 44, 'image_name' => 'MEN Shorts Black Formal and Cozy Cotton and Polyester.jpg' ],
@@ -123,12 +124,12 @@ class ImagesTableSeeder extends Seeder
             [ 'item_id' => 54, 'image_name' => 'WOMEN Long sleeved White Formal and Cozy Wool and Polyester_2.jpg' ],
             [ 'item_id' => 55, 'image_name' => 'KIDS Short sleeved Red Casual and Formal Cotton and Wool.jpg' ],#d
             [ 'item_id' => 55, 'image_name' => 'KIDS Short sleeved Red Casual and Formal Cotton and Wool_2.jpg' ],
-            [ 'item_id' => 56, 'image_name' => 'MEN Tank tops Green Casual and Formal Cotton and Polyester.jpg' ],
-            [ 'item_id' => 56, 'image_name' => 'MEN Tank tops Green Casual and Formal Cotton and Polyester_2.jpg' ],
+            [ 'item_id' => 56, 'image_name' => 'MEN Tank top Green Casual and Formal Cotton and Polyester.jpg' ],
+            [ 'item_id' => 56, 'image_name' => 'MEN Tank top Green Casual and Formal Cotton and Polyester_2.jpg' ],
             [ 'item_id' => 57, 'image_name' => 'WOMEN Polo shirts Blue Casual and Formal Wool and Polyester.jpg' ],
             [ 'item_id' => 57, 'image_name' => 'WOMEN Polo shirts Blue Casual and Formal Wool and Polyester_2.jpg' ],
-            [ 'item_id' => 58, 'image_name' => 'KIDS Sport Red Casual and Cozy Cotton and Wool.jpg' ],
-            [ 'item_id' => 58, 'image_name' => 'KIDS Sport Red Casual and Cozy Cotton and Wool_2.jpg' ],
+            [ 'item_id' => 58, 'image_name' => 'KIDS Sport shoes Red Casual and Cozy Cotton and Wool.jpg' ],
+            [ 'item_id' => 58, 'image_name' => 'KIDS Sport Red shoes Casual and Cozy Cotton and Wool_2.jpg' ],
             [ 'item_id' => 59, 'image_name' => 'MEN Jeans Yellow Casual and Cozy Cotton and Polyester.jpg' ],
             [ 'item_id' => 59, 'image_name' => 'MEN Jeans Yellow Casual and Cozy Cotton and Polyester_2.jpg' ],
             [ 'item_id' => 60, 'image_name' => 'WOMEN Shorts White Casual and Cozy Wool and Polyester.jpg' ],
