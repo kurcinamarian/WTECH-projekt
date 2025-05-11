@@ -89,7 +89,7 @@ Route::post('/shopping_cart/delete', [ShoppingCartController::class, 'delete'])-
 Route::post('/shopping_cart/save', [ShoppingCartController::class, 'save'])->name('shopping_cart.save');
 Route::get('/', [ItemController::class, 'main'])->name('main');
 
-Route::get('/admin', [ItemController::class, 'show_all'])->name('admin.show_all');
+Route::get('/admin', [ItemController::class, 'showAdminContent'])->name('admin.showAdminContent');
 Route::delete('/admin/items/{item_id}/delete', [ItemController::class, 'destroy'])->name('admin.items.destroy');
 Route::put('/admin/items/{item_id}/update', [ItemController::class, 'update'])->name('admin.items.update');
 Route::post('/admin/items/{item}/images', [ImageController::class, 'updateImages'])->name('admin.items.updateImages');
