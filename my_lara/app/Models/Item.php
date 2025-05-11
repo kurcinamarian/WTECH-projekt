@@ -12,7 +12,7 @@ class Item extends Model
     protected $primaryKey = 'item_id';
 
     protected $fillable = [
-        'item_name', 'price', 'description', 'parameters',
+        'item_id','item_name', 'price', 'description', 'parameters',
         'category_id', 'main_category', 'style_fabric', 'colour',
         'times_bought', 'release_date'
     ];

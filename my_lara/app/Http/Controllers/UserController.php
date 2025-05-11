@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -111,6 +114,8 @@ class UserController extends Controller
 
         return back()->with('success', 'Profile updated successfully!');
     }
+
+
 }
 
 

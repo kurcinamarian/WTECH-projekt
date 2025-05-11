@@ -25,7 +25,6 @@ class ImageController extends Controller
         foreach ($request->file('images') as $imageFile) {
             $imageName = uniqid() . '.' . $imageFile->getClientOriginalExtension();
             $imageFile->move(public_path('dataset_pics'), $imageName);
-
             Image::create([
                 'item_id' => $item->item_id,
                 'image_name' => $imageName,

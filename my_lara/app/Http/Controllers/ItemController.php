@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Image;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
@@ -218,16 +221,36 @@ class ItemController extends Controller
         return $suggestedItems;
     }
 
-    public function show_all()
+    public function showAdminContent()
     {
-        $items = Item::all();
-        $categories = Category::all()->groupBy('main_category');
+        if (!Auth::check()) {
+            return redirect()->route('main')->with('error', 'You must be logged in to access the admin page.');
+        }
+
+        $user = Auth::user();
+
+        // Check if the user's email is listed as an admin
+        $admin = Admin::where('admin_username', $user->email)->first();
+
+        $adminMatch = false;
+        $items = collect();
+        $categories = collect();
+
+        if ($admin) {
+            $adminMatch = true;
+
+            // Only load items and categories if the user is an admin
+            $items = Item::all();
+            $categories = Category::all()->groupBy('main_category');
+        }
 
         return view('admin', [
+            'adminMatch' => $adminMatch,
             'items' => $items,
-            'categories' => $categories
+            'categories' => $categories,
         ]);
     }
+
 
     public function destroy($item_id)
     {
@@ -322,7 +345,6 @@ class ItemController extends Controller
         foreach ($request->file('images') as $image) {
             $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('dataset_pics'), $imageName);
-
             Image::create([
                 'item_id' => $item->item_id,
                 'image_name' => $imageName,
