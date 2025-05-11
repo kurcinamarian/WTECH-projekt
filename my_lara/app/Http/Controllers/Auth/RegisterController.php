@@ -27,18 +27,16 @@ class RegisterController extends Controller
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:user'],
-            'password' => ['required', 'string', 'min:4'],
-            'phone_prefix' => ['required', 'in:A,B'], // Validate only expected values
+            'password' => ['required', 'string', 'min:8'],
+            'phone_prefix' => ['required', 'in:A,B'],
             'phone_number' => ['required', 'string', 'max:20'],
-            'terms' => ['accepted'], // Must be checked
-            'newsletter' => ['nullable'], // Optional
+            'terms' => ['accepted'],
+            'newsletter' => ['nullable'],
         ]);
     }
 
     protected function create(array $data)
     {
-
-
         $prefix = $data['phone_prefix'] == 'A' ? '421' : '420';
         $telephoneNumber = $prefix . $data['phone_number'];
         return User::create([
@@ -47,11 +45,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'telephone_number' => $telephoneNumber,
-            'newsletter' => isset($data['newsletter']) ? true : false,
+            'user_settings' => isset($data['newsletter']) ? 4 : 0,
         ]);
-        Auth::login($user);
-        return redirect('/');
-        return $user;
     }
 
     // Optional: If you want to show your custom form

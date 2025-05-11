@@ -17,29 +17,19 @@ class ShoppingCartController extends Controller
 {
     public function add(Request $request)
     {
-        // Validate the request data
         $request->validate([
             'size' => 'required|string',
             'quantity' => 'required|integer|min:1',
         ]);
 
-
-
-
-
-        // Retrieve the current user or guest ID
         $userId = auth()->check() ? auth()->id() : null;
         $sessionId = session()->getId();
 
-
-        // Get the quantity and validate it
         $quantity = $request->input('quantity');
         $itemId = $request->input('item_id');
         $size = $request->input('size');
 
-        // Insert the records in the shopping_cart table using Eloquent
         $cart= ShoppingCart::where('session_id', $sessionId)->where('item_id', $itemId)->where('size', $size)->first();
-
 
         if($cart){
             $cart->quantity += $quantity;
@@ -53,39 +43,32 @@ class ShoppingCartController extends Controller
                 'quantity' => $quantity,
                 'session_id' => $sessionId
             ]);
+            $cart->save();
         }
 
-
-
-
-        // Return a success message
         return redirect()->back()->with('success', 'Item(s) added to cart successfully!');
     }
 
 
     public function update(Request $request)
     {
-        // Validate the request data
         $request->validate([
             'quantity' => 'required|integer|min:1',
             'cart_item_id' => 'required',
         ]);
 
-        // Get the quantity and validate it
         $quantity = $request->input('quantity');
         $itemId = $request->input('cart_item_id');
 
         $item = ShoppingCart::find($itemId);
         $item->update(['quantity' => $quantity]);
 
-
-        // Return a success message
         return redirect()->back()->with('success', 'Item(s) updated successfully!');
     }
 
     public function delete(Request $request)
     {
-        // Validate the request data
+
         $request->validate([
             'cart_item_id' => 'required',
         ]);
@@ -95,8 +78,6 @@ class ShoppingCartController extends Controller
         $item = ShoppingCart::find($itemId);
         $item->delete();
 
-
-        // Return a success message
         return redirect()->back()->with('success', 'Item(s) deleted successfully!');
     }
 
@@ -106,7 +87,6 @@ class ShoppingCartController extends Controller
         $sessionId = session()->getId();
 
         if ($userId){
-            // Get all orders for this user with related item and orderInfo
             $cartItems = ShoppingCart::where('user_id', $userId)->get();
         }
         else{
@@ -115,14 +95,11 @@ class ShoppingCartController extends Controller
         $activeTab = request('tab','cart');
         $suggestedItems = app(ItemController::class)->cart();
 
-
-        // Send the grouped data to the view
         return view('shopping_cart', compact('cartItems', 'activeTab','suggestedItems'));
     }
 
     public function save(request $request)
     {
-        // Validate the request data
         $request->validate([
             'phone_number' => 'required|string|max:20',
             'street' => 'required|string|max:255',
@@ -138,7 +115,6 @@ class ShoppingCartController extends Controller
 
         $order_info->phone_number = $request->phone_number;
 
-        // Merge the address into a single string
         $address = implode(';', [
             $request->street,
             $request->house_number,
@@ -151,13 +127,11 @@ class ShoppingCartController extends Controller
         $order_info->delivery_method = $request->delivery_method;
         $order_info->user_id = $userId;
 
-        // Save the changes
         $order_info->save();
 
 
 
         if ($userId){
-            // Get all orders for this user with related item and orderInfo
             $cartItems = ShoppingCart::where('user_id', $userId)->get();
         }
         else{
@@ -174,8 +148,6 @@ class ShoppingCartController extends Controller
             $cartItem->delete();
         }
 
-
-        // Return a success message
         return redirect()->back()->with('success', 'Order was registered successfully!');
     }
 

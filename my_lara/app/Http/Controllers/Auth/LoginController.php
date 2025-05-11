@@ -18,11 +18,6 @@ class LoginController extends Controller
 
     protected $redirectTo = '/';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -32,7 +27,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $sessionId = session()->getId();
-        // Validate email and password
+
         $validator = Validator::make($request->all(), [
             'email' => ['required', 'email'],
             'password' => ['required', 'string'],
@@ -42,17 +37,13 @@ class LoginController extends Controller
             return back()->with("error","Login incorrect")->withErrors($validator)->withInput();
         }
 
-        // Attempt to log the user in
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $userId = auth()->check() ? auth()->id() : null;
-
             ShoppingCart::where('session_id', $sessionId)->update(['user_id' => $userId]);
             return redirect()->intended($this->redirectTo);
         }
 
-
-        // If login fails, return with an error message
-        return back()->withErrors(['email' => 'The provided credentials are incorrect.'])->withInput();
+        return back()->with( "error",'The provided credentials are incorrect.')->withInput();
     }
 }

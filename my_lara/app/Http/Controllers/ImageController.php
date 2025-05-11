@@ -43,13 +43,11 @@ class ImageController extends Controller
             return back()->withErrors(['delete' => 'At least 2 images must remain for this item.']);
         }
 
-        // Delete the image file from storage
         $imagePath = public_path('dataset_pics/' . $image->image_name);
         if (file_exists($imagePath)) {
             unlink($imagePath);
         }
 
-        // Delete from database
         $image->delete();
 
         return back()->with('success', 'Image deleted successfully.');

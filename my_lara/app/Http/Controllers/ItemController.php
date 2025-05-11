@@ -174,7 +174,7 @@ class ItemController extends Controller
 
         $items = $query->paginate(9)->appends($request->all());
 
-        return view('women', compact('items')); // <--- tu bola zmena
+        return view('women', compact('items'));
     }
 
     public function show($id)
@@ -229,7 +229,6 @@ class ItemController extends Controller
 
         $user = Auth::user();
 
-        // Check if the user's email is listed as an admin
         $admin = Admin::where('admin_username', $user->email)->first();
 
         $adminMatch = false;
@@ -239,7 +238,6 @@ class ItemController extends Controller
         if ($admin) {
             $adminMatch = true;
 
-            // Only load items and categories if the user is an admin
             $items = Item::all();
             $categories = Category::all()->groupBy('main_category');
         }

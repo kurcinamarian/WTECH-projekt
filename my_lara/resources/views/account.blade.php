@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account</title>
-    <link rel="icon" type="image/png" href="{{ asset('pictures/album.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('dataset_pics/album.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -144,7 +144,7 @@
                                placeholder="Search items..."
                                value="{{ request('search') }}">
                         <button class="btn border-0" type="submit">
-                            <i class="fas fa-search"></i> {{-- or use <i class="bi bi-search"></i> --}}
+                            <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </form>
@@ -158,6 +158,17 @@
         </div>
     </div>
 </nav>
+
+<div class="container">
+    @foreach (['success', 'error', 'warning', 'info'] as $msg)
+        @if(session()->has($msg))
+            <div class="alert mt-2 alert-{{ $msg == 'error'?'danger':$msg}}">
+                {{ session()->get($msg) }}
+            </div>
+        @endif
+    @endforeach
+</div>
+
 <!-- Navbar with Tabs -->
 <div class="container mt-5 mb-5">
     <ul class="nav nav-tabs" id="myTab" role="tablist">

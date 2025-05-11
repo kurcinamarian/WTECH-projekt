@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fair to wear</title>
-    <link rel="icon" type="image/png" href="{{ asset('pictures/album.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('dataset_pics/album.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -145,7 +145,7 @@
                                placeholder="Search items..."
                                value="{{ request('search') }}">
                         <button class="btn border-0" type="submit">
-                            <i class="fas fa-search"></i> {{-- or use <i class="bi bi-search"></i> --}}
+                            <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </form>
@@ -159,6 +159,17 @@
         </div>
     </div>
 </nav>
+
+<div class="container">
+    @foreach (['success', 'error', 'warning', 'info'] as $msg)
+        @if(session()->has($msg))
+            <div class="alert mt-2 alert-{{ $msg == 'error'?'danger':$msg}}">
+                {{ session()->get($msg) }}
+            </div>
+        @endif
+    @endforeach
+</div>
+
 <div class="container mt-4">
     <h2>Search Results</h2>
 
@@ -192,14 +203,11 @@
             @endforeach
         </div>
 
-        <!-- pagination info and links -->
         <div class="d-flex flex-column align-items-center mt-4">
-            <!-- info o počte -->
             <div class="mb-2 text-muted">
                 Zobrazené {{ $items->firstItem() }} – {{ $items->lastItem() }} z {{ $items->total() }} produktov
             </div>
 
-            <!-- číselné stránkovanie bez šípok -->
             <div class="pagination">
                 @for ($i = 1; $i <= $items->lastPage(); $i++)
                     <a href="{{ $items->url($i) }}"
@@ -528,6 +536,5 @@
         <span style="color: grey; font-size: 0.75rem;">FTW</span>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product</title>
-    <link rel="icon" type="image/png" href="{{ asset('pictures/album.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('dataset_pics/album.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -170,7 +170,7 @@
                                placeholder="Search items..."
                                value="{{ request('search') }}">
                         <button class="btn border-0" type="submit">
-                            <i class="fas fa-search"></i> {{-- or use <i class="bi bi-search"></i> --}}
+                            <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </form>
@@ -184,6 +184,7 @@
         </div>
     </div>
 </nav>
+
 
 <!-- Main_Product -->
 <div class="container my-5">
@@ -237,13 +238,13 @@
                         <i class="fa-regular fa-heart text-danger fs-3"></i>
                     </button>-->
                 </div>
-                <p>({{$item->category->main_category }})</p>
+                <p>({{$item->category->main_category }} - {{$item->category->secondary_category }})</p>
                 <div class="mb-4">
                     <p>{{ $item->description }}</p>
 
                     <h2>Parameters:</h2>
                     <div class="mb-4">
-                        <span class="text-muted">({{ $item->parameters }})</span>
+                        <span class="text-muted">{{ $item->parameters }}</span>
                     </div>
                     <ul class="list-unstyled">
                         <li><strong>Style:</strong>
@@ -353,7 +354,7 @@
                         </div>
                         <div class="mt-2">
                             <span class="product-name fs-4">{{ $suggested->item_name }}</span><br>
-                            <span class="product-category text-muted fs-6">({{ $suggested->main_category }})</span><br>
+                            <span class="product-category text-muted fs-6">({{$suggested->category->main_category }} - {{$suggested->category->secondary_category }})</span><br>
                             <span class="product-price fs-4">{{ number_format($suggested->price, 2) }} €</span>
                         </div>
                     </div>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fair to wear</title>
-    <link rel="icon" type="image/png" href="{{ asset('pictures/album.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('dataset_pics/album.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -145,7 +145,7 @@
                                placeholder="Search items..."
                                value="{{ request('search') }}">
                         <button class="btn border-0" type="submit">
-                            <i class="fas fa-search"></i> {{-- or use <i class="bi bi-search"></i> --}}
+                            <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </form>
@@ -159,10 +159,11 @@
         </div>
     </div>
 </nav>
+
 <div class="container">
     @foreach (['success', 'error', 'warning', 'info'] as $msg)
         @if(session()->has($msg))
-            <div class="alert alert-{{ $msg == 'error'?'danger':$msg}}">
+            <div class="alert mt-2 alert-{{ $msg == 'error'?'danger':$msg}}">
                 {{ session()->get($msg) }}
             </div>
         @endif
@@ -227,44 +228,42 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-lg-3">
-                <a href="" class="text-decoration-none">
                     <div class="rectangle-wrapper">
                         <div class="rectangle-square bg-light position-relative">
                             <img src="{{ asset('dataset_pics/F-I1.jpg') }}" alt="Featured"
                                  class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
                         </div>
                     </div>
-                </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <a href="" class="text-decoration-none">
+
                     <div class="rectangle-wrapper">
                         <div class="rectangle-square bg-light position-relative">
                             <img src="{{ asset('dataset_pics/F-I2.jpg') }}" alt="Featured"
                                  class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
                         </div>
                     </div>
-                </a>
+
             </div>
             <div class="col-sm-6 col-lg-3">
-                <a href="" class="text-decoration-none">
+
                     <div class="rectangle-wrapper">
                         <div class="rectangle-square bg-light position-relative">
                             <img src="{{ asset('dataset_pics/F-I3.jpg') }}" alt="Featured"
                                  class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
                         </div>
                     </div>
-                </a>
+
             </div>
             <div class="col-sm-6 col-lg-3">
-                <a href="" class="text-decoration-none">
+
                     <div class="rectangle-wrapper">
                         <div class="rectangle-square bg-light position-relative">
                             <img src="{{ asset('dataset_pics/F-I4.jpg') }}" alt="Featured"
                                  class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
                         </div>
                     </div>
-                </a>
+
             </div>
         </div>
     </div>
@@ -274,7 +273,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-12">
-                <a href="" class="text-decoration-none">
+
                     <div class="rectangle-square bg-light position-relative">
                         <img src="{{ asset('dataset_pics/F-I5.jpg') }}" alt="Featured"
                              class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
@@ -282,27 +281,27 @@
                             <span class="fs-3 fw-bold text-dark ms-3 me-3">New Collection</span>
                         </div>
                     </div>
-                </a>
+
             </div>
             <div class="col-md-6 col-sm-12">
                 <div class="row">
                     <div class="col-12">
-                        <a href="" class="text-decoration-none">
+
                             <div class="rectangle bg-light position-relative">
                                 <img src="{{ asset('dataset_pics/F-I7.jpg') }}" alt="Featured"
                                      class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
                             </div>
-                        </a>
+
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <a href="" class="text-decoration-none">
+
                             <div class="rectangle bg-light position-relative">
                                 <img src="{{ asset('dataset_pics/F-I6.jpg') }}" alt="Featured"
                                      class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
                             </div>
-                        </a>
+
                     </div>
                 </div>
             </div>
@@ -337,7 +336,7 @@
                         </div>
                         <div class="mt-2">
                             <span class="product-name fs-4">{{ $suggested->item_name }}</span><br>
-                            <span class="product-category text-muted fs-6">({{ $suggested->main_category }})</span><br>
+                            <span class="product-category text-muted fs-6">({{$suggested->category->main_category }} - {{$suggested->category->secondary_category }})</span><br>
                             <span class="product-price fs-4">{{ number_format($suggested->price, 2) }} €</span>
                         </div>
                     </div>
@@ -374,7 +373,7 @@
                         </div>
                         <div class="mt-2">
                             <span class="product-name fs-4">{{ $suggested->item_name }}</span><br>
-                            <span class="product-category text-muted fs-6">({{ $suggested->main_category }})</span><br>
+                            <span class="product-category text-muted fs-6">({{$suggested->category->main_category }} - {{$suggested->category->secondary_category }})</span><br>
                             <span class="product-price fs-4">{{ number_format($suggested->price, 2) }} €</span>
                         </div>
                     </div>

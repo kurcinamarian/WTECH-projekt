@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
             CategoriesTableSeeder::class,
             ItemsTableSeeder::class,
             ImagesTableSeeder::class,
+            AdminTableSeeder::class,
         ]);
     }
 }
